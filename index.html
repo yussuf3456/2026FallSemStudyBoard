@@ -1,0 +1,582 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<style>*,*::before,*::after{box-sizing:border-box}body{margin:0}</style>
+</head>
+<body>
+<title>Fall 2026 Study Board</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Atkinson+Hyperlegible:wght@400;700&family=JetBrains+Mono:wght@500&display=swap">
+<style>
+/* Layout: one narrow column with two tabs (Plan, Exams). Plan: up next, catch-up status, today, phases, checklists, weekly classes. Exams: countdown list and one review page per exam. */
+:root{
+  --bg:#f6f7fb; --surface:#ffffff; --fg:#1b1e2b; --muted:#5d6378; --line:#dfe2ec;
+  --accent:#3346d3; --accent-soft:#e7eafc; --done:#2f8a57; --warn:#b5520b; --bad:#c4302b; --bad-soft:#fdecea;
+  --c-stats:#b5520b; --c-math:#2e6fb7; --c-2sh4:#7a3fb8; --c-2di4:#0f8a7e; --c-2ci4:#b8336a; --c-all:#5d6378;
+  --display:"Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --body:"Atkinson Hyperlegible", "Segoe UI", system-ui, sans-serif;
+  --mono:"JetBrains Mono", ui-monospace, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#12141c; --surface:#1b1e29; --fg:#e8eaf2; --muted:#9aa0b5; --line:#2c3040;
+  --accent:#8c9bff; --accent-soft:#252a48; --done:#5cc48a; --warn:#f0914a; --bad:#ff7b72; --bad-soft:#3a1f22;
+  --c-stats:#f0914a; --c-math:#6aa8ef; --c-2sh4:#b98af0; --c-2di4:#4cc7b9; --c-2ci4:#ef7aa7; --c-all:#9aa0b5;
+  color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#12141c; --surface:#1b1e29; --fg:#e8eaf2; --muted:#9aa0b5; --line:#2c3040;
+  --accent:#8c9bff; --accent-soft:#252a48; --done:#5cc48a; --warn:#f0914a; --bad:#ff7b72; --bad-soft:#3a1f22;
+  --c-stats:#f0914a; --c-math:#6aa8ef; --c-2sh4:#b98af0; --c-2di4:#4cc7b9; --c-2ci4:#ef7aa7; --c-all:#9aa0b5;
+  color-scheme:dark}
+body{background:var(--bg);color:var(--fg);font:16px/1.5 var(--body)}
+.wrap{max-width:780px;margin:0 auto;padding-block:24px 64px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:flex;flex-direction:column;gap:24px}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0}
+h1{font-size:2rem;font-weight:700;letter-spacing:-.01em}
+h2{font-size:1.25rem;font-weight:700}
+a{color:var(--accent)}
+a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.sub{color:var(--muted);margin:6px 0 0}
+.links{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.links a{font-size:.875rem;text-decoration:none;border:1px solid var(--line);background:var(--surface);padding:6px 10px;border-radius:999px;color:var(--fg)}
+.links a:hover{border-color:var(--accent)}
+.eyebrow{font:500 .75rem var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+
+nav.tabs{display:flex;gap:6px;border-bottom:1px solid var(--line)}
+nav.tabs a{font:700 1rem var(--display);text-decoration:none;color:var(--muted);padding:8px 14px;border-bottom:3px solid transparent;margin-bottom:-1px}
+nav.tabs a[aria-current="page"]{color:var(--fg);border-bottom-color:var(--accent)}
+.view{display:flex;flex-direction:column;gap:24px}
+[hidden]{display:none !important}
+
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px;display:flex;flex-direction:column;gap:12px}
+.next{border:2px solid var(--accent)}
+.next .task{font-size:1.15rem;font-weight:700}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.btn{font:700 1rem var(--body);border:0;border-radius:10px;padding:10px 16px;cursor:pointer;background:var(--accent);color:var(--surface);text-decoration:none;display:inline-block}
+.btn.ghost{background:var(--accent-soft);color:var(--accent)}
+.allclear{color:var(--done);font-weight:700}
+
+.behind{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px}
+.bcard{border:1px solid var(--line);border-radius:10px;padding:12px;display:flex;flex-direction:column;gap:4px;min-width:0;background:var(--bg)}
+.bcard .n{font:700 1.6rem var(--display);font-variant-numeric:tabular-nums;line-height:1.1}
+.bcard .n.zero{color:var(--done)}
+.bcard small{color:var(--muted)}
+.bcard .chip{align-self:flex-start}
+ul.wkrows{list-style:none;margin:4px 0 0;padding:6px 0 0;border-top:1px solid var(--line);display:flex;flex-direction:column;gap:2px;font-size:.8rem;font-variant-numeric:tabular-nums}
+ul.wkrows li{display:flex;justify-content:space-between;gap:8px;color:var(--muted)}
+ul.wkrows li.miss{color:var(--bad);font-weight:700}
+ul.wkrows li.ok{color:var(--done)}
+.bcard small.miss{color:var(--bad)}
+
+.today-cols{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+@media (max-width:560px){.today-cols{grid-template-columns:1fr}}
+.today-cols h3{font-size:.95rem;margin-bottom:6px}
+.clist{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+.clist li{display:flex;flex-direction:column;gap:2px;min-width:0}
+.when{font:500 .78rem var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.empty{color:var(--muted)}
+
+.exams{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px}
+.exam{background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--warn);border-radius:10px;padding:12px 14px;display:flex;flex-direction:column;gap:4px;min-width:0;text-decoration:none;color:var(--fg)}
+.exam:hover{border-color:var(--accent)}
+.exam .days{font:700 1.5rem var(--display);font-variant-numeric:tabular-nums}
+.exam small{color:var(--muted)}
+.exam .go{font-size:.85rem;color:var(--accent);font-weight:700}
+
+.phases{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+@media (max-width:560px){.phases{grid-template-columns:1fr}}
+.phase{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px;display:flex;flex-direction:column;gap:6px;min-width:0}
+.phase b{font-family:var(--display);font-size:.95rem}
+.phase small{color:var(--muted);font-variant-numeric:tabular-nums}
+.bar{height:6px;border-radius:3px;background:var(--line);overflow:hidden}
+.bar i{display:block;height:100%;background:var(--done);width:0;transition:width .3s}
+
+.section{display:flex;flex-direction:column;gap:14px}
+.section > p{margin:0;color:var(--muted)}
+.day{display:flex;flex-direction:column;gap:6px}
+.day h3{font-size:1rem;display:flex;gap:8px;align-items:baseline}
+.tag{font:500 .7rem var(--mono);letter-spacing:.06em;text-transform:uppercase;background:var(--accent);color:var(--surface);padding:2px 6px;border-radius:4px}
+ul.tasks{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
+li.t{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:10px 12px;display:grid;grid-template-columns:auto minmax(0,1fr);gap:10px;align-items:start}
+li.t.is-next{border-color:var(--accent)}
+li.t input{width:20px;height:20px;margin:2px 0 0;accent-color:var(--done);cursor:pointer}
+li.t label{cursor:pointer;display:flex;flex-direction:column;gap:3px;min-width:0}
+li.t .what{overflow-wrap:anywhere}
+li.t.overdue{border-color:var(--bad);background:var(--bad-soft)}
+li.t.overdue .what{color:var(--bad);font-weight:700}
+.miss{font:700 .7rem var(--mono);letter-spacing:.04em;text-transform:uppercase;color:var(--bad)}
+.kind{font:500 .7rem var(--mono);color:var(--muted)}
+.subh{font:700 .8rem var(--mono);letter-spacing:.06em;text-transform:uppercase;margin:6px 0 2px}
+.subh.bad{color:var(--bad)}
+details.wkplan summary{cursor:pointer;font:700 1.25rem var(--display)}
+details.wkplan[open] summary{margin-bottom:10px}
+li.t.done .what{text-decoration:line-through;color:var(--muted)}
+.meta{display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-size:.8rem}
+.chip{font:500 .7rem var(--mono);letter-spacing:.04em;padding:2px 6px;border-radius:4px;border:1px solid currentColor;white-space:nowrap}
+.k-stats{color:var(--c-stats)} .k-math{color:var(--c-math)} .k-2sh4{color:var(--c-2sh4)} .k-2di4{color:var(--c-2di4)} .k-2ci4{color:var(--c-2ci4)} .k-all{color:var(--c-all)}
+
+.tablewrap{overflow-x:auto;background:var(--surface);border:1px solid var(--line);border-radius:10px}
+table.wk{width:100%;border-collapse:collapse;font-size:.88rem}
+table.wk th,table.wk td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+table.wk th{font:500 .72rem var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+table.wk td.d{font-weight:700;white-space:nowrap}
+table.wk tr:last-child td{border-bottom:0}
+table.wk .item{display:block;margin-bottom:4px}
+
+.facts{display:grid;grid-template-columns:max-content minmax(0,1fr);gap:6px 14px;margin:0}
+.facts dt{font:500 .75rem var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);padding-top:2px}
+.facts dd{margin:0}
+.back{font-size:.9rem;text-decoration:none}
+.status{font-size:.8rem;color:var(--muted)}
+@media (prefers-reduced-motion:reduce){.bar i{transition:none}}
+</style>
+
+<div class="wrap">
+  <header>
+    <h1>Fall 2026 Study Board</h1>
+    <p class="sub">Every missed lecture done by Wed Nov 11, then one exam at a time. Each day lists the classes to go to (2DI4, 2CI4, tutorials, labs), the videos to watch (MATH, 2SH4, STATS) and your study block. Anything you skip turns red and stays at the top until you tick it.</p>
+    <div class="links">
+      <a href="https://avenue.cllmcmaster.ca/d2l/home" target="_blank" rel="noopener">Avenue to Learn</a>
+      <a href="https://claude.ai/artifact/4ouvwWyM1dZXHYdhSbyjY6" target="_blank" rel="noopener">Full catch-up plan</a>
+      <a href="https://app.notion.com/p/a996bc446a878303bd6e019dfc116671" target="_blank" rel="noopener">Notion School Hub</a>
+    </div>
+  </header>
+
+  <nav class="tabs" aria-label="Sections">
+    <a href="#plan" id="tab-plan">Plan</a>
+    <a href="#exams" id="tab-exams">Exams</a>
+  </nav>
+
+  <div class="view" id="view-plan">
+    <section class="card next" aria-live="polite">
+      <span class="eyebrow">Up next</span>
+      <div class="task" id="next-task">Loading your progress…</div>
+      <div class="meta" id="next-meta"></div>
+      <div class="row" id="next-row"></div>
+    </section>
+
+    <section class="card">
+      <span class="eyebrow">How far behind you are</span>
+      <div class="behind" id="behind"></div>
+    </section>
+
+    <section class="card">
+      <span class="eyebrow" id="today-label">Today</span>
+      <div id="today-box"></div>
+    </section>
+
+    <section class="section">
+      <h2>Upcoming midterms</h2>
+      <div class="exams" id="mid-cards"></div>
+    </section>
+
+    <div class="phases" id="phases"></div>
+    <div id="sections"></div>
+
+    <details class="section wkplan">
+      <summary>Weekly class plan (reference)</summary>
+      <p>Your classes are already in each day's checklist above. This is the same schedule as one week.</p>
+      <div class="tablewrap"><table class="wk"><thead><tr><th>Day</th><th>Go to class</th><th>Watch</th></tr></thead><tbody id="week"></tbody></table></div>
+    </details>
+  </div>
+
+  <div class="view" id="view-exams" hidden>
+    <section class="section">
+      <h2>Exams coming soon</h2>
+      <p>Midterms first, then December finals. Final exam rooms appear on Mosaic at the end of November. Tap an exam for its review page.</p>
+      <div class="exams" id="all-exams"></div>
+    </section>
+  </div>
+
+  <div class="view" id="view-review" hidden></div>
+
+  <p class="status" id="status"></p>
+</div>
+
+<script>
+const AV = "https://avenue.cllmcmaster.ca/d2l/home";
+const LINKS = {stats:AV, math:AV, "2sh4":AV, "2di4":"https://avenue.cllmcmaster.ca/d2l/le/content/807941/Home", "2ci4":"https://avenue.cllmcmaster.ca/d2l/le/content/806882/Home", all:AV};
+const NAMES = {stats:"STATS 3Y03", math:"MATH 2Z03", "2sh4":"COMPENG 2SH4", "2di4":"COMPENG 2DI4", "2ci4":"ELECENG 2CI4", all:"All courses"};
+
+/* day: 1=Mon … 5=Fri. mode: attend | watch. dates: only on these dates (labs). skip: weekly table only, not the daily checklist. */
+const CLASSES = [
+ {day:1,t:"8:30 AM",c:"math",what:"Lecture (Echo360 recording)",loc:"TSH 120",mode:"watch"},
+ {day:1,t:"10:30 AM",c:"2sh4",what:"Lecture (PLV + recording)",loc:"HH 302",mode:"watch"},
+ {day:1,t:"12:30 PM",c:"stats",what:"Lecture (Echo360 recording)",loc:"CNH 104",mode:"watch"},
+ {day:1,t:"5:30 PM",c:"2ci4",what:"Lecture",loc:"BSB B136",mode:"attend"},
+ {day:2,t:"12:30 PM",c:"2di4",what:"Lecture",loc:"BSB B135",mode:"attend"},
+ {day:2,t:"1:30 PM",c:"stats",what:"Lecture (Echo360 recording)",loc:"CNH 104",mode:"watch"},
+ {day:2,t:"2:30 PM",c:"2ci4",what:"Lab (L03)",loc:"ITB A114",mode:"attend",dates:["2026-11-17","2026-12-01"]},
+ {day:2,t:"2:30 PM",c:"2sh4",what:"Lab (L08, every other week, check Avenue)",loc:"JHE 329",mode:"attend",skip:true},
+ {day:3,t:"8:30 AM",c:"math",what:"Lecture (Echo360 recording)",loc:"TSH 120",mode:"watch"},
+ {day:3,t:"10:30 AM",c:"2sh4",what:"Lecture (PLV + recording)",loc:"HH 302",mode:"watch"},
+ {day:3,t:"12:30 PM",c:"2di4",what:"Lecture",loc:"BSB B135",mode:"attend"},
+ {day:3,t:"1:30 PM",c:"2ci4",what:"Tutorial (T02)",loc:"BSB B136",mode:"attend"},
+ {day:3,t:"2:30 PM",c:"2di4",what:"Lab (L05)",loc:"ITB 143",mode:"attend",dates:["2026-11-18","2026-12-02"]},
+ {day:3,t:"5:30 PM",c:"2ci4",what:"Lecture",loc:"BSB B136",mode:"attend"},
+ {day:4,t:"10:30 AM",c:"2sh4",what:"Lecture (PLV + recording)",loc:"HH 302",mode:"watch"},
+ {day:4,t:"12:30 PM",c:"stats",what:"Lecture (Echo360 recording)",loc:"CNH 104",mode:"watch"},
+ {day:4,t:"1:30 PM",c:"2sh4",what:"Tutorial (T02)",loc:"TSH B128",mode:"attend"},
+ {day:4,t:"5:30 PM",c:"math",what:"Tutorial (T01)",loc:"TSH 120",mode:"attend"},
+ {day:5,t:"8:30 AM",c:"2di4",what:"Tutorial (T02)",loc:"KTH B135",mode:"attend"},
+ {day:5,t:"10:30 AM",c:"math",what:"Lecture (Echo360 recording)",loc:"TSH 120",mode:"watch"},
+ {day:5,t:"12:30 PM",c:"2di4",what:"Lecture",loc:"BSB B135",mode:"attend"},
+ {day:5,t:"5:30 PM",c:"2ci4",what:"Lecture",loc:"BSB B136",mode:"attend"}
+];
+
+/* Backlog per course: each unit counts toward "behind" until its task is ticked. */
+const BACKLOG = {
+ stats:{unit:"lectures", items:[["s3",4,"L16–L19"],["s7",5,"L20–L24"]], note:"Unticked lectures are added here when their week ends"},
+ math:{unit:"lectures", items:[["s4",2,"L14–L15"],["s8",2,"L16–L17"],["s9",3,"L18–L20"],["s12",3,"L21–L23"]]},
+ "2sh4":{unit:"lectures", items:[["s1",3,"L13–L15"],["s6",3,"L16–L18"],["s10",3,"L19–L21"],["s13",2,"L22–L23"]]},
+ "2di4":{unit:"module parts", items:[["s11",3,"Module 5 Parts 3–5"]]},
+ "2ci4":{unit:"note sets", items:[["s15",3,"Module 5 (5.1–5.3)"],["s16",5,"Module 6 (6.1–6.5)"]], note:"Module 4 done"}
+};
+
+const PHASES = [
+ {id:"sprint", title:"Catch-up sprint", range:"Nov 7–11", note:"Three study blocks a day, one course per block. Clears everything posted up to Nov 7.", days:[
+  {date:"2026-11-07", label:"Sat Nov 7", tasks:[
+   ["s1","2sh4","Watch L13–L15: pointer arithmetic, dynamic memory, DMA for 2D arrays (PLVs 13–15)"],
+   ["s2","2sh4","Work on Lab 3 (pointers and arrays)"],
+   ["s3","stats","Watch L16–L19: Ch. 6 and the start of Ch. 7"],
+   ["s4","math","Watch L14–L15: 3.4 trial solutions, 3.5 Variation of Parameters"]]},
+  {date:"2026-11-08", label:"Sun Nov 8", tasks:[
+   ["s5","2sh4","Submit Lab 3 by 11:59 PM (no late submissions)"],
+   ["s6","2sh4","Watch L16–L18: jagged arrays and double pointers, memory allocation, OOD in C"],
+   ["s7","stats","Watch L20–L24: rest of Ch. 7, Ch. 8, 9.1"],
+   ["s8","math","Watch L16–L17: 3.6 Cauchy-Euler Equations"]]},
+  {date:"2026-11-09", label:"Mon Nov 9", tasks:[
+   ["s9","math","Watch L18–L20: 3.8 Linear Models (IVPs), 3.9 Linear Models (BVPs)"],
+   ["s10","2sh4","Watch L19–L21: From C to C++, C++ procedural programming (UML PLV), Class Design I"],
+   ["s11","2di4","Module 5 Parts 3–5 (Analysis C02 version, FSM, Applications) + Tutorials 5–6"]]},
+  {date:"2026-11-10", label:"Tue Nov 10", tasks:[
+   ["s12","math","Watch L21–L23: 4.1 Laplace Transform, 4.2 Inverse Laplace Transform"],
+   ["s13","2sh4","Watch L22–L23: special member functions and Rule of Six, operator overloads"],
+   ["s15","2ci4","Module 5: 5.1 Capacitors, 5.2 Inductors, 5.3 Combinations + Tutorial 8"]]},
+  {date:"2026-11-11", label:"Wed Nov 11", tasks:[
+   ["s16","2ci4","Module 6: 6.1–6.3 First-Order, 6.4–6.5 Second-Order Circuits + Tutorials 9–10"]]}
+ ]},
+ {id:"stats", title:"STATS Midterm 2 prep", range:"Nov 12–18", note:"One block a day, plus your classes and same-day videos.", days:[
+  {date:"2026-11-12", label:"Thu Nov 12", tasks:[
+   ["m1","stats","Ch. 4–5 exercises: 4.5.1–4.5.7, 4.5.9, 4.5.11, 4.5.13, 4.5.17, 4.6.1, 4.6.3, 4.7.1, 4.7.2, 4.7.3, 4.7.5, 4.7.7, 4.7.9, 4.7.11, 4.7.13, 5.1.1, 5.1.3–5.1.10, 5.4.1, 5.4.2, 5.4.5–5.4.7, 5.4.10, 5.6.1–5.6.7"]]},
+  {date:"2026-11-13", label:"Fri Nov 13", tasks:[
+   ["m2","stats","Ch. 6–7 exercises: 6.1.1–6.1.7, 6.2.1–6.2.4, 6.3.1–6.3.4, 6.4.3, 6.7.1–6.7.2, 7.2.1–7.2.7, 7.3.1, 7.3.3, 7.3.4, 7.3.6, 7.3.7, 7.3.9"]]},
+  {date:"2026-11-14", label:"Sat Nov 14", tasks:[
+   ["m3","stats","Ch. 8 exercises: 8.1.1–8.1.11, 8.2.1–8.2.7, 8.3.1–8.3.6, 8.4.1–8.4.5"]]},
+  {date:"2026-11-15", label:"Sun Nov 15", tasks:[
+   ["m5","stats","Sample Midterm 2, timed at 75 minutes, then go over every mistake"]]},
+  {date:"2026-11-16", label:"Mon Nov 16", tasks:[
+   ["m6","stats","Redo the problems you got wrong in Ch. 8–9 (L25 is in your Mon Nov 9 videos)"]]},
+  {date:"2026-11-17", label:"Tue Nov 17", tasks:[
+   ["m9","stats","Light review of your mistakes only"]]},
+  {date:"2026-11-18", label:"Wed Nov 18", tasks:[
+   ["m11","stats","Midterm 2, 7:00 PM, TSH 120. Pencil, McMaster standard calculator, student ID"]]}
+ ]},
+ {id:"math", title:"MATH Test 2 prep", range:"Nov 19–26", note:"One block a day, plus your classes and same-day videos.", days:[
+  {date:"2026-11-19", label:"Thu Nov 19", tasks:[["t1","math","3.6 and 3.8 with Tutorial 5 and Practice 6, trying each problem before the solution"]]},
+  {date:"2026-11-20", label:"Fri Nov 20", tasks:[["t2","math","3.9 and 4.1–4.3 with Tutorials 6–7 and Practice 7, plus any new 4.3 lecture video"]]},
+  {date:"2026-11-21", label:"Sat Nov 21", tasks:[["t3","math","2026 Sample Test 2, timed, then redo every mistake"]]},
+  {date:"2026-11-22", label:"Sun Nov 22", tasks:[["t8","math","Redo the problems you got wrong from Practice 6–7 and the tutorials"]]},
+  {date:"2026-11-23", label:"Mon Nov 23", tasks:[["t9","math","Second timed pass at the sample test, without notes"]]},
+  {date:"2026-11-24", label:"Tue Nov 24", tasks:[["t6","math","Short pass on your mistakes and the Laplace transform table"]]},
+  {date:"2026-11-25", label:"Wed Nov 25", tasks:[["t10","math","Light review only, then sleep early"]]},
+  {date:"2026-11-26", label:"Thu Nov 26", tasks:[["t7","math","Test 2, 6:30 PM, T13 125"]]}
+ ]}
+];
+
+/* Exams. phase: midterm review uses that phase's tasks. review: final-exam checklist. */
+const EXAMS = [
+ {id:"stats-mt2",c:"stats",kind:"Midterm",name:"STATS 3Y03 Midterm 2",iso:"2026-11-18",when:"Wed Nov 18, 7:00–8:15 PM",where:"TSH 120",length:"75 minutes",weight:"20%",
+  covers:"Lectures 11–25: 4.5–4.7, 5.1, 5.4, 5.6, 6.1–6.4, 6.7, 7.1–7.3, 8.1–8.4, 9.1–9.2",
+  bring:"Pencil, McMaster standard calculator, student ID. 16 multiple-choice questions; formula sheet and tables are given.",
+  start:"Thu Nov 12", phase:"stats"},
+ {id:"math-t2",c:"math",kind:"Test",name:"MATH 2Z03 Test 2",iso:"2026-11-26",when:"Thu Nov 26, 6:30 PM",where:"T13 125 (last names Sus–Zyz)",weight:"10%",
+  covers:"3.6 Cauchy-Euler, 3.8 and 3.9 Linear Models, 4.1 Laplace Transform, 4.2 Inverse Laplace, 4.3 (not 3.5)",
+  bring:"Practice with the 2026 Sample Test 2 (Test2 folder on Avenue), Tutorials 5–7, Practice 6–7.",
+  start:"Thu Nov 19", phase:"math"},
+ {id:"2ci4-final",c:"2ci4",kind:"Final",name:"ELECENG 2CI4 Final",iso:"2026-12-12",when:"Sat Dec 12, 12:30 PM",where:"Room posted end of November",length:"2 hours 30 minutes",weight:"40% (need at least 30% on the final)",
+  covers:"Whole course so far: Modules 1–6 (Irwin Ch. 1–3, 5–7), plus Modules 7–8 (AC steady-state, power) once posted. Confirm on Avenue.",
+  bring:"Past finals with solutions are under Past midterms and finals on Avenue.",
+  start:"Tue Dec 1", review:[
+   ["f2ci4-1","Modules 1–3 (Ch. 1–3): redo your midterm mistakes and the Fall 2022–2024 midterm problems"],
+   ["f2ci4-2","Modules 4–6 (Ch. 5–7): Problem Sets 1–2 for each, checked with the solution manuals"],
+   ["f2ci4-3","Modules 7–8 (AC steady-state, power) once posted, with their tutorials"],
+   ["f2ci4-4","Past final #1, timed at 2.5 hours, then go over every mistake"],
+   ["f2ci4-5","Past final #2, timed, then a last pass over the formula sheet"]]},
+ {id:"2sh4-final",c:"2sh4",kind:"Final",name:"COMPENG 2SH4 Final",iso:"2026-12-14",when:"Mon Dec 14, 7:30 PM",where:"Room posted end of November",length:"2 hours",
+  covers:"Whole course: C basics, pointers, dynamic memory, OOD in C, C++ classes, special members, operator overloads. Confirm on Avenue.",
+  bring:"Past finals and review videos are under Exam Preparation on Avenue.",
+  start:"Thu Dec 10", review:[
+   ["f2sh4-1","Redo Practice Question Sets 1–8 without looking at the solutions"],
+   ["f2sh4-2","Rework the sample code from L13–L23 (DMA, matrices, FracStack, OpOverload)"],
+   ["f2sh4-3","Watch the review videos in Exam Preparation"],
+   ["f2sh4-4","One past final, timed at 2 hours, then go over every mistake"]]},
+ {id:"2di4-final",c:"2di4",kind:"Final",name:"COMPENG 2DI4 Final",iso:"2026-12-17",when:"Thu Dec 17, 12:30 PM",where:"Room posted end of November",length:"2 hours 30 minutes",weight:"45% (need at least 40% on the final)",
+  covers:"Whole course: Modules 1–5 and any later modules, plus Labs 1–5. No calculator. Confirm on Avenue.",
+  bring:"No calculator on tests. Use the readings and homework schedule for the later modules' problems.",
+  start:"Tue Dec 15", review:[
+   ["f2di4-1","Modules 1–4: redo the starred (*) problems and your midterm mistakes"],
+   ["f2di4-2","Module 5 (sequential logic, FSMs): Problem Sets and Tutorials 5–6"],
+   ["f2di4-3","Later modules and tutorials posted after Nov 7"],
+   ["f2di4-4","Go back over Labs 1–5"],
+   ["f2di4-5","Timed practice by hand, no calculator: a past final if one is posted"]]},
+ {id:"stats-final",c:"stats",kind:"Final",name:"STATS 3Y03 Final",iso:"2026-12-19",when:"Sat Dec 19, 4:00 PM",where:"Room posted end of November",length:"2 hours 30 minutes",
+  covers:"Whole course: Ch. 2–9 and anything after 9.2. Confirm on Avenue.",
+  bring:"Formula sheet and tables were given on the midterms; check whether the final does the same.",
+  start:"Fri Dec 18", review:[
+   ["fstats-1","Sample Midterm 1 and 2 again, timed"],
+   ["fstats-2","Lectures after 9.2: their posted exercises"],
+   ["fstats-3","Sample final if posted, timed at 2.5 hours, then every mistake"]]},
+ {id:"math-final",c:"math",kind:"Final",name:"MATH 2Z03 Final",iso:"2026-12-21",when:"Mon Dec 21, 12:30 PM",where:"Room posted end of November",length:"2 hours 30 minutes",
+  covers:"Whole course: Ch. 1–3 (Test 1), 3.6–4.3 (Test 2) and the sections after. Confirm on Avenue.",
+  bring:"Tutorials, Practice sets and sample tests on Avenue.",
+  start:"Sun Dec 20", review:[
+   ["fmath-1","Sample Test 1 and 2 again, timed"],
+   ["fmath-2","Sections after 4.3: tutorials and practice sets"],
+   ["fmath-3","Past or sample final if posted, timed at 2.5 hours, then every mistake"]]}
+];
+
+let done = {};
+let docRef = null;
+let saving = Promise.resolve();
+const LS = "fall26-study-board";
+function lsGet(){try{return JSON.parse(localStorage.getItem(LS)||"{}")}catch(e){return {}}}
+function lsSet(){try{localStorage.setItem(LS,JSON.stringify(done))}catch(e){}}
+
+function iso(d){return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0")}
+function el(tag,cls,txt){const e=document.createElement(tag);if(cls)e.className=cls;if(txt!=null)e.textContent=txt;return e}
+function chip(c){return el("span","chip k-"+c,NAMES[c])}
+function link(c,txt){const a=el("a",null,txt||"Open on Avenue");a.href=LINKS[c];a.target="_blank";a.rel="noopener";return a}
+function daysTo(isoDate){const t0=new Date(iso(new Date())+"T00:00:00");return Math.round((new Date(isoDate+"T00:00:00")-t0)/86400000)}
+function dayWord(d){return d>1?d+" days":d===1?"Tomorrow":d===0?"Today":"Done"}
+const DAYNAMES=["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+function addDays(d,n){const x=new Date(d+"T12:00:00");x.setDate(x.getDate()+n);return iso(x)}
+function shortDate(d){return new Date(d+"T12:00:00").toLocaleDateString("en-CA",{weekday:"short",month:"short",day:"numeric"})}
+function tmin(t){const m=t.match(/(\d+):(\d+) (AM|PM)/);let h=+m[1]%12;if(m[3]==="PM")h+=12;return h*60+(+m[2])}
+function todayIso(){return iso(new Date())}
+
+/* Classes go into the daily checklist from Mon Nov 9 to the last day of classes.
+   Video lecture numbers continue from the last one in the catch-up sprint (MATH L23, 2SH4 L23, STATS L24). */
+const CLASS_START="2026-11-09", CLASS_END="2026-12-09";
+const FIRST_LECTURE={math:24,"2sh4":24,stats:25};
+const CLASS_TASKS={};
+(function(){
+  const n={...FIRST_LECTURE};
+  for(let d=CLASS_START;d<=CLASS_END;d=addDays(d,1)){
+    const wd=new Date(d+"T12:00:00").getDay(), dn=DAYNAMES[wd].slice(0,3);
+    CLASS_TASKS[d]=CLASSES.filter(k=>k.day===wd&&!k.skip&&(!k.dates||k.dates.includes(d))).sort((a,b)=>tmin(a.t)-tmin(b.t)).map(k=>{
+      if(k.mode==="watch"){const L=n[k.c]++;return {id:"w-"+k.c+"-L"+L,c:k.c,kind:"watch",date:d,label:"L"+L,text:"Watch "+NAMES[k.c]+" Lecture "+L+" (the "+dn+" "+k.t+" class, "+k.what.replace(/^Lecture \((.*)\)$/,"$1")+")"}}
+      const slug=k.what.toLowerCase().replace(/[^a-z0-9]+/g,"");
+      return {id:"a-"+d+"-"+k.c+"-"+slug,c:k.c,kind:"attend",date:d,label:k.what.replace(/ \(.*\)$/,"")+" "+shortDate(d).replace(/,/,""),text:"Go to "+NAMES[k.c]+" "+k.what+" · "+k.t+", "+k.loc};
+    });
+  }
+})();
+const LAST_PHASE_DATE=PHASES[PHASES.length-1].days.slice(-1)[0].date;
+const EXTRA_DAYS=Object.keys(CLASS_TASKS).filter(d=>d>LAST_PHASE_DATE&&CLASS_TASKS[d].length);
+
+function studyTasks(day){return day.tasks.map(([id,c,text])=>({id,c,text,kind:"study",date:day.date}))}
+function dayTasks(date,day){return (CLASS_TASKS[date]||[]).concat(day?studyTasks(day):[])}
+function allDays(){
+  const out=[];PHASES.forEach(p=>p.days.forEach(d=>out.push({date:d.date,label:d.label,tasks:dayTasks(d.date,d)})));
+  EXTRA_DAYS.forEach(d=>out.push({date:d,label:shortDate(d),tasks:dayTasks(d,null)}));
+  return out;
+}
+function allTasks(){return allDays().flatMap(d=>d.tasks.map(t=>({...t,day:d.label})))}
+function weeksSoFar(){const out=[],t=todayIso();let m=CLASS_START;const first=t<CLASS_START?CLASS_START:t;while(m<=first&&m<=CLASS_END){out.push(m);m=addDays(m,7)}return out}
+function mondayOf(d){const wd=new Date(d+"T12:00:00").getDay();return addDays(d,-((wd+6)%7))}
+function weekEnded(d){return addDays(mondayOf(d),6)<todayIso()}
+function isOverdue(t){return !!t.date&&t.date<todayIso()&&!done[t.id]}
+
+const KIND={attend:"Go to class",watch:"Watch video",study:"Study block"};
+function taskItem(t,next,showDate){
+  const od=isOverdue(t);
+  const li=el("li","t"+(done[t.id]?" done":"")+(od?" overdue":"")+(next&&next.id===t.id?" is-next":""));
+  const cb=el("input"); cb.type="checkbox"; cb.id="cb-"+t.id+(showDate?"-x":""); cb.checked=!!done[t.id]; cb.onchange=()=>toggle(t.id,cb.checked);
+  const lab=el("label"); lab.htmlFor=cb.id;
+  const m=el("span","meta");
+  if(od) m.append(el("span","miss","Missed "+shortDate(t.date)));
+  else if(showDate&&t.date) m.append(el("span","kind",shortDate(t.date)));
+  m.append(chip(t.c));
+  if(t.kind) m.append(el("span","kind",KIND[t.kind]));
+  if(t.kind!=="attend") m.append(link(t.c));
+  lab.append(el("span","what",t.text), m); li.append(cb,lab); return li;
+}
+
+function examCard(x){
+  const a=el("a","exam"); a.href="#review-"+x.id;
+  a.append(el("span","eyebrow",x.kind+" · "+NAMES[x.c]), el("span","days",dayWord(daysTo(x.iso))), el("small",null,x.when), el("span","go","Review page →"));
+  return a;
+}
+
+function renderPlan(){
+  const today=todayIso();
+  const tasks=allTasks();
+  const next=tasks.find(t=>!done[t.id]&&t.date<=today)||tasks.find(t=>!done[t.id]);
+  const nt=document.getElementById("next-task"), nm=document.getElementById("next-meta"), nr=document.getElementById("next-row");
+  nm.replaceChildren(); nr.replaceChildren();
+  if(next){
+    nt.textContent=next.text; nt.className="task";
+    if(isOverdue(next)) nm.append(el("span","miss","Missed "+shortDate(next.date)));
+    nm.append(chip(next.c), el("span",null,next.day));
+    if(next.kind!=="attend"){const open=link(next.c,"Open on Avenue"); open.className="btn ghost"; nr.append(open)}
+    const b=el("button","btn","Done, next task"); b.id="next-done"; b.onclick=()=>toggle(next.id,true);
+    nr.append(b);
+  } else { nt.textContent="Everything on the list is done."; nt.className="task allclear"; }
+
+  const missed=tasks.filter(isOverdue);
+  const bh=document.getElementById("behind"); bh.replaceChildren();
+  Object.entries(BACKLOG).forEach(([c,b])=>{
+    const left=b.items.filter(i=>!done[i[0]]); let n=left.reduce((s,i)=>s+i[1],0);
+    const labels=left.map(i=>i[2]);
+    const old=missed.filter(t=>t.c===c&&weekEnded(t.date));
+    const mv=old.filter(t=>t.kind==="watch"); n+=mv.length; mv.forEach(t=>labels.push(t.label));
+    const ma=old.filter(t=>t.kind==="attend");
+    const card=el("div","bcard"); card.append(chip(c));
+    card.append(el("span","n"+(n?"":" zero"),n?n+" "+(b.unit==="lectures"&&n===1?"lecture":b.unit):"Caught up"));
+    if(n) card.append(el("small",null,"Left: "+labels.join(", ")));
+    if(ma.length) card.append(el("small","miss","+ "+ma.length+" missed class"+(ma.length>1?"es":"")+" from past weeks: "+ma.map(t=>t.label).join(", ")));
+    const wk=el("ul","wkrows");
+    weeksSoFar().forEach(m=>{
+      const end=addDays(m,6), ts=Object.keys(CLASS_TASKS).filter(d=>d>=m&&d<=end).flatMap(d=>CLASS_TASKS[d]).filter(t=>t.c===c);
+      if(!ts.length) return;
+      const dn=ts.filter(t=>done[t.id]).length, ms=ts.filter(isOverdue).length, cur=m<=today&&today<=end;
+      const li=el("li",ms?"miss":(dn===ts.length?"ok":null));
+      li.append(el("span",null,(cur?"This week":"Week of "+shortDate(m).replace(/^\w+, /,""))), el("span",null,dn+" of "+ts.length+" done"+(ms?" · "+ms+" missed"+(cur?"":", added above"):"")));
+      wk.append(li);
+    });
+    if(wk.children.length) card.append(wk);
+    if(b.note) card.append(el("small",null,b.note));
+    bh.append(card);
+  });
+
+  document.getElementById("today-label").textContent="Today's checklist · "+new Date().toLocaleDateString(undefined,{weekday:"long",month:"short",day:"numeric"});
+  const box=document.getElementById("today-box"); box.replaceChildren();
+  if(missed.length){
+    box.append(el("div","subh bad","Missed, go back to these ("+missed.length+")"));
+    const ul=el("ul","tasks"); missed.forEach(t=>ul.append(taskItem(t,next,true))); box.append(ul);
+  }
+  const td=allDays().find(d=>d.date===today);
+  const tt=td?td.tasks:(CLASS_TASKS[today]||[]);
+  box.append(el("div","subh","Today"));
+  if(tt.length){const ul=el("ul","tasks"); tt.forEach(t=>ul.append(taskItem(t,next,false))); box.append(ul)}
+  else box.append(el("p","empty","Nothing scheduled today."));
+
+  const mc=document.getElementById("mid-cards"); mc.replaceChildren();
+  EXAMS.filter(x=>x.kind!=="Final"&&daysTo(x.iso)>=0).forEach(x=>mc.append(examCard(x)));
+
+  const ph=document.getElementById("phases"); ph.replaceChildren();
+  PHASES.forEach(p=>{
+    const ids=p.days.flatMap(d=>d.tasks.map(t=>t[0])); const n=ids.filter(i=>done[i]).length;
+    const c=el("div","phase"); c.append(el("b",null,p.title), el("small",null,p.range+" · "+n+" of "+ids.length+" study blocks done"));
+    const bar=el("div","bar"); const i=el("i"); i.style.width=(ids.length?100*n/ids.length:0)+"%"; bar.append(i); c.append(bar); ph.append(c);
+  });
+
+  const sec=document.getElementById("sections"); sec.replaceChildren();
+  const renderDay=(s,date,label,list)=>{
+    const day=el("div","day"); const h3=el("h3",null,label); if(date===today) h3.append(el("span","tag","Today"));
+    const ul=el("ul","tasks"); list.forEach(t=>ul.append(taskItem(t,next,false)));
+    day.append(h3,ul); s.append(day);
+  };
+  PHASES.forEach(p=>{
+    const s=el("section","section"); s.append(el("h2",null,p.title+" ("+p.range+")"), el("p",null,p.note+" Classes and videos are listed first each day."));
+    p.days.forEach(d=>renderDay(s,d.date,d.label,dayTasks(d.date,d)));
+    sec.append(s);
+  });
+  if(EXTRA_DAYS.length){
+    const s=el("section","section"); s.append(el("h2",null,"Classes to the end of term ("+shortDate(EXTRA_DAYS[0])+" to "+shortDate(EXTRA_DAYS[EXTRA_DAYS.length-1])+")"), el("p",null,"Keep up with every class and video so nothing piles up before finals."));
+    EXTRA_DAYS.forEach(d=>renderDay(s,d,shortDate(d),CLASS_TASKS[d]));
+    sec.append(s);
+  }
+
+  const tb=document.getElementById("week"); tb.replaceChildren();
+  for(let wd=1;wd<=5;wd++){
+    const tr=el("tr"); tr.append(el("td","d",DAYNAMES[wd]));
+    ["attend","watch"].forEach(mode=>{
+      const td=el("td");
+      CLASSES.filter(k=>k.day===wd&&k.mode===mode).forEach(k=>{
+        const s=el("span","item"); s.append(el("span","when",k.t+" "), chip(k.c), document.createTextNode(" "+k.what+(k.dates?" ("+k.dates.map(x=>x.slice(5).replace("-","/")).join(", ")+")":"")));
+        td.append(s);
+      });
+      tr.append(td);
+    });
+    tb.append(tr);
+  }
+}
+
+function renderExams(){
+  const box=document.getElementById("all-exams"); box.replaceChildren();
+  EXAMS.forEach(x=>box.append(examCard(x)));
+}
+
+function renderReview(id){
+  const v=document.getElementById("view-review"); v.replaceChildren();
+  const x=EXAMS.find(e=>e.id===id); if(!x) return false;
+  const back=el("a","back","← All exams"); back.href="#exams";
+  const head=el("div"); head.append(el("span","eyebrow",x.kind+" · "+NAMES[x.c]), el("h2",null,x.name));
+  const info=el("section","card");
+  const dl=el("dl","facts");
+  [["When",x.when+" ("+dayWord(daysTo(x.iso))+")"],["Where",x.where],["Length",x.length],["Weight",x.weight],["Covers",x.covers],["Know",x.bring],["Start review",x.start]].forEach(([k,val])=>{if(!val)return;dl.append(el("dt",null,k),el("dd",null,val))});
+  info.append(dl, link(x.c,"Open course on Avenue"));
+  const s=el("section","section"); s.append(el("h2",null,"Review checklist"));
+  const ul=el("ul","tasks");
+  if(x.phase){
+    const p=PHASES.find(p=>p.id===x.phase);
+    p.days.forEach(d=>studyTasks(d).forEach(t=>ul.append(taskItem({...t,text:d.label+": "+t.text},null,false))));
+    s.append(el("p",null,"These are the same tasks as the "+p.title+" days on the Plan tab, so ticking one ticks both."));
+  } else {
+    x.review.forEach(([tid,text])=>ul.append(taskItem({id:tid,c:x.c,text},null,false)));
+    s.append(el("p",null,"A first-pass checklist. Coverage is confirmed once the instructor posts it, and I can turn this into day-by-day blocks later."));
+  }
+  s.append(ul);
+  const ids=(x.phase?PHASES.find(p=>p.id===x.phase).days.flatMap(d=>d.tasks.map(t=>t[0])):x.review.map(r=>r[0]));
+  const n=ids.filter(i=>done[i]).length;
+  const prog=el("div","phase"); prog.append(el("b",null,"Review progress"), el("small",null,n+" of "+ids.length+" done"));
+  const bar=el("div","bar"); const i=el("i"); i.style.width=(100*n/ids.length)+"%"; bar.append(i); prog.append(bar);
+  v.append(back, head, info, prog, s);
+  return true;
+}
+
+function route(){
+  const h=location.hash.slice(1);
+  let view="plan";
+  if(h==="exams") view="exams";
+  else if(h.startsWith("review-") && renderReview(h.slice(7))) view="review";
+  document.getElementById("view-plan").hidden=view!=="plan";
+  document.getElementById("view-exams").hidden=view!=="exams";
+  document.getElementById("view-review").hidden=view!=="review";
+  document.getElementById("tab-plan").setAttribute("aria-current",view==="plan"?"page":"false");
+  document.getElementById("tab-exams").setAttribute("aria-current",view!=="plan"?"page":"false");
+}
+
+function renderAll(){renderPlan();renderExams();route()}
+function setStatus(t){document.getElementById("status").textContent=t}
+function toggle(id,val){
+  if(val) done[id]=true; else delete done[id];
+  lsSet(); renderAll();
+  if(docRef){
+    const snap={...done};
+    saving=saving.then(()=>docRef.set({done:snap})).then(()=>setStatus("Progress saved to your account.")).catch(()=>setStatus("Couldn't save to your account. Your ticks are kept on this device only."));
+  }
+}
+
+window.addEventListener("hashchange",()=>{route();window.scrollTo(0,0)});
+done=lsGet(); renderAll();
+
+(async()=>{
+  const timer=setTimeout(()=>setStatus("Progress is kept on this device only."),10000);
+  try{
+    const db=await (window.claude?.use ? window.claude.use("db") : null);
+    if(!db){clearTimeout(timer);setStatus("Progress is kept on this device only.");return}
+    docRef=db.doc("progress/main");
+    const snap=await docRef.get();
+    clearTimeout(timer);
+    if(snap.exists){const d=snap.data()||{}; done={...(d.done||{})}; lsSet(); renderAll()}
+    else if(Object.keys(done).length){await docRef.set({done:{...done}})}
+    setStatus("Progress syncs to your account, so it shows on your phone and PC.");
+  }catch(e){clearTimeout(timer);setStatus("Progress is kept on this device only.")}
+})();
+</script>
+
+</body>
+</html>
