@@ -136,7 +136,7 @@ table.wk .item{display:block;margin-bottom:4px}
 <div class="wrap">
   <header>
     <h1>Fall 2026 Study Board</h1>
-    <p class="sub">Starting Tue Nov 10: every missed lecture done by Mon Nov 16 (STATS first), off weekend Nov 21–22, then one exam at a time. Each day lists the classes to go to (2DI4, 2CI4, tutorials, labs), the videos to watch (MATH, 2SH4, STATS) and your study block. Anything you skip turns red and stays at the top until you tick it.</p>
+    <p class="sub">Starting Tue Nov 10: every missed lecture done by Sun Nov 15 (STATS first), off weekend Nov 21–22, then one exam at a time. Each day lists the classes to go to (2DI4, 2CI4, tutorials, labs), the videos to watch (MATH, 2SH4, STATS) and your study block. Anything you skip turns red and stays at the top until you tick it.</p>
     <div class="links">
       <a href="https://avenue.cllmcmaster.ca/d2l/home" target="_blank" rel="noopener">Avenue to Learn</a>
       <a href="https://claude.ai/artifact/4ouvwWyM1dZXHYdhSbyjY6" target="_blank" rel="noopener">Full catch-up plan</a>
@@ -228,44 +228,43 @@ const CLASSES = [
 
 /* Backlog per course: each unit counts toward "behind" until its task is ticked. */
 const BACKLOG = {
- stats:{unit:"lectures", items:[["r1",4,"L16–L19"],["r4",6,"L20–L25"]], note:"Unticked lectures are added here when their week ends"},
- math:{unit:"lectures", items:[["r3",2,"L14–L15"],["r5",2,"L16–L17"],["r8",3,"L18–L20"],["r12",4,"L21–L24"]]},
- "2sh4":{unit:"lectures", items:[["r2",3,"L13–L15"],["r6",3,"L16–L18"],["r11",3,"L19–L21"],["r15",3,"L22–L24"]]},
- "2di4":{unit:"module parts", items:[["r9",3,"Module 5 Parts 3–5"]]},
- "2ci4":{unit:"note sets", items:[["r17",3,"Module 5 (5.1–5.3)"],["r19",5,"Module 6 (6.1–6.5)"]], note:"Module 4 done"}
+ stats:{unit:"lectures", items:[["q1",5,"L11–L15"],["q4",5,"L16–L20"],["q7",5,"L21–L25"]], note:"Unticked lectures are added here when their week ends"},
+ math:{unit:"lectures", items:[["q3",2,"L14–L15"],["q6",2,"L16–L17"],["q8",3,"L18–L20"],["q11",4,"L21–L24"]]},
+ "2sh4":{unit:"lectures", items:[["q2",3,"L18–L20"],["q5",4,"L21–L24"]], note:"Done through L17 (AI Design Activity 2)"},
+ "2di4":{unit:"module parts", items:[["q9",2,"Module 5 Parts 1–2"],["q12",3,"Module 5 Parts 3–5"]], note:"Done through Module 4"},
+ "2ci4":{unit:"note sets", items:[["q15",3,"Module 5 (5.1–5.3)"],["q17",5,"Module 6 (6.1–6.5)"]], note:"Done through 4.3 Maximum Power Transfer"}
 };
 
 const PHASES = [
- {id:"sprint", title:"Catch-up sprint", range:"Nov 10–16", note:"Three study blocks a day. STATS comes first because its midterm is Nov 18. Clears every lecture posted up to Mon Nov 9.", days:[
+ {id:"sprint", title:"Catch-up sprint", range:"Nov 10–16", note:"Three study blocks a day. STATS comes first because Midterm 2 (Nov 18) covers L11–L25, which is exactly what you're behind on. Watch STATS at 1.5x.", days:[
   {date:"2026-11-10", label:"Tue Nov 10", tasks:[
-   ["r1","stats","Watch L16–L19: Ch. 6 and the start of Ch. 7"],
-   ["r2","2sh4","Watch L13–L15: pointer arithmetic, dynamic memory, DMA for 2D arrays (PLVs 13–15)"],
-   ["r3","math","Watch L14–L15: 3.4 trial solutions, 3.5 Variation of Parameters"]]},
+   ["q1","stats","Watch L11–L15: 4.5–4.7, 5.1 (start of Midterm 2 material)"],
+   ["q2","2sh4","Watch L18–L20: OOD in C, From C to C++, C++ procedural programming"],
+   ["q3","math","Watch L14–L15: 3.4 trial solutions, 3.5 Variation of Parameters"]]},
   {date:"2026-11-11", label:"Wed Nov 11", tasks:[
-   ["r4","stats","Watch L20–L25: rest of Ch. 7, Ch. 8, 9.1–9.2"],
-   ["r5","math","Watch L16–L17: 3.6 Cauchy-Euler Equations"],
-   ["r6","2sh4","Watch L16–L18: jagged arrays and double pointers, memory allocation, OOD in C"]]},
+   ["q4","stats","Watch L16–L20: 5.4, 5.6, Ch. 6 and the start of Ch. 7"],
+   ["q5","2sh4","Watch L21–L24: Class Design I, special member functions and Rule of Six, operator overloads, and Monday's lecture"],
+   ["q6","math","Watch L16–L17: 3.6 Cauchy-Euler Equations"]]},
   {date:"2026-11-12", label:"Thu Nov 12", tasks:[
-   ["r7","stats","Ch. 4–5 exercises: 4.5.1–4.5.7, 4.5.9, 4.5.11, 4.5.13, 4.5.17, 4.6.1, 4.6.3, 4.7.1–4.7.3, 4.7.5, 4.7.7, 4.7.9, 4.7.11, 4.7.13, 5.1.1, 5.1.3–5.1.10, 5.4.1, 5.4.2, 5.4.5–5.4.7, 5.4.10, 5.6.1–5.6.7"],
-   ["r8","math","Watch L18–L20: 3.8 Linear Models (IVPs), 3.9 Linear Models (BVPs)"],
-   ["r9","2di4","Module 5 Parts 3–5 (Analysis C02 version, FSM, Applications) + Tutorials 5–6"]]},
+   ["q7","stats","Watch L21–L25: rest of Ch. 7, Ch. 8, 9.1–9.2"],
+   ["q8","math","Watch L18–L20: 3.8 Linear Models (IVPs), 3.9 Linear Models (BVPs)"],
+   ["q9","2di4","Module 5 Parts 1–2 + Tutorial 5"]]},
   {date:"2026-11-13", label:"Fri Nov 13", tasks:[
-   ["r10","stats","Ch. 6–7 exercises: 6.1.1–6.1.7, 6.2.1–6.2.4, 6.3.1–6.3.4, 6.4.3, 6.7.1–6.7.2, 7.2.1–7.2.7, 7.3.1, 7.3.3, 7.3.4, 7.3.6, 7.3.7, 7.3.9"],
-   ["r11","2sh4","Watch L19–L21: From C to C++, C++ procedural programming (UML PLV), Class Design I"],
-   ["r12","math","Watch L21–L24: 4.1 Laplace Transform, 4.2 Inverse Laplace Transform, and Monday's lecture"]]},
+   ["q10","stats","Ch. 4–5 exercises: 4.5.1–4.5.7, 4.5.9, 4.5.11, 4.5.13, 4.5.17, 4.6.1, 4.6.3, 4.7.1–4.7.3, 4.7.5, 4.7.7, 4.7.9, 4.7.11, 4.7.13, 5.1.1, 5.1.3–5.1.10, 5.4.1, 5.4.2, 5.4.5–5.4.7, 5.4.10, 5.6.1–5.6.7"],
+   ["q11","math","Watch L21–L24: 4.1 Laplace Transform, 4.2 Inverse Laplace Transform, and Monday's lecture"],
+   ["q12","2di4","Module 5 Parts 3–5 (Analysis C02 version, FSM, Applications) + Tutorial 6"]]},
   {date:"2026-11-14", label:"Sat Nov 14", tasks:[
-   ["r13","2sh4","Lab 4: finish and submit by today's deadline (check Avenue)"],
-   ["r14","stats","Ch. 8 exercises: 8.1.1–8.1.11, 8.2.1–8.2.7, 8.3.1–8.3.6, 8.4.1–8.4.5"],
-   ["r15","2sh4","Watch L22–L24: special member functions and Rule of Six, operator overloads, and Monday's lecture"]]},
+   ["q13","2sh4","Lab 4: finish and submit by today's deadline (check Avenue)"],
+   ["q14","stats","Ch. 6–7 exercises: 6.1.1–6.1.7, 6.2.1–6.2.4, 6.3.1–6.3.4, 6.4.3, 6.7.1–6.7.2, 7.2.1–7.2.7, 7.3.1, 7.3.3, 7.3.4, 7.3.6, 7.3.7, 7.3.9"],
+   ["q15","2ci4","Module 5: 5.1 Capacitors, 5.2 Inductors, 5.3 Combinations + Tutorial 8"]]},
   {date:"2026-11-15", label:"Sun Nov 15", tasks:[
-   ["r16","stats","Sample Midterm 2, timed at 75 minutes, then go over every mistake"],
-   ["r17","2ci4","Module 5: 5.1 Capacitors, 5.2 Inductors, 5.3 Combinations + Tutorial 8"]]},
+   ["q16","stats","Ch. 8 exercises: 8.1.1–8.1.11, 8.2.1–8.2.7, 8.3.1–8.3.6, 8.4.1–8.4.5"],
+   ["q17","2ci4","Module 6: 6.1–6.3 First-Order, 6.4–6.5 Second-Order Circuits + Tutorials 9–10"]]},
   {date:"2026-11-16", label:"Mon Nov 16", tasks:[
-   ["r18","stats","Redo every problem you got wrong, focusing on Ch. 8–9"],
-   ["r19","2ci4","Module 6: 6.1–6.3 First-Order, 6.4–6.5 Second-Order Circuits + Tutorials 9–10"]]}
+   ["q18","stats","Sample Midterm 2, timed at 75 minutes, then go over every mistake"]]}
  ]},
  {id:"stats", title:"STATS Midterm 2", range:"Nov 17–18", note:"Light review only. You are caught up by now.", days:[
-  {date:"2026-11-17", label:"Tue Nov 17", tasks:[["r20","stats","Light review of your mistakes and the formula sheet, then sleep early"]]},
+  {date:"2026-11-17", label:"Tue Nov 17", tasks:[["r20","stats","Redo every problem you got wrong (Ch. 8–9 first), then the formula sheet. Sleep early"]]},
   {date:"2026-11-18", label:"Wed Nov 18", tasks:[["r21","stats","Midterm 2, 7:00 PM, TSH 120. Pencil, McMaster standard calculator, student ID"]]}
  ]},
  {id:"math", title:"MATH Test 2 prep", range:"Nov 19–26", note:"One block a day, plus your classes and videos. Sat–Sun Nov 21–22 is your off weekend.", days:[
