@@ -141,7 +141,7 @@ table.wk .item{display:block;margin-bottom:4px}
 <div class="wrap">
   <header>
     <h1>Fall 2026 Study Board</h1>
-    <p class="sub">Starting Tue Nov 10: every missed lecture done by Sun Nov 15 (STATS first), off weekend Nov 21–22, then one exam at a time. Each day lists the classes to go to (2DI4, 2CI4, tutorials, labs), the videos to watch (MATH, 2SH4, STATS) and your study block. Anything you skip turns red and stays at the top until you tick it.</p>
+    <p class="sub">Starting Tue Nov 10: every missed lecture done by Sun Nov 15 (STATS first), days off Thu Nov 19 to Sun Nov 22, then one exam at a time. Each day lists the classes to go to (2DI4, 2CI4, tutorials, labs), the videos to watch (MATH, 2SH4, STATS) and your study block. Anything you skip turns red and stays at the top until you tick it.</p>
     <div class="links">
       <a href="https://avenue.cllmcmaster.ca/d2l/home" target="_blank" rel="noopener">Avenue to Learn</a>
       <a href="https://claude.ai/artifact/4ouvwWyM1dZXHYdhSbyjY6" target="_blank" rel="noopener">Full catch-up plan</a>
@@ -272,13 +272,13 @@ const PHASES = [
   {date:"2026-11-17", label:"Tue Nov 17", tasks:[["r20","stats","Redo every problem you got wrong (Ch. 8–9 first), then the formula sheet. Sleep early"]]},
   {date:"2026-11-18", label:"Wed Nov 18", tasks:[["r21","stats","Midterm 2, 7:00 PM, TSH 120. Pencil, McMaster standard calculator, student ID"]]}
  ]},
- {id:"math", title:"MATH Test 2 prep", range:"Nov 19–26", note:"One block a day, plus your classes and videos. Sat–Sun Nov 21–22 is your off weekend.", days:[
-  {date:"2026-11-19", label:"Thu Nov 19", tasks:[["r22","math","3.6 and 3.8 with Tutorial 5 and Practice 6, trying each problem before the solution"]]},
-  {date:"2026-11-20", label:"Fri Nov 20", tasks:[["r23","math","3.9 and 4.1–4.3 with Tutorials 6–7 and Practice 7"]]},
+ {id:"math", title:"MATH Test 2 prep", range:"Nov 19–26", note:"Thu Nov 19 to Sun Nov 22 are your days off. Then three focused days before Test 2. You already did Practice 6–7 during the catch-up, so this is review, not new material.", days:[
+  {date:"2026-11-19", label:"Thu Nov 19", off:true, tasks:[]},
+  {date:"2026-11-20", label:"Fri Nov 20", off:true, tasks:[]},
   {date:"2026-11-21", label:"Sat Nov 21", off:true, tasks:[]},
   {date:"2026-11-22", label:"Sun Nov 22", off:true, tasks:[]},
-  {date:"2026-11-23", label:"Mon Nov 23", tasks:[["r24","math","2026 Sample Test 2, timed, then redo every mistake"]]},
-  {date:"2026-11-24", label:"Tue Nov 24", tasks:[["r25","math","Redo the problems you got wrong from Practice 6–7, the tutorials and the sample test"]]},
+  {date:"2026-11-23", label:"Mon Nov 23", tasks:[["r22","math","Redo Practice 6–7 and Tutorials 5–7 without notes (3.6, 3.8, 3.9, 4.1–4.3). Mark every one you get wrong"]]},
+  {date:"2026-11-24", label:"Tue Nov 24", tasks:[["r24","math","2026 Sample Test 2, timed, then redo every mistake"]]},
   {date:"2026-11-25", label:"Wed Nov 25", tasks:[["r26","math","Second timed pass at the sample test without notes, then the Laplace table. Sleep early"]]},
   {date:"2026-11-26", label:"Thu Nov 26", tasks:[["r27","math","Test 2, 6:30 PM, T13 125"]]}
  ]}
@@ -293,7 +293,7 @@ const EXAMS = [
  {id:"math-t2",c:"math",kind:"Test",name:"MATH 2Z03 Test 2",iso:"2026-11-26",when:"Thu Nov 26, 6:30 PM",where:"T13 125 (last names Sus–Zyz)",weight:"10%",
   covers:"3.6 Cauchy-Euler, 3.8 and 3.9 Linear Models, 4.1 Laplace Transform, 4.2 Inverse Laplace, 4.3 (not 3.5)",
   bring:"Practice with the 2026 Sample Test 2 (Test2 folder on Avenue), Tutorials 5–7, Practice 6–7.",
-  start:"Thu Nov 19", phase:"math"},
+  start:"Mon Nov 23 (after your days off)", phase:"math"},
  {id:"2ci4-final",c:"2ci4",kind:"Final",name:"ELECENG 2CI4 Final",iso:"2026-12-12",when:"Sat Dec 12, 12:30 PM",where:"Room posted end of November",length:"2 hours 30 minutes",weight:"40% (need at least 30% on the final)",
   covers:"Whole course so far: Modules 1–6 (Irwin Ch. 1–3, 5–7), plus Modules 7–8 (AC steady-state, power) once posted. Confirm on Avenue.",
   bring:"Past finals with solutions are under Past midterms and finals on Avenue.",
@@ -359,7 +359,7 @@ function todayIso(){return iso(new Date())}
    Video lecture numbers continue from the last one in the catch-up sprint (MATH L24, 2SH4 L24, STATS L25). */
 const CLASS_START="2026-11-10", CLASS_END="2026-12-09";
 const FIRST_LECTURE={math:25,"2sh4":25,stats:26};
-const CLASS_TASKS={}, LATE={}, CAUGHT_UP={};
+const CLASS_TASKS={}, LATE={}, EARLY={}, CAUGHT_UP={};
 (function(){
   const n={...FIRST_LECTURE};
   for(let d=CLASS_START;d<=CLASS_END;d=addDays(d,1)){
@@ -386,6 +386,17 @@ const CLASS_TASKS={}, LATE={}, CAUGHT_UP={};
       (LATE[cu]=LATE[cu]||[]).push(m); return false;
     });
   });
+  const OFF=new Set(PHASES.flatMap(p=>p.days).filter(d=>d.off).map(d=>d.date));
+  [...OFF].sort().forEach(d=>{
+    if(!CLASS_TASKS[d]||!CLASS_TASKS[d].length) return;
+    let nd=addDays(d,1); while(OFF.has(nd)) nd=addDays(nd,1);
+    let nd2=addDays(nd,1); while(OFF.has(nd2)) nd2=addDays(nd2,1);
+    const orig=shortDate(d);
+    /* videos from days off come first on the next working day, so lectures stay in order;
+       notes for in-person classes go one day later so that day isn't overloaded */
+    CLASS_TASKS[d].forEach(t=>{const day=t.kind==="watch"?nd:nd2, bucket=t.kind==="watch"?EARLY:LATE;(bucket[day]=bucket[day]||[]).push({...t,date:day,kind:"catchup",text:t.kind==="watch"?"Watch "+NAMES[t.c]+" Lecture "+t.label.slice(1)+" (posted on your day off, "+orig+")":"Go over the "+NAMES[t.c]+" "+t.label.replace(/ \w+ \w+ \d+$/,"")+" from your day off, "+orig+" (slides and notes on Avenue)"})});
+    CLASS_TASKS[d]=[];
+  });
 })();
 const LAST_PHASE_DATE=PHASES[PHASES.length-1].days.slice(-1)[0].date;
 const EXTRA_DAYS=Object.keys(CLASS_TASKS).filter(d=>d>LAST_PHASE_DATE&&CLASS_TASKS[d].length);
@@ -393,7 +404,7 @@ const EXTRA_DAYS=Object.keys(CLASS_TASKS).filter(d=>d>LAST_PHASE_DATE&&CLASS_TAS
 function studyTasks(day){return day.tasks.map(([id,c,text])=>({id,c,text,kind:"study",date:day.date}))}
 function dayTasks(date,day){
   const cls=CLASS_TASKS[date]||[], first=cls.filter(t=>!(CAUGHT_UP[t.c]===date)), after=cls.filter(t=>CAUGHT_UP[t.c]===date);
-  return first.concat(day?studyTasks(day):[], LATE[date]||[], after);
+  return (EARLY[date]||[]).slice().sort((a,b)=>a.id<b.id?-1:1).concat(first, day?studyTasks(day):[], LATE[date]||[], after);
 }
 function allDays(){
   const out=[];PHASES.forEach(p=>p.days.forEach(d=>out.push({date:d.date,label:d.label,tasks:dayTasks(d.date,d)})));
@@ -507,7 +518,7 @@ function renderPlan(){
   const tt=td?td.tasks:(CLASS_TASKS[today]||[]);
   box.append(el("div","subh","Today"));
   if(tt.length){const ul=el("ul","tasks"); tt.forEach(t=>ul.append(taskItem(t,next,false))); box.append(ul)}
-  else box.append(el("p","empty",td&&PHASES.some(p=>p.days.some(d=>d.date===today&&d.off))?"Off weekend. No studying, rest up.":"Nothing scheduled today."));
+  else box.append(el("p","empty",td&&PHASES.some(p=>p.days.some(d=>d.date===today&&d.off))?"Day off. No studying, rest up.":"Nothing scheduled today."));
 
   const mc=document.getElementById("mid-cards"); mc.replaceChildren();
   EXAMS.filter(x=>x.kind!=="Final"&&daysTo(x.iso)>=0).forEach(x=>mc.append(examCard(x)));
@@ -522,7 +533,7 @@ function renderPlan(){
   const sec=document.getElementById("sections"); sec.replaceChildren();
   const renderDay=(s,date,label,list)=>{
     const day=el("div","day"); const h3=el("h3",null,label); if(date===today) h3.append(el("span","tag","Today"));
-    if(!list.length){day.append(h3,el("p","empty","Off weekend. No studying, rest up.")); s.append(day); return}
+    if(!list.length){day.append(h3,el("p","empty","Day off. No studying, rest up.")); s.append(day); return}
     const ul=el("ul","tasks"); list.forEach(t=>ul.append(taskItem(t,next,false)));
     day.append(h3,ul); s.append(day);
   };
