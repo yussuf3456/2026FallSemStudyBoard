@@ -229,7 +229,7 @@ const CLASSES = [
 /* Backlog per course: each unit counts toward "behind" until its task is ticked. */
 const BACKLOG = {
  stats:{unit:"lectures", items:[["q1",5,"L11–L15"],["q4",5,"L16–L20"],["q7",5,"L21–L25"]], note:"Unticked lectures are added here when their week ends"},
- math:{unit:"lectures", items:[["q3",2,"L14–L15"],["q6",2,"L16–L17"],["q8",3,"L18–L20"],["q11",4,"L21–L24"]]},
+ math:{unit:"lectures", items:[["q3",2,"L16–L17"],["q6",3,"L18–L20"],["q8",4,"L21–L24"]], note:"Done through 3.5 (L15)"},
  "2sh4":{unit:"lectures", items:[["q2",3,"L18–L20"],["q5",4,"L21–L24"]], note:"Done through L17 (AI Design Activity 2)"},
  "2di4":{unit:"module parts", items:[["q9",2,"Module 5 Parts 1–2"],["q12",3,"Module 5 Parts 3–5"]], note:"Done through Module 4"},
  "2ci4":{unit:"note sets", items:[["q15",3,"Module 5 (5.1–5.3)"],["q17",5,"Module 6 (6.1–6.5)"]], note:"Done through 4.3 Maximum Power Transfer"}
@@ -240,18 +240,17 @@ const PHASES = [
   {date:"2026-11-10", label:"Tue Nov 10", tasks:[
    ["q1","stats","Watch L11–L15: 4.5–4.7, 5.1 (start of Midterm 2 material)"],
    ["q2","2sh4","Watch L18–L20: OOD in C, From C to C++, C++ procedural programming"],
-   ["q3","math","Watch L14–L15: 3.4 trial solutions, 3.5 Variation of Parameters"]]},
+   ["q3","math","Watch L16–L17: 3.6 Cauchy-Euler Equations"]]},
   {date:"2026-11-11", label:"Wed Nov 11", tasks:[
    ["q4","stats","Watch L16–L20: 5.4, 5.6, Ch. 6 and the start of Ch. 7"],
    ["q5","2sh4","Watch L21–L24: Class Design I, special member functions and Rule of Six, operator overloads, and Monday's lecture"],
-   ["q6","math","Watch L16–L17: 3.6 Cauchy-Euler Equations"]]},
+   ["q6","math","Watch L18–L20: 3.8 Linear Models (IVPs), 3.9 Linear Models (BVPs)"]]},
   {date:"2026-11-12", label:"Thu Nov 12", tasks:[
    ["q7","stats","Watch L21–L25: rest of Ch. 7, Ch. 8, 9.1–9.2"],
-   ["q8","math","Watch L18–L20: 3.8 Linear Models (IVPs), 3.9 Linear Models (BVPs)"],
+   ["q8","math","Watch L21–L24: 4.1 Laplace Transform, 4.2 Inverse Laplace Transform, and Monday's lecture"],
    ["q9","2di4","Module 5 Parts 1–2 + Tutorial 5"]]},
   {date:"2026-11-13", label:"Fri Nov 13", tasks:[
    ["q10","stats","Ch. 4–5 exercises: 4.5.1–4.5.7, 4.5.9, 4.5.11, 4.5.13, 4.5.17, 4.6.1, 4.6.3, 4.7.1–4.7.3, 4.7.5, 4.7.7, 4.7.9, 4.7.11, 4.7.13, 5.1.1, 5.1.3–5.1.10, 5.4.1, 5.4.2, 5.4.5–5.4.7, 5.4.10, 5.6.1–5.6.7"],
-   ["q11","math","Watch L21–L24: 4.1 Laplace Transform, 4.2 Inverse Laplace Transform, and Monday's lecture"],
    ["q12","2di4","Module 5 Parts 3–5 (Analysis C02 version, FSM, Applications) + Tutorial 6"]]},
   {date:"2026-11-14", label:"Sat Nov 14", tasks:[
    ["q13","2sh4","Lab 4: finish and submit by today's deadline (check Avenue)"],
