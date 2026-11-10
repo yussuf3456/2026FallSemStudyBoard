@@ -355,7 +355,7 @@ function todayIso(){return iso(new Date())}
    Video lecture numbers continue from the last one in the catch-up sprint (MATH L24, 2SH4 L24, STATS L25). */
 const CLASS_START="2026-11-10", CLASS_END="2026-12-09";
 const FIRST_LECTURE={math:25,"2sh4":25,stats:26};
-const CLASS_TASKS={};
+const CLASS_TASKS={}, LATE={}, CAUGHT_UP={};
 (function(){
   const n={...FIRST_LECTURE};
   for(let d=CLASS_START;d<=CLASS_END;d=addDays(d,1)){
@@ -366,12 +366,31 @@ const CLASS_TASKS={};
       return {id:"a-"+d+"-"+k.c+"-"+slug,c:k.c,kind:"attend",date:d,label:k.what.replace(/ \(.*\)$/,"")+" "+shortDate(d).replace(/,/,""),text:"Go to "+NAMES[k.c]+" "+k.what+" · "+k.t+", "+k.loc};
     });
   }
+  /* You can't follow a new lecture before the backlog in that course is done.
+     Videos posted on or before a course's catch-up day, and in-person classes before it,
+     move to that day, after the catch-up block, in order. */
+  const dateOf={};PHASES.forEach(p=>p.days.forEach(d=>d.tasks.forEach(t=>dateOf[t[0]]=d.date)));
+  Object.entries(BACKLOG).forEach(([c,b])=>{CAUGHT_UP[c]=b.items.map(i=>dateOf[i[0]]).sort().slice(-1)[0]});
+  Object.keys(CLASS_TASKS).forEach(d=>{
+    CLASS_TASKS[d]=CLASS_TASKS[d].filter(t=>{
+      const cu=CAUGHT_UP[t.c]; if(!cu) return true;
+      const move=t.kind==="watch"?d<=cu:d<cu; if(!move) return true;
+      const orig=shortDate(d);
+      const m=t.kind==="watch"
+        ?{...t,date:cu,kind:"catchup",text:"Then watch "+NAMES[t.c]+" Lecture "+t.label.slice(1)+" (posted "+orig+")"}
+        :{...t,date:cu,kind:"catchup",text:"Then go over the "+NAMES[t.c]+" "+t.label.replace(/ \w+ \w+ \d+$/,"")+" you skipped on "+orig+" (slides and notes on Avenue)"};
+      (LATE[cu]=LATE[cu]||[]).push(m); return false;
+    });
+  });
 })();
 const LAST_PHASE_DATE=PHASES[PHASES.length-1].days.slice(-1)[0].date;
 const EXTRA_DAYS=Object.keys(CLASS_TASKS).filter(d=>d>LAST_PHASE_DATE&&CLASS_TASKS[d].length);
 
 function studyTasks(day){return day.tasks.map(([id,c,text])=>({id,c,text,kind:"study",date:day.date}))}
-function dayTasks(date,day){return (CLASS_TASKS[date]||[]).concat(day?studyTasks(day):[])}
+function dayTasks(date,day){
+  const cls=CLASS_TASKS[date]||[], first=cls.filter(t=>!(CAUGHT_UP[t.c]===date)), after=cls.filter(t=>CAUGHT_UP[t.c]===date);
+  return first.concat(day?studyTasks(day):[], LATE[date]||[], after);
+}
 function allDays(){
   const out=[];PHASES.forEach(p=>p.days.forEach(d=>out.push({date:d.date,label:d.label,tasks:dayTasks(d.date,d)})));
   EXTRA_DAYS.forEach(d=>out.push({date:d,label:shortDate(d),tasks:dayTasks(d,null)}));
@@ -383,7 +402,7 @@ function mondayOf(d){const wd=new Date(d+"T12:00:00").getDay();return addDays(d,
 function weekEnded(d){return addDays(mondayOf(d),6)<todayIso()}
 function isOverdue(t){return !!t.date&&t.date<todayIso()&&!done[t.id]}
 
-const KIND={attend:"Go to class",watch:"Watch video",study:"Study block"};
+const KIND={attend:"Go to class",watch:"Watch video",study:"Study block",catchup:"Catch-up"};
 function taskItem(t,next,showDate){
   const od=isOverdue(t);
   const li=el("li","t"+(done[t.id]?" done":"")+(od?" overdue":"")+(next&&next.id===t.id?" is-next":""));
@@ -425,8 +444,8 @@ function renderPlan(){
     const left=b.items.filter(i=>!done[i[0]]); let n=left.reduce((s,i)=>s+i[1],0);
     const labels=left.map(i=>i[2]);
     const old=missed.filter(t=>t.c===c&&weekEnded(t.date));
-    const mv=old.filter(t=>t.kind==="watch"); n+=mv.length; mv.forEach(t=>labels.push(t.label));
-    const ma=old.filter(t=>t.kind==="attend");
+    const mv=old.filter(t=>t.kind==="watch"||(t.kind==="catchup"&&t.id.startsWith("w-"))); n+=mv.length; mv.forEach(t=>labels.push(t.label));
+    const ma=old.filter(t=>t.kind==="attend"||(t.kind==="catchup"&&t.id.startsWith("a-")));
     const card=el("div","bcard"); card.append(chip(c));
     card.append(el("span","n"+(n?"":" zero"),n?n+" "+(b.unit==="lectures"&&n===1?"lecture":b.unit):"Caught up"));
     if(n) card.append(el("small",null,"Left: "+labels.join(", ")));
