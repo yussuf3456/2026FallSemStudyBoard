@@ -136,7 +136,7 @@ table.wk .item{display:block;margin-bottom:4px}
 <div class="wrap">
   <header>
     <h1>Fall 2026 Study Board</h1>
-    <p class="sub">Every missed lecture done by Wed Nov 11, then one exam at a time. Each day lists the classes to go to (2DI4, 2CI4, tutorials, labs), the videos to watch (MATH, 2SH4, STATS) and your study block. Anything you skip turns red and stays at the top until you tick it.</p>
+    <p class="sub">Starting Tue Nov 10: every missed lecture done by Mon Nov 16 (STATS first), off weekend Nov 21–22, then one exam at a time. Each day lists the classes to go to (2DI4, 2CI4, tutorials, labs), the videos to watch (MATH, 2SH4, STATS) and your study block. Anything you skip turns red and stays at the top until you tick it.</p>
     <div class="links">
       <a href="https://avenue.cllmcmaster.ca/d2l/home" target="_blank" rel="noopener">Avenue to Learn</a>
       <a href="https://claude.ai/artifact/4ouvwWyM1dZXHYdhSbyjY6" target="_blank" rel="noopener">Full catch-up plan</a>
@@ -228,61 +228,55 @@ const CLASSES = [
 
 /* Backlog per course: each unit counts toward "behind" until its task is ticked. */
 const BACKLOG = {
- stats:{unit:"lectures", items:[["s3",4,"L16–L19"],["s7",5,"L20–L24"]], note:"Unticked lectures are added here when their week ends"},
- math:{unit:"lectures", items:[["s4",2,"L14–L15"],["s8",2,"L16–L17"],["s9",3,"L18–L20"],["s12",3,"L21–L23"]]},
- "2sh4":{unit:"lectures", items:[["s1",3,"L13–L15"],["s6",3,"L16–L18"],["s10",3,"L19–L21"],["s13",2,"L22–L23"]]},
- "2di4":{unit:"module parts", items:[["s11",3,"Module 5 Parts 3–5"]]},
- "2ci4":{unit:"note sets", items:[["s15",3,"Module 5 (5.1–5.3)"],["s16",5,"Module 6 (6.1–6.5)"]], note:"Module 4 done"}
+ stats:{unit:"lectures", items:[["r1",4,"L16–L19"],["r4",6,"L20–L25"]], note:"Unticked lectures are added here when their week ends"},
+ math:{unit:"lectures", items:[["r3",2,"L14–L15"],["r5",2,"L16–L17"],["r8",3,"L18–L20"],["r12",4,"L21–L24"]]},
+ "2sh4":{unit:"lectures", items:[["r2",3,"L13–L15"],["r6",3,"L16–L18"],["r11",3,"L19–L21"],["r15",3,"L22–L24"]]},
+ "2di4":{unit:"module parts", items:[["r9",3,"Module 5 Parts 3–5"]]},
+ "2ci4":{unit:"note sets", items:[["r17",3,"Module 5 (5.1–5.3)"],["r19",5,"Module 6 (6.1–6.5)"]], note:"Module 4 done"}
 };
 
 const PHASES = [
- {id:"sprint", title:"Catch-up sprint", range:"Nov 7–11", note:"Three study blocks a day, one course per block. Clears everything posted up to Nov 7.", days:[
-  {date:"2026-11-07", label:"Sat Nov 7", tasks:[
-   ["s1","2sh4","Watch L13–L15: pointer arithmetic, dynamic memory, DMA for 2D arrays (PLVs 13–15)"],
-   ["s2","2sh4","Work on Lab 3 (pointers and arrays)"],
-   ["s3","stats","Watch L16–L19: Ch. 6 and the start of Ch. 7"],
-   ["s4","math","Watch L14–L15: 3.4 trial solutions, 3.5 Variation of Parameters"]]},
-  {date:"2026-11-08", label:"Sun Nov 8", tasks:[
-   ["s5","2sh4","Submit Lab 3 by 11:59 PM (no late submissions)"],
-   ["s6","2sh4","Watch L16–L18: jagged arrays and double pointers, memory allocation, OOD in C"],
-   ["s7","stats","Watch L20–L24: rest of Ch. 7, Ch. 8, 9.1"],
-   ["s8","math","Watch L16–L17: 3.6 Cauchy-Euler Equations"]]},
-  {date:"2026-11-09", label:"Mon Nov 9", tasks:[
-   ["s9","math","Watch L18–L20: 3.8 Linear Models (IVPs), 3.9 Linear Models (BVPs)"],
-   ["s10","2sh4","Watch L19–L21: From C to C++, C++ procedural programming (UML PLV), Class Design I"],
-   ["s11","2di4","Module 5 Parts 3–5 (Analysis C02 version, FSM, Applications) + Tutorials 5–6"]]},
+ {id:"sprint", title:"Catch-up sprint", range:"Nov 10–16", note:"Three study blocks a day. STATS comes first because its midterm is Nov 18. Clears every lecture posted up to Mon Nov 9.", days:[
   {date:"2026-11-10", label:"Tue Nov 10", tasks:[
-   ["s12","math","Watch L21–L23: 4.1 Laplace Transform, 4.2 Inverse Laplace Transform"],
-   ["s13","2sh4","Watch L22–L23: special member functions and Rule of Six, operator overloads"],
-   ["s15","2ci4","Module 5: 5.1 Capacitors, 5.2 Inductors, 5.3 Combinations + Tutorial 8"]]},
+   ["r1","stats","Watch L16–L19: Ch. 6 and the start of Ch. 7"],
+   ["r2","2sh4","Watch L13–L15: pointer arithmetic, dynamic memory, DMA for 2D arrays (PLVs 13–15)"],
+   ["r3","math","Watch L14–L15: 3.4 trial solutions, 3.5 Variation of Parameters"]]},
   {date:"2026-11-11", label:"Wed Nov 11", tasks:[
-   ["s16","2ci4","Module 6: 6.1–6.3 First-Order, 6.4–6.5 Second-Order Circuits + Tutorials 9–10"]]}
- ]},
- {id:"stats", title:"STATS Midterm 2 prep", range:"Nov 12–18", note:"One block a day, plus your classes and same-day videos.", days:[
+   ["r4","stats","Watch L20–L25: rest of Ch. 7, Ch. 8, 9.1–9.2"],
+   ["r5","math","Watch L16–L17: 3.6 Cauchy-Euler Equations"],
+   ["r6","2sh4","Watch L16–L18: jagged arrays and double pointers, memory allocation, OOD in C"]]},
   {date:"2026-11-12", label:"Thu Nov 12", tasks:[
-   ["m1","stats","Ch. 4–5 exercises: 4.5.1–4.5.7, 4.5.9, 4.5.11, 4.5.13, 4.5.17, 4.6.1, 4.6.3, 4.7.1, 4.7.2, 4.7.3, 4.7.5, 4.7.7, 4.7.9, 4.7.11, 4.7.13, 5.1.1, 5.1.3–5.1.10, 5.4.1, 5.4.2, 5.4.5–5.4.7, 5.4.10, 5.6.1–5.6.7"]]},
+   ["r7","stats","Ch. 4–5 exercises: 4.5.1–4.5.7, 4.5.9, 4.5.11, 4.5.13, 4.5.17, 4.6.1, 4.6.3, 4.7.1–4.7.3, 4.7.5, 4.7.7, 4.7.9, 4.7.11, 4.7.13, 5.1.1, 5.1.3–5.1.10, 5.4.1, 5.4.2, 5.4.5–5.4.7, 5.4.10, 5.6.1–5.6.7"],
+   ["r8","math","Watch L18–L20: 3.8 Linear Models (IVPs), 3.9 Linear Models (BVPs)"],
+   ["r9","2di4","Module 5 Parts 3–5 (Analysis C02 version, FSM, Applications) + Tutorials 5–6"]]},
   {date:"2026-11-13", label:"Fri Nov 13", tasks:[
-   ["m2","stats","Ch. 6–7 exercises: 6.1.1–6.1.7, 6.2.1–6.2.4, 6.3.1–6.3.4, 6.4.3, 6.7.1–6.7.2, 7.2.1–7.2.7, 7.3.1, 7.3.3, 7.3.4, 7.3.6, 7.3.7, 7.3.9"]]},
+   ["r10","stats","Ch. 6–7 exercises: 6.1.1–6.1.7, 6.2.1–6.2.4, 6.3.1–6.3.4, 6.4.3, 6.7.1–6.7.2, 7.2.1–7.2.7, 7.3.1, 7.3.3, 7.3.4, 7.3.6, 7.3.7, 7.3.9"],
+   ["r11","2sh4","Watch L19–L21: From C to C++, C++ procedural programming (UML PLV), Class Design I"],
+   ["r12","math","Watch L21–L24: 4.1 Laplace Transform, 4.2 Inverse Laplace Transform, and Monday's lecture"]]},
   {date:"2026-11-14", label:"Sat Nov 14", tasks:[
-   ["m3","stats","Ch. 8 exercises: 8.1.1–8.1.11, 8.2.1–8.2.7, 8.3.1–8.3.6, 8.4.1–8.4.5"]]},
+   ["r13","2sh4","Lab 4: finish and submit by today's deadline (check Avenue)"],
+   ["r14","stats","Ch. 8 exercises: 8.1.1–8.1.11, 8.2.1–8.2.7, 8.3.1–8.3.6, 8.4.1–8.4.5"],
+   ["r15","2sh4","Watch L22–L24: special member functions and Rule of Six, operator overloads, and Monday's lecture"]]},
   {date:"2026-11-15", label:"Sun Nov 15", tasks:[
-   ["m5","stats","Sample Midterm 2, timed at 75 minutes, then go over every mistake"]]},
+   ["r16","stats","Sample Midterm 2, timed at 75 minutes, then go over every mistake"],
+   ["r17","2ci4","Module 5: 5.1 Capacitors, 5.2 Inductors, 5.3 Combinations + Tutorial 8"]]},
   {date:"2026-11-16", label:"Mon Nov 16", tasks:[
-   ["m6","stats","Redo the problems you got wrong in Ch. 8–9 (L25 is in your Mon Nov 9 videos)"]]},
-  {date:"2026-11-17", label:"Tue Nov 17", tasks:[
-   ["m9","stats","Light review of your mistakes only"]]},
-  {date:"2026-11-18", label:"Wed Nov 18", tasks:[
-   ["m11","stats","Midterm 2, 7:00 PM, TSH 120. Pencil, McMaster standard calculator, student ID"]]}
+   ["r18","stats","Redo every problem you got wrong, focusing on Ch. 8–9"],
+   ["r19","2ci4","Module 6: 6.1–6.3 First-Order, 6.4–6.5 Second-Order Circuits + Tutorials 9–10"]]}
  ]},
- {id:"math", title:"MATH Test 2 prep", range:"Nov 19–26", note:"One block a day, plus your classes and same-day videos.", days:[
-  {date:"2026-11-19", label:"Thu Nov 19", tasks:[["t1","math","3.6 and 3.8 with Tutorial 5 and Practice 6, trying each problem before the solution"]]},
-  {date:"2026-11-20", label:"Fri Nov 20", tasks:[["t2","math","3.9 and 4.1–4.3 with Tutorials 6–7 and Practice 7, plus any new 4.3 lecture video"]]},
-  {date:"2026-11-21", label:"Sat Nov 21", tasks:[["t3","math","2026 Sample Test 2, timed, then redo every mistake"]]},
-  {date:"2026-11-22", label:"Sun Nov 22", tasks:[["t8","math","Redo the problems you got wrong from Practice 6–7 and the tutorials"]]},
-  {date:"2026-11-23", label:"Mon Nov 23", tasks:[["t9","math","Second timed pass at the sample test, without notes"]]},
-  {date:"2026-11-24", label:"Tue Nov 24", tasks:[["t6","math","Short pass on your mistakes and the Laplace transform table"]]},
-  {date:"2026-11-25", label:"Wed Nov 25", tasks:[["t10","math","Light review only, then sleep early"]]},
-  {date:"2026-11-26", label:"Thu Nov 26", tasks:[["t7","math","Test 2, 6:30 PM, T13 125"]]}
+ {id:"stats", title:"STATS Midterm 2", range:"Nov 17–18", note:"Light review only. You are caught up by now.", days:[
+  {date:"2026-11-17", label:"Tue Nov 17", tasks:[["r20","stats","Light review of your mistakes and the formula sheet, then sleep early"]]},
+  {date:"2026-11-18", label:"Wed Nov 18", tasks:[["r21","stats","Midterm 2, 7:00 PM, TSH 120. Pencil, McMaster standard calculator, student ID"]]}
+ ]},
+ {id:"math", title:"MATH Test 2 prep", range:"Nov 19–26", note:"One block a day, plus your classes and videos. Sat–Sun Nov 21–22 is your off weekend.", days:[
+  {date:"2026-11-19", label:"Thu Nov 19", tasks:[["r22","math","3.6 and 3.8 with Tutorial 5 and Practice 6, trying each problem before the solution"]]},
+  {date:"2026-11-20", label:"Fri Nov 20", tasks:[["r23","math","3.9 and 4.1–4.3 with Tutorials 6–7 and Practice 7"]]},
+  {date:"2026-11-21", label:"Sat Nov 21", off:true, tasks:[]},
+  {date:"2026-11-22", label:"Sun Nov 22", off:true, tasks:[]},
+  {date:"2026-11-23", label:"Mon Nov 23", tasks:[["r24","math","2026 Sample Test 2, timed, then redo every mistake"]]},
+  {date:"2026-11-24", label:"Tue Nov 24", tasks:[["r25","math","Redo the problems you got wrong from Practice 6–7, the tutorials and the sample test"]]},
+  {date:"2026-11-25", label:"Wed Nov 25", tasks:[["r26","math","Second timed pass at the sample test without notes, then the Laplace table. Sleep early"]]},
+  {date:"2026-11-26", label:"Thu Nov 26", tasks:[["r27","math","Test 2, 6:30 PM, T13 125"]]}
  ]}
 ];
 
@@ -291,7 +285,7 @@ const EXAMS = [
  {id:"stats-mt2",c:"stats",kind:"Midterm",name:"STATS 3Y03 Midterm 2",iso:"2026-11-18",when:"Wed Nov 18, 7:00–8:15 PM",where:"TSH 120",length:"75 minutes",weight:"20%",
   covers:"Lectures 11–25: 4.5–4.7, 5.1, 5.4, 5.6, 6.1–6.4, 6.7, 7.1–7.3, 8.1–8.4, 9.1–9.2",
   bring:"Pencil, McMaster standard calculator, student ID. 16 multiple-choice questions; formula sheet and tables are given.",
-  start:"Thu Nov 12", phase:"stats"},
+  start:"Tue Nov 10 (with the catch-up)", phase:"stats"},
  {id:"math-t2",c:"math",kind:"Test",name:"MATH 2Z03 Test 2",iso:"2026-11-26",when:"Thu Nov 26, 6:30 PM",where:"T13 125 (last names Sus–Zyz)",weight:"10%",
   covers:"3.6 Cauchy-Euler, 3.8 and 3.9 Linear Models, 4.1 Laplace Transform, 4.2 Inverse Laplace, 4.3 (not 3.5)",
   bring:"Practice with the 2026 Sample Test 2 (Test2 folder on Avenue), Tutorials 5–7, Practice 6–7.",
@@ -358,9 +352,9 @@ function tmin(t){const m=t.match(/(\d+):(\d+) (AM|PM)/);let h=+m[1]%12;if(m[3]==
 function todayIso(){return iso(new Date())}
 
 /* Classes go into the daily checklist from Mon Nov 9 to the last day of classes.
-   Video lecture numbers continue from the last one in the catch-up sprint (MATH L23, 2SH4 L23, STATS L24). */
-const CLASS_START="2026-11-09", CLASS_END="2026-12-09";
-const FIRST_LECTURE={math:24,"2sh4":24,stats:25};
+   Video lecture numbers continue from the last one in the catch-up sprint (MATH L24, 2SH4 L24, STATS L25). */
+const CLASS_START="2026-11-10", CLASS_END="2026-12-09";
+const FIRST_LECTURE={math:25,"2sh4":25,stats:26};
 const CLASS_TASKS={};
 (function(){
   const n={...FIRST_LECTURE};
@@ -461,7 +455,7 @@ function renderPlan(){
   const tt=td?td.tasks:(CLASS_TASKS[today]||[]);
   box.append(el("div","subh","Today"));
   if(tt.length){const ul=el("ul","tasks"); tt.forEach(t=>ul.append(taskItem(t,next,false))); box.append(ul)}
-  else box.append(el("p","empty","Nothing scheduled today."));
+  else box.append(el("p","empty",td&&PHASES.some(p=>p.days.some(d=>d.date===today&&d.off))?"Off weekend. No studying, rest up.":"Nothing scheduled today."));
 
   const mc=document.getElementById("mid-cards"); mc.replaceChildren();
   EXAMS.filter(x=>x.kind!=="Final"&&daysTo(x.iso)>=0).forEach(x=>mc.append(examCard(x)));
@@ -476,6 +470,7 @@ function renderPlan(){
   const sec=document.getElementById("sections"); sec.replaceChildren();
   const renderDay=(s,date,label,list)=>{
     const day=el("div","day"); const h3=el("h3",null,label); if(date===today) h3.append(el("span","tag","Today"));
+    if(!list.length){day.append(h3,el("p","empty","Off weekend. No studying, rest up.")); s.append(day); return}
     const ul=el("ul","tasks"); list.forEach(t=>ul.append(taskItem(t,next,false)));
     day.append(h3,ul); s.append(day);
   };
@@ -510,6 +505,7 @@ function renderExams(){
   EXAMS.forEach(x=>box.append(examCard(x)));
 }
 
+function examPrep(x){return PHASES.flatMap(p=>p.days).filter(d=>d.date<=x.iso).flatMap(d=>studyTasks(d).filter(t=>t.c===x.c).map(t=>({...t,text:d.label+": "+t.text})))}
 function renderReview(id){
   const v=document.getElementById("view-review"); v.replaceChildren();
   const x=EXAMS.find(e=>e.id===id); if(!x) return false;
@@ -522,15 +518,14 @@ function renderReview(id){
   const s=el("section","section"); s.append(el("h2",null,"Review checklist"));
   const ul=el("ul","tasks");
   if(x.phase){
-    const p=PHASES.find(p=>p.id===x.phase);
-    p.days.forEach(d=>studyTasks(d).forEach(t=>ul.append(taskItem({...t,text:d.label+": "+t.text},null,false))));
-    s.append(el("p",null,"These are the same tasks as the "+p.title+" days on the Plan tab, so ticking one ticks both."));
+    examPrep(x).forEach(t=>ul.append(taskItem(t,null,false)));
+    s.append(el("p",null,"Every "+NAMES[x.c]+" study block on the Plan tab up to the exam, so ticking one ticks both."));
   } else {
     x.review.forEach(([tid,text])=>ul.append(taskItem({id:tid,c:x.c,text},null,false)));
     s.append(el("p",null,"A first-pass checklist. Coverage is confirmed once the instructor posts it, and I can turn this into day-by-day blocks later."));
   }
   s.append(ul);
-  const ids=(x.phase?PHASES.find(p=>p.id===x.phase).days.flatMap(d=>d.tasks.map(t=>t[0])):x.review.map(r=>r[0]));
+  const ids=(x.phase?examPrep(x).map(t=>t.id):x.review.map(r=>r[0]));
   const n=ids.filter(i=>done[i]).length;
   const prog=el("div","phase"); prog.append(el("b",null,"Review progress"), el("small",null,n+" of "+ids.length+" done"));
   const bar=el("div","bar"); const i=el("i"); i.style.width=(100*n/ids.length)+"%"; bar.append(i); prog.append(bar);
