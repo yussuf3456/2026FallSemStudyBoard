@@ -348,7 +348,7 @@ const EXAMS = [
 let done = {};
 let docRef = null;
 let saving = Promise.resolve();
-const LS = "fall26-study-board";
+const LS = "fall26-study-board-v2";
 function lsGet(){try{return JSON.parse(localStorage.getItem(LS)||"{}")}catch(e){return {}}}
 function lsSet(){try{localStorage.setItem(LS,JSON.stringify(done))}catch(e){}}
 
@@ -674,7 +674,7 @@ done=lsGet(); renderAll();
   try{
     const db=await (window.claude?.use ? window.claude.use("db") : null);
     if(!db){clearTimeout(timer);setStatus("Progress is kept on this device only.");return}
-    docRef=db.doc("progress/main");
+    docRef=db.doc("progress/v2");
     const snap=await docRef.get();
     clearTimeout(timer);
     if(snap.exists){const d=snap.data()||{}; done={...(d.done||{})}; lsSet(); renderAll()}
