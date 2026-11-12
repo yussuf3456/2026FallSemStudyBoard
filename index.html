@@ -141,7 +141,7 @@ table.wk .item{display:block;margin-bottom:4px}
 <div class="wrap">
   <header>
     <h1>Fall 2026 Study Board</h1>
-    <p class="sub">Starting Tue Nov 10: STATS lectures done by Fri Nov 13, 2SH4 by Sat Nov 14, MATH by Sun Nov 15, 2DI4 by Tue Nov 17, 2CI4 by Mon Nov 23, STATS midterm Nov 18, days off Thu–Sat Nov 19–21. then one exam at a time. Each day lists the classes to go to (2DI4, 2CI4, tutorials, labs), the videos to watch (MATH, 2SH4, STATS) and your study block. Anything you skip turns red and stays at the top until you tick it.</p>
+    <p class="sub">Starting Tue Nov 10: STATS lectures done by Fri Nov 13, 2SH4 by Sat Nov 14, MATH by Sun Nov 15, 2DI4 by Mon Nov 23, 2CI4 by Fri Nov 27, STATS midterm Nov 18, days off Thu–Sat Nov 19–21. then one exam at a time. Each day lists the classes to go to (2DI4, 2CI4, tutorials, labs), the videos to watch (MATH, 2SH4, STATS) and your study block. Anything you skip turns red and stays at the top until you tick it.</p>
     <div class="links">
       <a href="https://avenue.cllmcmaster.ca/d2l/home" target="_blank" rel="noopener">Avenue to Learn</a>
       <a href="https://claude.ai/artifact/4ouvwWyM1dZXHYdhSbyjY6" target="_blank" rel="noopener">Full catch-up plan</a>
@@ -242,7 +242,7 @@ const BACKLOG = {
 };
 
 const PHASES = [
- {id:"sprint", title:"Catch-up sprint", range:"Nov 10–16", note:"At most three blocks a day. Wednesday's blocks moved forward: STATS lectures finish Fri, then exercises Sat to Mon, with 2SH4 (Sat), MATH (Sun) and 2DI4 (Mon–Tue) in between. 2CI4 waits until after the midterm (Nov 22–23).", days:[
+ {id:"sprint", title:"Catch-up sprint", range:"Nov 10–16", note:"STATS problems take the most time, so Sat to Tue are mostly problems, one chapter a day, and every problem is its own checkbox. 2DI4 and 2CI4 move to after the midterm so STATS gets the time.", days:[
   {date:"2026-11-10", label:"Tue Nov 10", tasks:[
    ["q1","stats","Watch L11–L15: 4.5–4.7, 5.1 (start of Midterm 2 material)"],
    ["q2","2sh4","Watch L18–L20: OOD in C, From C to C++, C++ procedural programming"],
@@ -255,39 +255,42 @@ const PHASES = [
    ["q13","2sh4","Lab 4: finish and submit (due Sat Nov 14, check Avenue for the time)"],
    ["q7","stats","Watch L21–L25: rest of Ch. 7, Ch. 8, 9.1–9.2"]]},
   {date:"2026-11-14", label:"Sat Nov 14", tasks:[
-   ["q10","stats","Ch. 4–5 exercises: 4.5.1–4.5.7, 4.5.9, 4.5.11, 4.5.13, 4.5.17, 4.6.1, 4.6.3, 4.7.1–4.7.3, 4.7.5, 4.7.7, 4.7.9, 4.7.11, 4.7.13, 5.1.1, 5.1.3–5.1.10, 5.4.1, 5.4.2, 5.4.5–5.4.7, 5.4.10, 5.6.1–5.6.7"],
+   ["q10","stats","Ch. 4 exercises: all 21 problems from 4.5–4.7"],
    ["q5","2sh4","Watch L21–L24: Class Design I, special member functions and Rule of Six, operator overloads, and Monday's lecture"]]},
   {date:"2026-11-15", label:"Sun Nov 15", tasks:[
-   ["q14","stats","Ch. 6–7 exercises: 6.1.1–6.1.7, 6.2.1–6.2.4, 6.3.1–6.3.4, 6.4.3, 6.7.1–6.7.2, 7.2.1–7.2.7, 7.3.1, 7.3.3, 7.3.4, 7.3.6, 7.3.7, 7.3.9"],
+   ["q19","stats","Ch. 5 exercises: all 22 problems from 5.1, 5.4 and 5.6"],
    ["q8","math","Watch L21–L24: 4.1 Laplace Transform, 4.2 Inverse Laplace Transform, and Monday's lecture"]]},
   {date:"2026-11-16", label:"Mon Nov 16", tasks:[
-   ["q16","stats","Ch. 8 exercises: 8.1.1–8.1.11, 8.2.1–8.2.7, 8.3.1–8.3.6, 8.4.1–8.4.5"],
-   ["q9","2di4","Module 5 Parts 1–2 + Tutorial 5"]]}
+   ["q14","stats","Ch. 6 exercises: all 18 problems from 6.1–6.4 and 6.7"],
+   ["q20","stats","Ch. 7 exercises: all 13 problems from 7.2–7.3"]]}
  ]},
  {id:"stats", title:"STATS Midterm 2", range:"Nov 17–18", note:"Review only. You are caught up by now.", days:[
   {date:"2026-11-17", label:"Tue Nov 17", tasks:[
-   ["q18","stats","Sample Midterm 2, timed at 75 minutes, then go over every mistake"],
-   ["q12","2di4","Module 5 Parts 3–5 (Analysis C02 version, FSM, Applications) + Tutorial 6"]]},
+   ["q16","stats","Ch. 8 exercises: all 29 problems from 8.1–8.4"]]},
   {date:"2026-11-18", label:"Wed Nov 18", tasks:[
-   ["r20","stats","Morning: redo every problem you got wrong (Ch. 8–9 first), then the formula sheet"],
+   ["q18","stats","Morning: Sample Midterm 2, timed at 75 minutes, then go over every mistake"],
+   ["r20","stats","Afternoon: redo every problem you starred, then the formula sheet. Eat, then head to TSH 120"],
    ["r21","stats","Midterm 2, 7:00 PM, TSH 120. Pencil, McMaster standard calculator, student ID"]]}
  ]},
- {id:"math", title:"MATH Test 2 prep", range:"Nov 19–26", note:"Thu–Sat Nov 19–21 are your days off. Sun Nov 22 also finishes 2CI4 Module 6. Then MATH review every day before Test 2.", days:[
+ {id:"math", title:"MATH Test 2 prep", range:"Nov 19–27", note:"Thu–Sat Nov 19–21 are your days off. Then MATH review every day before Test 2, with 2DI4 Module 5 (Nov 22–23) and 2CI4 Modules 5–6 (Nov 24 and 27) alongside.", days:[
   {date:"2026-11-19", label:"Thu Nov 19", off:true, tasks:[]},
   {date:"2026-11-20", label:"Fri Nov 20", off:true, tasks:[]},
   {date:"2026-11-21", label:"Sat Nov 21", off:true, tasks:[]},
   {date:"2026-11-22", label:"Sun Nov 22", tasks:[
    ["r22","math","Redo Practice 6–7 and Tutorials 5–7 without notes (3.6, 3.8, 3.9, 4.1–4.3). Mark every one you get wrong"],
-   ["q15","2ci4","Module 5 (Ch. 6): Capacitors, Inductors, Combinations + Tutorial 8"]]},
+   ["q9","2di4","Module 5 Parts 1–2 + Tutorial 5"]]},
   {date:"2026-11-23", label:"Mon Nov 23", tasks:[
    ["r24","math","2026 Sample Test 2, timed, then redo every mistake"],
-   ["q17","2ci4","Module 6: 6.1–6.3 First-Order, 6.4–6.5 Second-Order Circuits + Tutorials 9–10"]]},
+   ["q12","2di4","Module 5 Parts 3–5 (Analysis C02 version, FSM, Applications) + Tutorial 6"]]},
   {date:"2026-11-24", label:"Tue Nov 24", tasks:[
-   ["r25","math","Redo the problems you got wrong from Practice 6–7, the tutorials and the sample test"]]},
+   ["r25","math","Redo the problems you got wrong from Practice 6–7, the tutorials and the sample test"],
+   ["q15","2ci4","Module 5 (Ch. 6): Capacitors, Inductors, Combinations + Tutorial 8"]]},
   {date:"2026-11-25", label:"Wed Nov 25", tasks:[
    ["r26","math","Second timed pass at the sample test without notes, then the Laplace table. Sleep early"]]},
   {date:"2026-11-26", label:"Thu Nov 26", tasks:[
-   ["r27","math","Test 2, 6:30 PM, T13 125"]]}
+   ["r27","math","Test 2, 6:30 PM, T13 125"]]},
+  {date:"2026-11-27", label:"Fri Nov 27", tasks:[
+   ["q17","2ci4","Module 6: 6.1–6.3 First-Order, 6.4–6.5 Second-Order Circuits + Tutorials 9–10"]]}
  ]}
 ];
 
@@ -441,15 +444,19 @@ const SH={ // STATS textbook exercises by section (from the Midterm 2 exercise l
  "6.1":"6.1.1–6.1.7","6.2":"6.2.1–6.2.4","6.3":"6.3.1–6.3.4","6.4":"6.4.3","6.7":"6.7.1–6.7.2",
  "7.2":"7.2.1–7.2.7","7.3":"7.3.1, 7.3.3, 7.3.4, 7.3.6, 7.3.7, 7.3.9",
  "8.1":"8.1.1–8.1.11","8.2":"8.2.1–8.2.7","8.3":"8.3.1–8.3.6","8.4":"8.4.1–8.4.5"};
+function expandProbs(x){return x.split(", ").flatMap(p=>{if(!p.includes("–"))return [p];const [a,b]=p.split("–"),pre=a.slice(0,a.lastIndexOf(".")),from=+a.slice(a.lastIndexOf(".")+1),to=+b.slice(b.lastIndexOf(".")+1);const o=[];for(let i=from;i<=to;i++)o.push(pre+"."+i);return o})}
 const sHw=secs=>secs.map(x=>["hw-stats-"+x,"Section "+x+" exercises: "+SH[x]]);
+const sGroups=secs=>secs.map(x=>{const ps=expandProbs(SH[x]);return ["Section "+x+" ("+ps.length+" problems)",ps.map(q=>["hw-stats-p"+q,"Exercise "+q])]});
 const lecs=(c,a,b)=>{const o=[];for(let i=a;i<=b;i++)o.push(["lec-"+c+"-"+i,"Lecture "+i]);return o};
 const DETAILS={
  q1:{title:"STATS 3Y03: Lectures 11–15",about:"Sections 4.5–4.7 and 5.1. The exercises for these sections are a separate block later, so this block is done once the lectures are.",groups:[["Lectures",lecs("stats",11,15)]]},
  q4:{title:"STATS 3Y03: Lectures 16–20",about:"Sections 5.4, 5.6, Ch. 6 and the start of Ch. 7.",groups:[["Lectures",lecs("stats",16,20)]]},
  q7:{title:"STATS 3Y03: Lectures 21–25",about:"The rest of Ch. 7, Ch. 8, and 9.1–9.2. Midterm 2 ends at L25.",groups:[["Lectures",lecs("stats",21,25)]]},
- q10:{title:"STATS 3Y03: Ch. 4–5 exercises",about:"Try each problem before checking the answer, and mark the ones you got wrong to redo on Tue Nov 17.",groups:[["Ch. 4",sHw(["4.5","4.6","4.7"])],["Ch. 5",sHw(["5.1","5.4","5.6"])]]},
- q14:{title:"STATS 3Y03: Ch. 6–7 exercises",about:"Try each problem before checking the answer.",groups:[["Ch. 6",sHw(["6.1","6.2","6.3","6.4","6.7"])],["Ch. 7",sHw(["7.2","7.3"])]]},
- q16:{title:"STATS 3Y03: Ch. 8 exercises",about:"Try each problem before checking the answer.",groups:[["Ch. 8",sHw(["8.1","8.2","8.3","8.4"])]]},
+ q10:{title:"STATS 3Y03: Ch. 4 exercises (21 problems)",about:"Sections 4.5–4.7. Try each problem before checking the answer, and star the ones you get wrong to redo on Wed morning.",groups:sGroups(["4.5","4.6","4.7"])},
+ q19:{title:"STATS 3Y03: Ch. 5 exercises (22 problems)",about:"Sections 5.1, 5.4 and 5.6. Try each problem before checking the answer.",groups:sGroups(["5.1","5.4","5.6"])},
+ q14:{title:"STATS 3Y03: Ch. 6 exercises (18 problems)",about:"Sections 6.1–6.4 and 6.7.",groups:sGroups(["6.1","6.2","6.3","6.4","6.7"])},
+ q20:{title:"STATS 3Y03: Ch. 7 exercises (13 problems)",about:"Sections 7.2–7.3.",groups:sGroups(["7.2","7.3"])},
+ q16:{title:"STATS 3Y03: Ch. 8 exercises (29 problems)",about:"Sections 8.1–8.4. The biggest set, and the newest material before the midterm.",groups:sGroups(["8.1","8.2","8.3","8.4"])},
  q3:{title:"MATH 2Z03: Lectures 16–17",about:"3.6 Cauchy-Euler Equations. Homework is from Practice Questions 6 on Avenue (Zill textbook exercises).",groups:[["Lectures",lecs("math",16,17)],["Homework (Practice 6)",[["hw-math-3.6.18","Exercise 3.6.18"],["hw-math-3.6.21","Exercise 3.6.21"],["hw-math-t5a","Tutorial 5: the 3.6 questions"]]]]},
  q6:{title:"MATH 2Z03: Lectures 18–20",about:"3.8 Linear Models (IVPs) and 3.9 Linear Models (BVPs).",groups:[["Lectures",lecs("math",18,20)],["Homework (Practice 6)",[["hw-math-3.8.30","Exercise 3.8.30"],["hw-math-3.8.45","Exercise 3.8.45"],["hw-math-3.9.9","Exercise 3.9.9"],["hw-math-3.9.21","Exercise 3.9.21"],["hw-math-t5b","Tutorial 5: the 3.8 questions"]]]]},
  q8:{title:"MATH 2Z03: Lectures 21–24",about:"4.1 Laplace Transform, 4.2 Inverse Laplace Transform, and Monday's lecture.",groups:[["Lectures",lecs("math",21,24)],["Homework (Practice 7)",[["hw-math-4.1.9","Exercise 4.1.9"],["hw-math-4.1.18","Exercise 4.1.18"],["hw-math-4.1.42","Exercise 4.1.42"],["hw-math-4.2.24","Exercise 4.2.24"],["hw-math-4.2.27","Exercise 4.2.27"],["hw-math-4.2.42","Exercise 4.2.42"],["hw-math-t6","Tutorial 6"]]]]},
