@@ -234,7 +234,7 @@ const CLASSES = [
 
 /* Backlog per course: each unit counts toward "behind" until its task is ticked. */
 const BACKLOG = {
- stats:{unit:"lectures", items:[["q1",5,"L11–L15"],["q22",3,"L16–L18"],["q23",3,"L19–L21"],["q24",2,"L22–L23"],["q25",2,"L24–L25"]], note:"Unticked lectures are added here when their week ends"},
+ stats:{unit:"lectures", items:[["q1",5,"L11–L15"],["q22",1,"L16"],["q23",1,"L17"],["q24",2,"L18–L19"],["q25",2,"L20–L21"],["q26",4,"L22–L25"]], note:"Unticked lectures are added here when their week ends"},
  math:{unit:"lectures", items:[["q3",2,"L16–L17"],["q6",3,"L18–L20"],["q8",4,"L21–L24"]], note:"Done through 3.5 (L15)"},
  "2sh4":{unit:"lectures", items:[["q2",3,"L18–L20"],["q5",4,"L21–L24"]], note:"Done through L17 (AI Design Activity 2)"},
  "2di4":{unit:"module parts", items:[["q9",2,"Module 5 Parts 1–2"],["q12",3,"Module 5 Parts 3–5"]], note:"Done through Module 4"},
@@ -249,26 +249,26 @@ const PHASES = [
    ["q3","math","Watch L16–L17: 3.6 Cauchy-Euler Equations"]]},
   {date:"2026-11-11", label:"Wed Nov 11", tasks:[]},
   {date:"2026-11-12", label:"Thu Nov 12", tasks:[
-   ["q21","stats","Problems: 21 problems (4.5, 4.6, 4.7)"],
+   ["q21","stats","21 problems for L11–L13 (4.5 Normal, 4.6 Normal approx, 4.7 Exponential)"],
    ["q6","math","Watch L18–L20: 3.8 Linear Models (IVPs), 3.9 Linear Models (BVPs)"]]},
   {date:"2026-11-13", label:"Fri Nov 13", tasks:[
    ["q13","2sh4","Lab 4: finish and submit (due Sat Nov 14, check Avenue for the time)"],
-   ["q22","stats","Watch L16–L18 + 22 problems (5.1, 5.4, 5.6)"]]},
+   ["q22","stats","Watch L16 + 22 problems for L14–L16 (5.1, 5.4, 5.6)"]]},
   {date:"2026-11-14", label:"Sat Nov 14", tasks:[
-   ["q23","stats","Watch L19–L21 + 18 problems (6.1, 6.2, 6.3, 6.4, 6.7)"],
+   ["q23","stats","Watch L17 + 18 problems (6.1, 6.2, 6.3, 6.4, 6.7)"],
    ["q5","2sh4","Watch L21–L24: Class Design I, special member functions and Rule of Six, operator overloads, and Monday's lecture"]]},
   {date:"2026-11-15", label:"Sun Nov 15", tasks:[
-   ["q24","stats","Watch L22–L23 + 13 problems (7.2, 7.3)"],
+   ["q24","stats","Watch L18–L19 + 13 problems (7.2, 7.3)"],
    ["q8","math","Watch L21–L24: 4.1 Laplace Transform, 4.2 Inverse Laplace Transform, and Monday's lecture"]]},
   {date:"2026-11-16", label:"Mon Nov 16", tasks:[
-   ["q25","stats","Watch L24–L25 + 18 problems (8.1, 8.2)"]]}
+   ["q25","stats","Watch L20–L21 + 18 problems (8.1, 8.2)"]]}
  ]},
  {id:"stats", title:"STATS Midterm 2", range:"Nov 17–18", note:"Review only. You are caught up by now.", days:[
   {date:"2026-11-17", label:"Tue Nov 17", tasks:[
-   ["q26","stats","Problems: 11 problems (8.3, 8.4)"],
-   ["q18","stats","Sample Midterm 2, timed at 75 minutes, then go over every mistake"]]},
+   ["q26","stats","Watch L22–L23 + 11 problems (8.3, 8.4), then L24–L25"]]},
   {date:"2026-11-18", label:"Wed Nov 18", tasks:[
-   ["r20","stats","Morning: redo every problem you starred, then the formula sheet. Eat, then head to TSH 120"],
+   ["q18","stats","Morning: Sample Midterm 2, timed at 75 minutes, then go over every mistake"],
+   ["r20","stats","Afternoon: redo every problem you starred, then the formula sheet. Eat, then head to TSH 120"],
    ["r21","stats","Midterm 2, 7:00 PM, TSH 120. Pencil, McMaster standard calculator, student ID"]]}
  ]},
  {id:"math", title:"MATH Test 2 prep", range:"Nov 19–27", note:"Thu–Sat Nov 19–21 are your days off. Then MATH review every day before Test 2, with 2DI4 Module 5 (Nov 22–23) and 2CI4 Modules 5–6 (Nov 24 and 27) alongside.", days:[
@@ -384,6 +384,9 @@ const CLASS_TASKS={}, LATE={}, EARLY={}, CAUGHT_UP={};
      move to that day, after the catch-up block, in order. */
   const dateOf={};PHASES.forEach(p=>p.days.forEach(d=>d.tasks.forEach(t=>dateOf[t[0]]=d.date)));
   Object.entries(BACKLOG).forEach(([c,b])=>{CAUGHT_UP[c]=b.items.map(i=>dateOf[i[0]]).sort().slice(-1)[0]});
+  /* New STATS lectures wait until after Midterm 2 and the days off */
+  const RESUME={stats:"2026-11-22"};
+  Object.entries(RESUME).forEach(([c,d])=>{if(CAUGHT_UP[c]&&CAUGHT_UP[c]<d)CAUGHT_UP[c]=d});
   Object.keys(CLASS_TASKS).forEach(d=>{
     CLASS_TASKS[d]=CLASS_TASKS[d].filter(t=>{
       const cu=CAUGHT_UP[t.c]; if(!cu) return true;
@@ -449,12 +452,12 @@ const sGroups=secs=>secs.map(x=>{const ps=expandProbs(SH[x]);return ["Section "+
 const lecs=(c,a,b)=>{const o=[];for(let i=a;i<=b;i++)o.push(["lec-"+c+"-"+i,"Lecture "+i]);return o};
 const DETAILS={
  q1:{title:"STATS 3Y03: Lectures 11–15",about:"Sections 4.5–4.7 and 5.1. The exercises for these sections are a separate block later, so this block is done once the lectures are.",groups:[["Lectures",lecs("stats",11,15)]]},
- q21:{title:"STATS 3Y03: 21 problems",about:"Homework for L11–L15, which you already watched. Do each section's problems in order and star any you get wrong for Wed morning.",groups:[...sGroups(["4.5", "4.6", "4.7"])]},
- q22:{title:"STATS 3Y03: Lectures 16–18 + 22 problems",about:"5.1 homework, then L16–L18 with 5.4 and 5.6. Watch each lecture, then do its section problems right after. Star any you get wrong for Wed morning. Lecture-to-section split is my estimate from the course outline; check the slides.",groups:[["Lectures",lecs("stats",16,18)],...sGroups(["5.1", "5.4", "5.6"])]},
- q23:{title:"STATS 3Y03: Lectures 19–21 + 18 problems",about:"L19–L21 with Ch. 6. Watch each lecture, then do its section problems right after. Star any you get wrong for Wed morning. Lecture-to-section split is my estimate from the course outline; check the slides.",groups:[["Lectures",lecs("stats",19,21)],...sGroups(["6.1", "6.2", "6.3", "6.4", "6.7"])]},
- q24:{title:"STATS 3Y03: Lectures 22–23 + 13 problems",about:"L22–L23 with Ch. 7. Watch each lecture, then do its section problems right after. Star any you get wrong for Wed morning. Lecture-to-section split is my estimate from the course outline; check the slides.",groups:[["Lectures",lecs("stats",22,23)],...sGroups(["7.2", "7.3"])]},
- q25:{title:"STATS 3Y03: Lectures 24–25 + 18 problems",about:"L24–L25 with 8.1–8.2. Watch each lecture, then do its section problems right after. Star any you get wrong for Wed morning. Lecture-to-section split is my estimate from the course outline; check the slides.",groups:[["Lectures",lecs("stats",24,25)],...sGroups(["8.1", "8.2"])]},
- q26:{title:"STATS 3Y03: 11 problems",about:"The last Ch. 8 problems (8.3–8.4), from L24–L25. Star any you get wrong for Wed morning.",groups:[...sGroups(["8.3", "8.4"])]},
+ q21:{title:"STATS 3Y03: 21 problems (L11–L13)",about:"L11 = 4.5 Normal, L12 = 4.6 Normal approx to the binomial, L13 = 4.7 Exponential. You already watched these. Star any you get wrong for Wed.",groups:[...sGroups(["4.5", "4.6", "4.7"])]},
+ q22:{title:"STATS 3Y03: Lecture 16 + 22 problems",about:"5.1 goes with L14 (joint distributions), 5.4 with L15–L16 (covariance, correlation), 5.6 with L16. Star any you get wrong for Wed.",groups:[["Lectures",lecs("stats",16,16)],...sGroups(["5.1", "5.4", "5.6"])]},
+ q23:{title:"STATS 3Y03: Lecture 17 + 18 problems",about:"L16 ends with 6.1 and L17 covers stem-and-leaf, histograms, boxplots and probability plots (6.2–6.4, 6.7). Star any you get wrong for Wed.",groups:[["Lectures",lecs("stats",17,17)],...sGroups(["6.1", "6.2", "6.3", "6.4", "6.7"])]},
+ q24:{title:"STATS 3Y03: Lectures 18–19 + 13 problems",about:"L18 point estimation and sampling distributions, L19 CLT and difference of means (7.2–7.3). Star any you get wrong for Wed.",groups:[["Lectures",lecs("stats",18,19)],...sGroups(["7.2", "7.3"])]},
+ q25:{title:"STATS 3Y03: Lectures 20–21 + 18 problems",about:"L20 CI on the mean with known variance (8.1), L21 the t distribution, variance unknown (8.2). Star any you get wrong for Wed.",groups:[["Lectures",lecs("stats",20,21)],...sGroups(["8.1", "8.2"])]},
+ q26:{title:"STATS 3Y03: Lectures 22–25 + 11 problems",about:"L22–L23 CI on a variance and a proportion (8.3–8.4); L23 also starts hypothesis testing, which L24–L25 continue (no problems assigned for those). Star any you get wrong for Wed.",groups:[["Lectures",lecs("stats",22,25)],...sGroups(["8.3", "8.4"])]},
  q3:{title:"MATH 2Z03: Lectures 16–17",about:"3.6 Cauchy-Euler Equations. Homework is from Practice Questions 6 on Avenue (Zill textbook exercises).",groups:[["Lectures",lecs("math",16,17)],["Homework (Practice 6)",[["hw-math-3.6.18","Exercise 3.6.18"],["hw-math-3.6.21","Exercise 3.6.21"],["hw-math-t5a","Tutorial 5: the 3.6 questions"]]]]},
  q6:{title:"MATH 2Z03: Lectures 18–20",about:"3.8 Linear Models (IVPs) and 3.9 Linear Models (BVPs).",groups:[["Lectures",lecs("math",18,20)],["Homework (Practice 6)",[["hw-math-3.8.30","Exercise 3.8.30"],["hw-math-3.8.45","Exercise 3.8.45"],["hw-math-3.9.9","Exercise 3.9.9"],["hw-math-3.9.21","Exercise 3.9.21"],["hw-math-t5b","Tutorial 5: the 3.8 questions"]]]]},
  q8:{title:"MATH 2Z03: Lectures 21–24",about:"4.1 Laplace Transform, 4.2 Inverse Laplace Transform, and Monday's lecture.",groups:[["Lectures",lecs("math",21,24)],["Homework (Practice 7)",[["hw-math-4.1.9","Exercise 4.1.9"],["hw-math-4.1.18","Exercise 4.1.18"],["hw-math-4.1.42","Exercise 4.1.42"],["hw-math-4.2.24","Exercise 4.2.24"],["hw-math-4.2.27","Exercise 4.2.27"],["hw-math-4.2.42","Exercise 4.2.42"],["hw-math-t6","Tutorial 6"]]]]},
