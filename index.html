@@ -253,15 +253,15 @@ const PHASES = [
  ]},
  {id:"stats", title:"STATS Midterm 2", range:"Nov 14–18", note:"Every STATS lecture with its problems, then the midterm. 2SH4 Lab 4 on Tuesday, since it's due Fri Nov 20 (a day off). Everything else waits until after Wednesday.", days:[
   {date:"2026-11-14", label:"Sat Nov 14", tasks:[
-   ["q21","stats","Finish the 21 problems for L11–L13 (4.5 Normal, 4.6 Normal approx, 4.7 Exponential)"],
-   ["q22","stats","Watch L16 + 22 problems for L14–L16 (5.1, 5.4, 5.6)"]]},
+   ["q21","stats","Finish the 7 essential problems for L11–L13 (4.5.7, 4.5.13, 4.6.1, 4.7.1–4.7.3, 4.7.5)"],
+   ["q22","stats","Watch L16 + 7 problems for L14–L16 (5.1, 5.4, 5.6)"]]},
   {date:"2026-11-15", label:"Sun Nov 15", tasks:[
-   ["q23","stats","Watch L17 + 18 problems (6.1, 6.2, 6.3, 6.4, 6.7)"],
-   ["q24","stats","Watch L18–L19 + 13 problems (7.2, 7.3)"]]},
+   ["q23","stats","Watch L17 + 6 problems (6.1, 6.2, 6.4, 6.7)"],
+   ["q24","stats","Watch L18–L19 + 5 problems (7.2, 7.3)"]]},
   {date:"2026-11-16", label:"Mon Nov 16", tasks:[
-   ["q25","stats","Watch L20–L21 + 18 problems (8.1, 8.2)"]]},
+   ["q25","stats","Watch L20–L21 + 6 problems (8.1, 8.2)"]]},
   {date:"2026-11-17", label:"Tue Nov 17", tasks:[
-   ["q26","stats","Watch L22–L23 + 11 problems (8.3, 8.4), then L24–L25"],
+   ["q26","stats","Watch L22–L23 + 4 problems (8.3, 8.4), then L24–L25 + redo Ex. 24.4 and 25.1"],
    ["q13","2sh4","Lab 4: finish and submit on GitHub Classroom (due Fri Nov 20, which is a day off, so do it now)"]]},
   {date:"2026-11-18", label:"Wed Nov 18", tasks:[
    ["q18","stats","Morning: Sample Midterm 2, timed at 75 minutes, then go over every mistake"],
@@ -508,24 +508,30 @@ function isOverdue(t){return !!t.date&&t.date<todayIso()&&!done[t.id]}
 
 /* Detail pages: click a study block to see its sections, lectures and homework.
    Each line is its own checkbox; when every line is ticked the whole block ticks itself. */
-const SH={ // STATS textbook exercises by section (from the Midterm 2 exercise list on Avenue)
- "4.5":"4.5.1–4.5.7, 4.5.9, 4.5.11, 4.5.13, 4.5.17","4.6":"4.6.1, 4.6.3","4.7":"4.7.1–4.7.3, 4.7.5, 4.7.7, 4.7.9, 4.7.11, 4.7.13",
- "5.1":"5.1.1, 5.1.3–5.1.10","5.4":"5.4.1, 5.4.2, 5.4.5–5.4.7, 5.4.10","5.6":"5.6.1–5.6.7",
- "6.1":"6.1.1–6.1.7","6.2":"6.2.1–6.2.4","6.3":"6.3.1–6.3.4","6.4":"6.4.3","6.7":"6.7.1–6.7.2",
- "7.2":"7.2.1–7.2.7","7.3":"7.3.1, 7.3.3, 7.3.4, 7.3.6, 7.3.7, 7.3.9",
- "8.1":"8.1.1–8.1.11","8.2":"8.2.1–8.2.7","8.3":"8.3.1–8.3.6","8.4":"8.4.1–8.4.5"};
-function expandProbs(x){return x.split(", ").flatMap(p=>{if(!p.includes("–"))return [p];const [a,b]=p.split("–"),pre=a.slice(0,a.lastIndexOf(".")),from=+a.slice(a.lastIndexOf(".")+1),to=+b.slice(b.lastIndexOf(".")+1);const o=[];for(let i=from;i<=to;i++)o.push(pre+"."+i);return o})}
+const SH={ // STATS essential problems (Yusuf's condensed list, 2026-11-14; 4.5.1-4.5.6 already done)
+ "4.5":"4.5.7, 4.5.13","4.6":"4.6.1","4.7":"4.7.1–4.7.3, 4.7.5",
+ "5.1":"5.1.1, 5.1.9","5.4":"5.4.1, 5.4.5, 5.4.7","5.6":"5.6.1, 5.6.6",
+ "6.1":"6.1.4, 6.1.5, 6.1.7","6.2":"6.2.2","6.4":"6.4.3","6.7":"6.7.1",
+ "7.2":"7.2.4, 7.2.6, 7.2.7","7.3":"7.3.3, 7.3.4",
+ "8.1":"8.1.1, 8.1.5, 8.1.7, 8.1.9","8.2":"8.2.3, 8.2.5","8.3":"8.3.2, 8.3.4","8.4":"8.4.2, 8.4.3","HT":"Ex. 24.4, Ex. 25.1"};
+const PT={"4.5.7":"Normal: probability, between, 'exceeded 90% of the time'","4.5.13":"Normal: solve for σ or μ","4.6.1":"Normal approx to binomial, continuity correction","4.7.1":"Exponential: basic probabilities and 'find x'","4.7.2":"Exponential: memoryless property","4.7.3":"Poisson process to exponential waiting time","4.7.5":"Exponential: intervals and 'at least one'",
+"5.1.1":"Joint pmf table: probabilities, marginals, mean, variance","5.1.9":"Joint pdf: find c, probabilities, marginal","5.4.1":"Covariance and correlation: discrete","5.4.5":"Covariance and correlation: continuous, triangle region","5.4.7":"cov = 0 but not independent (concept)","5.6.1":"Linear combination of independent normals","5.6.6":"X̄ ~ N(μ, σ²/n): solve for μ, σ, n",
+"6.1.4":"Quick concept check","6.1.5":"Quick concept check","6.2.2":"Quick concept check","6.1.7":"Sample mean and sample sd by hand","6.4.3":"Mean, variance, quartiles and boxplot","6.7.1":"Normal probability plot",
+"7.2.4":"CLT on a uniform population","7.2.6":"CLT probabilities for X̄","7.2.7":"Difference of two sample means","7.3.3":"Bias of an estimator","7.3.4":"Relative efficiency",
+"8.1.1":"Confidence level from a z-value (reverse lookup)","8.1.5":"Interpreting a CI (concept)","8.1.7":"z interval: two-sided and one-sided bound","8.1.9":"Sample size for a given error","8.2.3":"t interval (σ unknown, small n)","8.2.5":"One-sided t bound","8.3.2":"Reading the χ² table","8.3.4":"CI for σ","8.4.2":"CI for a proportion + one-sided bound","8.4.3":"Proportion CI and sample size",
+"Ex. 24.4":"L24 example, redo cold: hypotheses, p-value, power","Ex. 25.1":"L25 example, redo cold: two-sided z-test with p-value"};
+function expandProbs(x){return x.split(", ").flatMap(p=>{if(!p.includes("–"))return [p.trim()];const [a,b]=p.split("–"),pre=a.slice(0,a.lastIndexOf(".")),from=+a.slice(a.lastIndexOf(".")+1),to=+b.slice(b.lastIndexOf(".")+1);const o=[];for(let i=from;i<=to;i++)o.push(pre+"."+i);return o})}
 const sHw=secs=>secs.map(x=>["hw-stats-"+x,"Section "+x+" exercises: "+SH[x]]);
-const sGroups=secs=>secs.map(x=>{const ps=expandProbs(SH[x]);return ["Section "+x+" ("+ps.length+" problems)",ps.map(q=>["hw-stats-p"+q,"Exercise "+q])]});
+const sGroups=secs=>secs.map(x=>{const ps=expandProbs(SH[x]);return [(x==="HT"?"Hypothesis testing":"Section "+x)+" ("+ps.length+(ps.length>1?" problems)":" problem)"),ps.map(q=>["hw-stats-p"+q,(q.startsWith("Ex")?q:"Exercise "+q)+(PT[q]?": "+PT[q]:"")])]});
 const lecs=(c,a,b)=>{const o=[];for(let i=a;i<=b;i++)o.push(["lec-"+c+"-"+i,"Lecture "+i]);return o};
 const DETAILS={
  q1:{title:"STATS 3Y03: Lectures 11–15",about:"Sections 4.5–4.7 and 5.1. The exercises for these sections are a separate block later, so this block is done once the lectures are.",groups:[["Lectures",lecs("stats",11,15)]]},
- q21:{title:"STATS 3Y03: 21 problems (L11–L13)",about:"L11 = 4.5 Normal, L12 = 4.6 Normal approx to the binomial, L13 = 4.7 Exponential. You already watched these. Star any you get wrong for Wed.",groups:[...sGroups(["4.5", "4.6", "4.7"])]},
- q22:{title:"STATS 3Y03: Lecture 16 + 22 problems",about:"5.1 goes with L14 (joint distributions), 5.4 with L15–L16 (covariance, correlation), 5.6 with L16. Star any you get wrong for Wed.",groups:[["Lectures",lecs("stats",16,16)],...sGroups(["5.1", "5.4", "5.6"])]},
- q23:{title:"STATS 3Y03: Lecture 17 + 18 problems",about:"L16 ends with 6.1 and L17 covers stem-and-leaf, histograms, boxplots and probability plots (6.2–6.4, 6.7). Star any you get wrong for Wed.",groups:[["Lectures",lecs("stats",17,17)],...sGroups(["6.1", "6.2", "6.3", "6.4", "6.7"])]},
- q24:{title:"STATS 3Y03: Lectures 18–19 + 13 problems",about:"L18 point estimation and sampling distributions, L19 CLT and difference of means (7.2–7.3). Star any you get wrong for Wed.",groups:[["Lectures",lecs("stats",18,19)],...sGroups(["7.2", "7.3"])]},
- q25:{title:"STATS 3Y03: Lectures 20–21 + 18 problems",about:"L20 CI on the mean with known variance (8.1), L21 the t distribution, variance unknown (8.2). Star any you get wrong for Wed.",groups:[["Lectures",lecs("stats",20,21)],...sGroups(["8.1", "8.2"])]},
- q26:{title:"STATS 3Y03: Lectures 22–25 + 11 problems",about:"L22–L23 CI on a variance and a proportion (8.3–8.4); L23 also starts hypothesis testing, which L24–L25 continue (no problems assigned for those). Star any you get wrong for Wed.",groups:[["Lectures",lecs("stats",22,25)],...sGroups(["8.3", "8.4"])]},
+ q21:{title:"STATS 3Y03: 7 essential problems (L11–L13)",about:"L11 = 4.5 Normal, L12 = 4.6 Normal approx to the binomial, L13 = 4.7 Exponential. You already watched these. Star any you get wrong for Wed.",groups:[...sGroups(["4.5", "4.6", "4.7"])]},
+ q22:{title:"STATS 3Y03: Lecture 16 + 7 problems",about:"5.1 goes with L14 (joint distributions), 5.4 with L15–L16 (covariance, correlation), 5.6 with L16. Star any you get wrong for Wed.",groups:[["Lectures",lecs("stats",16,16)],...sGroups(["5.1", "5.4", "5.6"])]},
+ q23:{title:"STATS 3Y03: Lecture 17 + 6 problems",about:"L16 ends with 6.1 and L17 covers stem-and-leaf, histograms, boxplots and probability plots (6.2–6.4, 6.7). Star any you get wrong for Wed.",groups:[["Lectures",lecs("stats",17,17)],...sGroups(["6.1", "6.2", "6.4", "6.7"])]},
+ q24:{title:"STATS 3Y03: Lectures 18–19 + 5 problems",about:"L18 point estimation and sampling distributions, L19 CLT and difference of means (7.2–7.3). Star any you get wrong for Wed.",groups:[["Lectures",lecs("stats",18,19)],...sGroups(["7.2", "7.3"])]},
+ q25:{title:"STATS 3Y03: Lectures 20–21 + 6 problems",about:"L20 CI on the mean with known variance (8.1), L21 the t distribution, variance unknown (8.2). Star any you get wrong for Wed.",groups:[["Lectures",lecs("stats",20,21)],...sGroups(["8.1", "8.2"])]},
+ q26:{title:"STATS 3Y03: Lectures 22–25 + 6 problems",about:"L22–L23 CI on a variance and a proportion (8.3–8.4); L23 also starts hypothesis testing, which L24–L25 continue (no textbook problems, so redo Ex. 24.4 and 25.1 cold). Star any you get wrong for Wed.",groups:[["Lectures",lecs("stats",22,25)],...sGroups(["8.3", "8.4", "HT"])]},
  q3:{title:"MATH 2Z03: Lectures 16–17",about:"3.6 Cauchy-Euler Equations. Homework is from Practice Questions 6 on Avenue (Zill textbook exercises).",groups:[["Lectures",lecs("math",16,17)],["Homework (Practice 6)",[["hw-math-3.6.18","Exercise 3.6.18"],["hw-math-3.6.21","Exercise 3.6.21"],["hw-math-t5a","Tutorial 5: the 3.6 questions"]]]]},
  q6:{title:"MATH 2Z03: Lectures 18–20",about:"3.8 Linear Models (IVPs) and 3.9 Linear Models (BVPs).",groups:[["Lectures",lecs("math",18,20)],["Homework (Practice 6)",[["hw-math-3.8.30","Exercise 3.8.30"],["hw-math-3.8.45","Exercise 3.8.45"],["hw-math-3.9.9","Exercise 3.9.9"],["hw-math-3.9.21","Exercise 3.9.21"],["hw-math-t5b","Tutorial 5: the 3.8 questions"]]]]},
  q8:{title:"MATH 2Z03: Lectures 21–24",about:"4.1 Laplace Transform, 4.2 Inverse Laplace Transform, and Monday's lecture.",groups:[["Lectures",lecs("math",21,24)],["Homework (Practice 7)",[["hw-math-4.1.9","Exercise 4.1.9"],["hw-math-4.1.18","Exercise 4.1.18"],["hw-math-4.1.42","Exercise 4.1.42"],["hw-math-4.2.24","Exercise 4.2.24"],["hw-math-4.2.27","Exercise 4.2.27"],["hw-math-4.2.42","Exercise 4.2.42"],["hw-math-t6","Tutorial 6"]]]]},
@@ -738,7 +744,7 @@ function toggle(id,val){
 }
 
 window.addEventListener("hashchange",()=>{route();window.scrollTo(0,0)});
-done=lsGet(); renderAll();
+done=lsGet(); if(!done["seed-ess-1"]){["4.5.7","4.5.13","4.6.1"].forEach(q=>done["hw-stats-p"+q]=true);done["seed-ess-1"]=true;lsSet()} renderAll();
 
 (async()=>{
   const timer=setTimeout(()=>setStatus("Progress is kept on this device only."),10000);
