@@ -153,7 +153,7 @@ table.wk .item{display:block;margin-bottom:4px}
 <div class="wrap">
   <header>
     <h1>Fall 2026 Study Board</h1>
-    <p class="sub">Replanned Wed Nov 18: full catch-up by Sun Nov 29. 2DI4 and 2CI4 Module 5–6 first (Sat–Mon), 2DI4 caught up by Tue Nov 24, 2CI4 by Fri Nov 27, MATH Test 2 on Thu Nov 26, then the weekend clears the 2SH4, MATH and STATS videos and tutorials. Final review starts Mon Nov 30. Anything you skip turns red and stays at the top until you tick it.</p>
+    <p class="sub">Replanned Wed Nov 18: only Thu Nov 19 off, 2SH4 Lab 4 on Fri Nov 20, full catch-up by Sun Nov 29. 2DI4 and 2CI4 Module 5–6 first (Sat–Mon), 2DI4 caught up by Tue Nov 24, 2CI4 by Fri Nov 27, MATH Test 2 on Thu Nov 26, then the weekend clears the 2SH4, MATH and STATS videos and tutorials. Final review starts Mon Nov 30. Anything you skip turns red and stays at the top until you tick it.</p>
     <div class="links">
       <a href="https://avenue.cllmcmaster.ca/d2l/home" target="_blank" rel="noopener">Avenue to Learn</a>
       <a href="https://claude.ai/artifact/4ouvwWyM1dZXHYdhSbyjY6" target="_blank" rel="noopener">Full catch-up plan</a>
@@ -276,7 +276,7 @@ const PHASES = [
   {date:"2026-11-12", label:"Thu Nov 12", tasks:[]},
   {date:"2026-11-13", label:"Fri Nov 13", tasks:[]}
  ]},
- {id:"stats", title:"STATS Midterm 2", range:"Nov 14–18", note:"Every STATS lecture with its problems, then the midterm. 2SH4 Lab 4 on Tuesday, since it's due Fri Nov 20 (a day off). Everything else waits until after Wednesday.", days:[
+ {id:"stats", title:"STATS Midterm 2", range:"Nov 14–18", note:"Every STATS lecture with its problems, then the midterm. Everything else waits until after Wednesday.", days:[
   {date:"2026-11-14", label:"Sat Nov 14", tasks:[
    ["q21","stats","Finish the 7 essential problems for L11–L13 (4.5.7, 4.5.13, 4.6.1, 4.7.1–4.7.3, 4.7.5)"],
    ["q22","stats","Watch L16 + 7 problems for L14–L16 (5.1, 5.4, 5.6)"]]},
@@ -286,18 +286,18 @@ const PHASES = [
   {date:"2026-11-16", label:"Mon Nov 16", tasks:[
    ["q25","stats","Watch L20–L21 + 6 problems (8.1, 8.2)"]]},
   {date:"2026-11-17", label:"Tue Nov 17", tasks:[
-   ["q26","stats","Watch L22–L23 + 4 problems (8.3, 8.4), then L24–L25 + redo Ex. 24.4 and 25.1"],
-   ["q13","2sh4","Lab 4: finish and submit on GitHub Classroom (due Fri Nov 20, which is a day off, so do it now)"]]},
+   ["q26","stats","Watch L22–L23 + 4 problems (8.3, 8.4), then L24–L25 + redo Ex. 24.4 and 25.1"]]},
   {date:"2026-11-18", label:"Wed Nov 18", tasks:[
    ["q18","stats","Morning: Sample Midterm 2, timed at 75 minutes, then go over every mistake"],
    ["r20","stats","Afternoon: redo every problem you starred, then the formula sheet. Eat, then head to TSH 120"],
    ["r21","stats","Midterm 2, 7:00 PM, TSH 120. Pencil, McMaster standard calculator, student ID"]]}
  ]},
- {id:"math", title:"Full catch-up + MATH Test 2", range:"Nov 19–29", note:"Thu–Fri Nov 19–20 off. 2DI4 and 2CI4 go first: 2DI4 is caught up by its Tue Nov 24 lecture, 2CI4 by its Fri Nov 27 lecture. MATH prep Tue–Wed, Test 2 Thursday. Fri–Sun clear the 2SH4, MATH and STATS videos and tutorials, so every course is caught up by Sun Nov 29. This week is heavier than usual on purpose.", days:[
+ {id:"math", title:"Full catch-up + MATH Test 2", range:"Nov 19–29", note:"Only Thu Nov 19 off: Friday is 2SH4 Lab 4 (due that night) plus 2DI4 and STATS catch-up. 2DI4 and 2CI4 go first: 2DI4 is caught up by its Tue Nov 24 lecture, 2CI4 by its Fri Nov 27 lecture. MATH prep Tue–Wed, Test 2 Thursday. Fri–Sun clear the 2SH4, MATH and STATS videos and tutorials, so every course is caught up by Sun Nov 29. This week is heavier than usual on purpose.", days:[
   {date:"2026-11-19", label:"Thu Nov 19", off:true, tasks:[]},
-  {date:"2026-11-20", label:"Fri Nov 20", off:true, tasks:[]},
+  {date:"2026-11-20", label:"Fri Nov 20", tasks:[
+   ["q13","2sh4","Lab 4: finish and submit on GitHub Classroom, due tonight. Do this first"],
+   ["q9","2di4","Module 5 Parts 1–2 + Tutorial 5"]]},
   {date:"2026-11-21", label:"Sat Nov 21", tasks:[
-   ["q9","2di4","Module 5 Parts 1–2 + Tutorial 5"],
    ["q15","2ci4","Module 5 (Ch. 6): Capacitors, Inductors, Combinations + Tutorial 8"],
    ["q6","math","Watch L18–L20: 3.8 Linear Models (IVPs), 3.9 Linear Models (BVPs)"]]},
   {date:"2026-11-22", label:"Sun Nov 22", tasks:[
@@ -467,8 +467,8 @@ const CLASS_TASKS={}, LATE={}, EARLY={}, CAUGHT_UP={}, PINNED={};
   /* Full catch-up by Sun Nov 29 (planned Nov 18): every missed video and tutorial has a fixed day.
      2DI4 and 2CI4 in-person classes before their catch-up day are covered by the module blocks. */
   const P={};const pin=(ids,d)=>ids.forEach(i=>P[i]=d);
-  pin(["w-stats-L26"],"2026-11-21");pin(["w-stats-L27","w-stats-L28"],"2026-11-22");pin(["w-stats-L29","w-stats-L30"],"2026-11-23");pin(["w-stats-L33"],"2026-11-27");
-  pin(["w-2sh4-L25","w-2sh4-L26"],"2026-11-24");pin(["w-2sh4-L27","w-2sh4-L28"],"2026-11-27");pin(["w-2sh4-L29","w-2sh4-L30"],"2026-11-28");pin(["w-2sh4-L31","w-2sh4-L32"],"2026-11-29");
+  pin(["w-stats-L26","w-stats-L27"],"2026-11-20");pin(["w-stats-L28"],"2026-11-21");pin(["w-stats-L29","w-stats-L30"],"2026-11-22");pin(["w-stats-L33"],"2026-11-27");
+  pin(["w-2sh4-L25","w-2sh4-L26"],"2026-11-21");pin(["w-2sh4-L27","w-2sh4-L28"],"2026-11-24");pin(["w-2sh4-L29","w-2sh4-L30"],"2026-11-27");pin(["w-2sh4-L31","w-2sh4-L32"],"2026-11-28");
   pin(["w-math-L25","w-math-L26"],"2026-11-27");pin(["w-math-L27","w-math-L28","w-math-L29"],"2026-11-28");pin(["w-math-L30","w-math-L31","w-math-L32"],"2026-11-29");
   pin(["a-2026-11-12-2sh4-tutorialt02"],"2026-11-28");pin(["a-2026-11-19-2sh4-tutorialt02"],"2026-11-29");pin(["a-2026-11-12-math-tutorialt01","a-2026-11-19-math-tutorialt01"],"drop");
   const COVERED={"2di4":"2026-11-24","2ci4":"2026-11-27"};
