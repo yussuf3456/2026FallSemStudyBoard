@@ -47,6 +47,18 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(-
 nav.tabs{display:flex;gap:6px;border-bottom:1px solid var(--line)}
 nav.tabs a{font:700 1rem var(--display);text-decoration:none;color:var(--muted);padding:8px 14px;border-bottom:3px solid transparent;margin-bottom:-1px}
 nav.tabs a[aria-current="page"]{color:var(--fg);border-bottom-color:var(--accent)}
+.lock{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.lock input,.gin input{font:500 1rem var(--body);padding:8px 10px;border:1px solid var(--line);border-radius:10px;background:var(--bg);color:var(--fg)}
+.lock input{flex:1 1 200px;min-width:0}
+.lock .err{color:var(--bad);flex-basis:100%;margin:0;font-size:.875rem}
+.gin{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
+.gin label{display:flex;flex-direction:column;gap:4px;font-size:.8125rem;color:var(--muted)}
+.gin input{width:100%;box-sizing:border-box}
+table.need{border-collapse:collapse;width:100%;font-variant-numeric:tabular-nums}
+table.need th,table.need td{padding:6px 8px;border-bottom:1px solid var(--line);text-align:center}
+table.need th:first-child,table.need td:first-child{text-align:left}
+table.need td.no{color:var(--bad)}
+table.need td.hi{background:var(--accent-soft);font-weight:700}
 .view{display:flex;flex-direction:column;gap:24px}
 [hidden]{display:none !important}
 
@@ -152,6 +164,7 @@ table.wk .item{display:block;margin-bottom:4px}
   <nav class="tabs" aria-label="Sections">
     <a href="#plan" id="tab-plan">Plan</a>
     <a href="#exams" id="tab-exams">Exams</a>
+    <a href="#grades" id="tab-grades">Grades</a>
   </nav>
 
   <div class="view" id="view-plan">
@@ -195,6 +208,18 @@ table.wk .item{display:block;margin-bottom:4px}
     </section>
   </div>
 
+  <div class="view" id="view-grades" hidden>
+    <section class="card" id="g-lock">
+      <h2>Minimum grade calculator</h2>
+      <p class="sub" style="margin:0">Locked. Type the passcode to see your marks and what each final needs.</p>
+      <form class="lock" id="g-form">
+        <input type="password" id="g-pw" autocomplete="current-password" aria-label="Passcode" placeholder="Passcode">
+        <button class="btn" type="submit">Unlock</button>
+        <p class="err" id="g-err" hidden>Wrong passcode.</p>
+      </form>
+    </section>
+    <div class="section" id="g-body" hidden></div>
+  </div>
   <div class="view" id="view-review" hidden></div>
   <div class="view" id="view-task" hidden></div>
 
@@ -354,7 +379,7 @@ const EXAMS = [
   covers:"3.6 Cauchy-Euler, 3.8 and 3.9 Linear Models, 4.1 Laplace Transform, 4.2 Inverse Laplace, 4.3 (not 3.5)",
   bring:"Practice with the 2026 Sample Test 2 (Test2 folder on Avenue), Tutorials 5–7, Practice 6–7.",
   start:"Sun Nov 22 (after your days off)", phase:"math"},
- {id:"2ci4-final",c:"2ci4",kind:"Final",name:"ELECENG 2CI4 Final",iso:"2026-12-12",when:"Sat Dec 12, 12:30 PM",where:"Room posted end of November",length:"2 hours 30 minutes",weight:"40%. Need at least 30% to pass the course, 54% for a 70, 70% for an 80",
+ {id:"2ci4-final",c:"2ci4",kind:"Final",name:"ELECENG 2CI4 Final",iso:"2026-12-12",when:"Sat Dec 12, 12:30 PM",where:"Room posted end of November",length:"2 hours 30 minutes",weight:"40%. Need at least 30% on the final to pass the course",
   covers:"Whole course so far: Modules 1–6 (Irwin Ch. 1–3, 5–7), plus Modules 7–8 (AC steady-state, power) once posted. Confirm on Avenue.",
   bring:"Past finals with solutions are under Past midterms and finals on Avenue.",
   start:"Sun Nov 29", review:[
@@ -363,7 +388,7 @@ const EXAMS = [
    ["f2ci4-3","Modules 7–8 (AC steady-state, power) once posted, with their tutorials"],
    ["f2ci4-4","Past final #1, timed at 2.5 hours, then go over every mistake"],
    ["f2ci4-5","Past final #2, timed, then a last pass over the formula sheet"]]},
- {id:"2sh4-final",c:"2sh4",kind:"Final",name:"COMPENG 2SH4 Final",iso:"2026-12-14",when:"Mon Dec 14, 7:30 PM",where:"Room posted end of November",length:"2 hours",weight:"35%. Need at least 30% to pass the course, 40% for a 70, 66% for an 80",
+ {id:"2sh4-final",c:"2sh4",kind:"Final",name:"COMPENG 2SH4 Final",iso:"2026-12-14",when:"Mon Dec 14, 7:30 PM",where:"Room posted end of November",length:"2 hours",weight:"35%. Need at least 30% on the final to pass the course",
   covers:"Whole course: C basics, pointers, dynamic memory, OOD in C, C++ classes, special members, operator overloads. Confirm on Avenue.",
   bring:"Past finals and review videos are under Exam Preparation on Avenue.",
   start:"Sat Dec 12", review:[
@@ -371,7 +396,7 @@ const EXAMS = [
    ["f2sh4-2","Rework the sample code from L13–L23 (DMA, matrices, FracStack, OpOverload)"],
    ["f2sh4-3","Watch the review videos in Exam Preparation"],
    ["f2sh4-4","One past final, timed at 2 hours, then go over every mistake"]]},
- {id:"2di4-final",c:"2di4",kind:"Final",name:"COMPENG 2DI4 Final",iso:"2026-12-17",when:"Thu Dec 17, 12:30 PM",where:"Room posted end of November",length:"2 hours 30 minutes",weight:"45%. Need at least 40% to pass the course, 57% for a 70, 71% for an 80",
+ {id:"2di4-final",c:"2di4",kind:"Final",name:"COMPENG 2DI4 Final",iso:"2026-12-17",when:"Thu Dec 17, 12:30 PM",where:"Room posted end of November",length:"2 hours 30 minutes",weight:"45%. Need at least 40% on the final to pass the course",
   covers:"Whole course: Modules 1–5 and any later modules, plus Labs 1–5. No calculator. Confirm on Avenue.",
   bring:"No calculator on tests. Use the readings and homework schedule for the later modules' problems.",
   start:"Sat Nov 28", review:[
@@ -380,14 +405,14 @@ const EXAMS = [
    ["f2di4-3","Later modules and tutorials posted after Nov 7"],
    ["f2di4-4","Go back over Labs 1–5"],
    ["f2di4-5","Timed practice by hand, no calculator: a past final if one is posted"]]},
- {id:"stats-final",c:"stats",kind:"Final",name:"STATS 3Y03 Final",iso:"2026-12-19",when:"Sat Dec 19, 4:00 PM",where:"Room posted end of November",length:"2 hours 30 minutes",weight:"42–52% (best scheme). With a 40 on Midterm 2: 56% for a 70, 75% for an 80 (Midterm 2 gets dropped)",
+ {id:"stats-final",c:"stats",kind:"Final",name:"STATS 3Y03 Final",iso:"2026-12-19",when:"Sat Dec 19, 4:00 PM",where:"Room posted end of November",length:"2 hours 30 minutes",weight:"42–52% (best scheme)",
   covers:"Whole course: Ch. 2–9 and anything after 9.2. Confirm on Avenue.",
   bring:"Formula sheet and tables were given on the midterms; check whether the final does the same.",
   start:"Sun Dec 6", review:[
    ["fstats-1","Sample Midterm 1 and 2 again, timed"],
    ["fstats-2","Lectures after 9.2: their posted exercises"],
    ["fstats-3","Sample final if posted, timed at 2.5 hours, then every mistake"]]},
- {id:"math-final",c:"math",kind:"Final",name:"MATH 2Z03 Final",iso:"2026-12-21",when:"Mon Dec 21, 12:30 PM",where:"Room posted end of November",length:"2 hours 30 minutes",weight:"41%. With 88 on Test 1 and 70 on Test 2: 37% for a 70, 61% for an 80",
+ {id:"math-final",c:"math",kind:"Final",name:"MATH 2Z03 Final",iso:"2026-12-21",when:"Mon Dec 21, 12:30 PM",where:"Room posted end of November",length:"2 hours 30 minutes",weight:"41%",
   covers:"Whole course: Ch. 1–3 (Test 1), 3.6–4.3 (Test 2) and the sections after. Confirm on Avenue.",
   bring:"Tutorials, Practice sets and sample tests on Avenue.",
   start:"Wed Dec 9", review:[
@@ -720,15 +745,64 @@ function route(){
   const h=location.hash.slice(1);
   let view="plan";
   if(h==="exams") view="exams";
+  else if(h==="grades") view="grades";
   else if(h.startsWith("review-") && renderReview(h.slice(7))) view="review";
   else if(h.startsWith("task-") && renderTask(h.slice(5))) view="task";
   document.getElementById("view-task").hidden=view!=="task";
   document.getElementById("view-plan").hidden=view!=="plan";
   document.getElementById("view-exams").hidden=view!=="exams";
   document.getElementById("view-review").hidden=view!=="review";
+  document.getElementById("view-grades").hidden=view!=="grades";
+  document.getElementById("tab-grades").setAttribute("aria-current",view==="grades"?"page":"false");
   document.getElementById("tab-plan").setAttribute("aria-current",(view==="plan"||view==="task")?"page":"false");
   document.getElementById("tab-exams").setAttribute("aria-current",(view==="exams"||view==="review")?"page":"false");
 }
+
+
+/* Grades tab: marks are AES-GCM encrypted with a key derived from the passcode, so they are not readable in the page source. */
+const G_BLOB={"s":"NotfCxqz2oPrUIPKrO7EMg==","i":"2mFtxq0xsgBM94+e","c":"PRjjotmH8S6sKueijRJ1UKZTN+9+1DimQWEctK1sZu9p3xU30FmfZreGM5jM0uuIJtE2SxpM18ThtI4A8MAcw6dPPN8sELX+atzwqlDtwbbgN528CK2Ukm5u+MnZkgtYKLRDrrThluASdqd3RaKyIDEo95qLp5rQ571ahQsPcoauuc1eHNJNMnZVNI0STAGE0IRcmYkX1OrDqYdqiwYwHr2N81NiZy9pkcL3pWTxnvOgPDbLd5+JQz1SwwLARUcQHiuQKWOF+eU8cIQ7TzAZBO3ut0oPmcnJeH3Zyr7QjQQ2kY3Qo6BHLA=="};
+const G_TARGETS=[50,60,70,77,80,85,90];
+const G_FIELDS={
+ stats:{name:"STATS",min:0,f:[["hw","Homework %"],["t1raw","Test 1 raw %"],["mt2","Midterm 2 %"]]},
+ math:{name:"MATH",min:0,f:[["asg","Assignments %"],["lab","Matlab labs %"],["t1","Test 1 %"],["t2","Test 2 %"]]},
+ c2ci4:{name:"2CI4",min:30,f:[["lab","Labs %"],["ad3","AD3 homework %"],["mt","Midterm %"]]},
+ c2sh4:{name:"2SH4",min:30,f:[["lab","Labs %"],["ppa","PPAs %"],["proj","Project %"],["lp","Lab practical %"],["mt","Midterm %"]]},
+ c2di4:{name:"2DI4",min:40,f:[["lab","Labs %"],["mt","Midterm %"]]}};
+const stCurve=x=>70+(30/39.51)*(x-60.49);
+const G_GRADE={
+ stats:(d,F)=>{const t1=stCurve(d.t1raw);return .18*d.hw+Math.max(.2*t1+.2*d.mt2+.42*F,.3*Math.max(t1,d.mt2)+.52*F)},
+ math:(d,F)=>.24*d.asg+.15*d.lab+.1*d.t1+.1*d.t2+.41*F,
+ c2ci4:(d,F)=>.25*d.lab+.10*d.ad3+Math.max(.25*d.mt+.40*F,.65*F),
+ c2sh4:(d,F)=>.06*d.lab+.04*d.ppa+.10*d.proj+.20*d.lp+Math.max(.25*d.mt+.35*F,.60*F),
+ c2di4:(d,F)=>.30*d.lab+Math.max(.25*d.mt+.45*F,.70*F)};
+let G_DATA=null;
+function gNeed(k,T){for(let F=G_FIELDS[k].min;F<=100;F++){if(G_GRADE[k](G_DATA[k],F)>=T-1e-9)return F}return null}
+async function gUnlock(pw){
+ const b=x=>Uint8Array.from(atob(x),c=>c.charCodeAt(0));
+ const base=await crypto.subtle.importKey("raw",new TextEncoder().encode(pw),"PBKDF2",false,["deriveKey"]);
+ const key=await crypto.subtle.deriveKey({name:"PBKDF2",salt:b(G_BLOB.s),iterations:250000,hash:"SHA-256"},base,{name:"AES-GCM",length:256},false,["decrypt"]);
+ return JSON.parse(new TextDecoder().decode(await crypto.subtle.decrypt({name:"AES-GCM",iv:b(G_BLOB.i)},key,b(G_BLOB.c))));
+}
+function gRender(){
+ const body=document.getElementById("g-body");body.replaceChildren();
+ const card=el("section","card");card.append(el("h2",null,"Mark needed on each final"));
+ card.append(el("p","sub","Lowest final mark that gets you each course grade. It already uses each course's final minimum and the rule that a better final replaces the midterm (2CI4, 2SH4, 2DI4) or the best STATS scheme. Change any number below and the table updates."));
+ const wrap=el("div","tablewrap"),t=el("table","need"),hr=el("tr");hr.append(el("th",null,"Course"));G_TARGETS.forEach(x=>hr.append(el("th",null,"For "+x)));
+ const th=el("thead");th.append(hr);t.append(th);const tb=el("tbody");
+ Object.keys(G_FIELDS).forEach(k=>{const tr=el("tr");tr.append(el("td",null,G_FIELDS[k].name));G_TARGETS.forEach(T=>{const n=gNeed(k,T);const td=el("td",n===null?"no":(T===70?"hi":null),n===null?"Not possible":String(n));tr.append(td)});tb.append(tr)});
+ t.append(tb);wrap.append(t);card.append(wrap);
+ card.append(el("p","sub","STATS Test 1 after the curve: "+stCurve(G_DATA.stats.t1raw).toFixed(2)+"%. The highlighted column is a 70."));
+ body.append(card);
+ const ic=el("section","card");ic.append(el("h2",null,"Your marks and assumptions"));
+ Object.keys(G_FIELDS).forEach(k=>{ic.append(el("h3",null,G_FIELDS[k].name));const g=el("div","gin");
+  G_FIELDS[k].f.forEach(([f,lab])=>{const l=el("label",null,lab);const i=document.createElement("input");i.type="number";i.inputMode="decimal";i.min="0";i.max="110";i.step="any";i.value=G_DATA[k][f];
+   i.addEventListener("change",()=>{const v=parseFloat(i.value);if(!isNaN(v)){G_DATA[k][f]=v;gRender()}});l.append(i);g.append(l)});ic.append(g)});
+ ic.append(el("p","sub","Changes here last until you reload the page."));
+ body.append(ic);
+}
+document.getElementById("g-form").addEventListener("submit",async e=>{e.preventDefault();const err=document.getElementById("g-err");err.hidden=true;
+ try{G_DATA=await gUnlock(document.getElementById("g-pw").value);document.getElementById("g-pw").value="";document.getElementById("g-lock").hidden=true;document.getElementById("g-body").hidden=false;gRender()}
+ catch(x){err.hidden=false}});
 
 function renderAll(){Object.keys(DETAILS).forEach(pid=>{const ids=subIds(pid);if(ids.length&&ids.every(i=>done[i]))done[pid]=true});renderPlan();renderExams();route()}
 function setStatus(t){document.getElementById("status").textContent=t}
