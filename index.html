@@ -153,7 +153,7 @@ table.wk .item{display:block;margin-bottom:4px}
 <div class="wrap">
   <header>
     <h1>Fall 2026 Study Board</h1>
-    <p class="sub">Replanned Sat Nov 14 from what you'd ticked: STATS lectures and problems through Tue Nov 17, Midterm 2 Wed Nov 18, days off Thu–Fri Nov 19–20, MATH caught up by Sun Nov 22 for Test 2 on Nov 26, then early review for 2DI4 and 2CI4 and one final at a time from Dec 10. Lectures you fell behind on come back at most 2 a day. Anything you skip turns red and stays at the top until you tick it.</p>
+    <p class="sub">Replanned Wed Nov 18: full catch-up by Sun Nov 29. 2DI4 and 2CI4 Module 5–6 first (Sat–Mon), 2DI4 caught up by Tue Nov 24, 2CI4 by Fri Nov 27, MATH Test 2 on Thu Nov 26, then the weekend clears the 2SH4, MATH and STATS videos and tutorials. Final review starts Mon Nov 30. Anything you skip turns red and stays at the top until you tick it.</p>
     <div class="links">
       <a href="https://avenue.cllmcmaster.ca/d2l/home" target="_blank" rel="noopener">Avenue to Learn</a>
       <a href="https://claude.ai/artifact/4ouvwWyM1dZXHYdhSbyjY6" target="_blank" rel="noopener">Full catch-up plan</a>
@@ -293,38 +293,40 @@ const PHASES = [
    ["r20","stats","Afternoon: redo every problem you starred, then the formula sheet. Eat, then head to TSH 120"],
    ["r21","stats","Midterm 2, 7:00 PM, TSH 120. Pencil, McMaster standard calculator, student ID"]]}
  ]},
- {id:"math", title:"MATH Test 2 prep", range:"Nov 19–27", note:"Thu–Fri Nov 19–20 off. Saturday is a light catch-up day so MATH is caught up before Test 2. 2DI4 and 2CI4 Module 5 fit in around it.", days:[
+ {id:"math", title:"Full catch-up + MATH Test 2", range:"Nov 19–29", note:"Thu–Fri Nov 19–20 off. 2DI4 and 2CI4 go first: 2DI4 is caught up by its Tue Nov 24 lecture, 2CI4 by its Fri Nov 27 lecture. MATH prep Tue–Wed, Test 2 Thursday. Fri–Sun clear the 2SH4, MATH and STATS videos and tutorials, so every course is caught up by Sun Nov 29. This week is heavier than usual on purpose.", days:[
   {date:"2026-11-19", label:"Thu Nov 19", off:true, tasks:[]},
   {date:"2026-11-20", label:"Fri Nov 20", off:true, tasks:[]},
   {date:"2026-11-21", label:"Sat Nov 21", tasks:[
-   ["q6","math","Watch L18–L20: 3.8 Linear Models (IVPs), 3.9 Linear Models (BVPs)"],
-   ["q5","2sh4","Watch L21–L24: Class Design I, special member functions and Rule of Six, operator overloads, and Monday's lecture"]]},
+   ["q9","2di4","Module 5 Parts 1–2 + Tutorial 5"],
+   ["q15","2ci4","Module 5 (Ch. 6): Capacitors, Inductors, Combinations + Tutorial 8"],
+   ["q6","math","Watch L18–L20: 3.8 Linear Models (IVPs), 3.9 Linear Models (BVPs)"]]},
   {date:"2026-11-22", label:"Sun Nov 22", tasks:[
-   ["q8","math","Watch L21–L24: 4.1 Laplace Transform, 4.2 Inverse Laplace Transform, and Monday's lecture"],
-   ["q9","2di4","Module 5 Parts 1–2 + Tutorial 5"]]},
+   ["q12","2di4","Module 5 Parts 3–5 (Analysis C02 version, FSM, Applications) + Tutorial 6"],
+   ["q8","math","Watch L21–L24: 4.1 Laplace Transform, 4.2 Inverse Laplace Transform, and Monday's lecture"]]},
   {date:"2026-11-23", label:"Mon Nov 23", tasks:[
-   ["r22","math","Redo Practice 6–7 and Tutorials 5–7 without notes (3.6, 3.8, 3.9, 4.1–4.3). Mark every one you get wrong"],
-   ["q12","2di4","Module 5 Parts 3–5 (Analysis C02 version, FSM, Applications) + Tutorial 6"]]},
+   ["q17","2ci4","Module 6: 6.1–6.3 First-Order, 6.4–6.5 Second-Order Circuits + Tutorials 9–10"],
+   ["q5","2sh4","Watch L21–L24: Class Design I, special member functions and Rule of Six, operator overloads, and Monday's lecture"]]},
   {date:"2026-11-24", label:"Tue Nov 24", tasks:[
-   ["r24","math","2026 Sample Test 2, timed, then redo every mistake"],
-   ["q15","2ci4","Module 5 (Ch. 6): Capacitors, Inductors, Combinations + Tutorial 8"]]},
+   ["d6","2di4","Before the 12:30 lecture: everything else 2DI4 posted through Fri Nov 20 (the lectures after Module 5 and their tutorial, slides on Avenue). Then you're caught up in 2DI4"],
+   ["r22","math","Redo Practice 6–7 and Tutorials 5–7 without notes (3.6, 3.8, 3.9, 4.1–4.3). Mark every one you get wrong"]]},
   {date:"2026-11-25", label:"Wed Nov 25", tasks:[
+   ["r24","math","2026 Sample Test 2, timed, then redo every mistake"],
    ["r25","math","Redo the problems you got wrong from Practice 6–7, the tutorials and the sample test"],
-   ["r26","math","Second timed pass at the sample test without notes, then the Laplace table. Sleep early"]]},
+   ["r26","math","Quick pass over the Laplace table. Sleep early"]]},
   {date:"2026-11-26", label:"Thu Nov 26", tasks:[
    ["r27","math","Test 2, 6:30 PM, T13 125"]]},
   {date:"2026-11-27", label:"Fri Nov 27", tasks:[
-   ["q17","2ci4","Module 6: 6.1–6.3 First-Order, 6.4–6.5 Second-Order Circuits + Tutorials 9–10"]]}
+   ["c7","2ci4","Before the 5:30 lecture: everything else 2CI4 posted through Wed Nov 25 (the lectures and tutorials after Module 6, on Avenue). Then you're caught up in 2CI4"]]},
+  {date:"2026-11-28", label:"Sat Nov 28", tasks:[]},
+  {date:"2026-11-29", label:"Sun Nov 29", tasks:[]}
  ]},
- {id:"finals", title:"Finals", range:"Nov 28–Dec 21", note:"Review starts early for 2DI4 and 2CI4 (weakest midterms, highest minimums), on weekends while classes run. After Dec 9 each final gets the days right before it.", days:[
-  {date:"2026-11-28", label:"Sat Nov 28", tasks:[
+ {id:"finals", title:"Finals", range:"Nov 30–Dec 21", note:"Review starts early for 2DI4 and 2CI4 (weakest midterms, highest minimums), on weekends while classes run. After Dec 9 each final gets the days right before it.", days:[
+  {date:"2026-11-30", label:"Mon Nov 30", tasks:[
    ["f2di4-1","2di4","Modules 1–4: redo the starred (*) problems and every midterm mistake. 2DI4 needs 40% on the final to pass"]]},
-  {date:"2026-11-29", label:"Sun Nov 29", tasks:[
-   ["f2ci4-1","2ci4","Modules 1–3 (Ch. 1–3): redo your midterm mistakes and the Fall 2022–2024 midterm problems"]]},
-  {date:"2026-11-30", label:"Mon Nov 30", tasks:[]},
   {date:"2026-12-01", label:"Tue Dec 1", tasks:[
    ["f2di4-4","2di4","Go back over Labs 1–4 before Wednesday's Lab 5 practical"]]},
-  {date:"2026-12-02", label:"Wed Dec 2", tasks:[]},
+  {date:"2026-12-02", label:"Wed Dec 2", tasks:[
+   ["f2ci4-1","2ci4","Modules 1–3 (Ch. 1–3): redo your midterm mistakes and the Fall 2022–2024 midterm problems"]]},
   {date:"2026-12-03", label:"Thu Dec 3", tasks:[]},
   {date:"2026-12-04", label:"Fri Dec 4", tasks:[]},
   {date:"2026-12-05", label:"Sat Dec 5", tasks:[
@@ -444,7 +446,7 @@ function todayIso(){return iso(new Date())}
    Video lecture numbers continue from the last one in the catch-up sprint (MATH L24, 2SH4 L24, STATS L25). */
 const CLASS_START="2026-11-10", CLASS_END="2026-12-09";
 const FIRST_LECTURE={math:25,"2sh4":25,stats:26};
-const CLASS_TASKS={}, LATE={}, EARLY={}, CAUGHT_UP={};
+const CLASS_TASKS={}, LATE={}, EARLY={}, CAUGHT_UP={}, PINNED={};
 (function(){
   const n={...FIRST_LECTURE};
   for(let d=CLASS_START;d<=CLASS_END;d=addDays(d,1)){
@@ -460,9 +462,21 @@ const CLASS_TASKS={}, LATE={}, EARLY={}, CAUGHT_UP={};
      move to that day, after the catch-up block, in order. */
   const dateOf={};PHASES.forEach(p=>p.days.forEach(d=>d.tasks.forEach(t=>dateOf[t[0]]=d.date)));
   Object.entries(BACKLOG).forEach(([c,b])=>{CAUGHT_UP[c]=b.items.map(i=>dateOf[i[0]]).sort().slice(-1)[0]});
-  /* New STATS lectures wait until after Midterm 2 and the days off */
-  const RESUME={stats:"2026-11-22"};
-  Object.entries(RESUME).forEach(([c,d])=>{if(CAUGHT_UP[c]&&CAUGHT_UP[c]<d)CAUGHT_UP[c]=d});
+  /* Full catch-up by Sun Nov 29 (planned Nov 18): every missed video and tutorial has a fixed day.
+     2DI4 and 2CI4 in-person classes before their catch-up day are covered by the module blocks. */
+  const P={};const pin=(ids,d)=>ids.forEach(i=>P[i]=d);
+  pin(["w-stats-L26"],"2026-11-21");pin(["w-stats-L27","w-stats-L28"],"2026-11-22");pin(["w-stats-L29","w-stats-L30"],"2026-11-23");pin(["w-stats-L33"],"2026-11-27");
+  pin(["w-2sh4-L25","w-2sh4-L26"],"2026-11-24");pin(["w-2sh4-L27","w-2sh4-L28"],"2026-11-27");pin(["w-2sh4-L29","w-2sh4-L30"],"2026-11-28");pin(["w-2sh4-L31","w-2sh4-L32"],"2026-11-29");
+  pin(["w-math-L25","w-math-L26"],"2026-11-27");pin(["w-math-L27","w-math-L28","w-math-L29"],"2026-11-28");pin(["w-math-L30","w-math-L31","w-math-L32"],"2026-11-29");
+  pin(["a-2026-11-12-math-tutorialt01","a-2026-11-12-2sh4-tutorialt02"],"2026-11-28");pin(["a-2026-11-19-math-tutorialt01","a-2026-11-19-2sh4-tutorialt02"],"2026-11-29");
+  const COVERED={"2di4":"2026-11-24","2ci4":"2026-11-27"};
+  Object.keys(CLASS_TASKS).forEach(d=>{
+    CLASS_TASKS[d]=CLASS_TASKS[d].filter(t=>{
+      if(P[t.id]){const orig=shortDate(d),pd=P[t.id];
+        (PINNED[pd]=PINNED[pd]||[]).push({...t,date:pd,kind:"catchup",text:t.kind==="watch"?"Watch "+NAMES[t.c]+" Lecture "+t.label.slice(1)+" (posted "+orig+")":"Go over the "+NAMES[t.c]+" "+t.label.replace(/ \w+ \w+ \d+$/,"")+" from "+orig+" (slides and notes on Avenue)"});return false}
+      if(COVERED[t.c]&&d<COVERED[t.c]&&t.kind==="attend"&&!/^Lab/.test(t.label)) return false;
+      return true});
+  });
   Object.keys(CLASS_TASKS).forEach(d=>{
     CLASS_TASKS[d]=CLASS_TASKS[d].filter(t=>{
       const cu=CAUGHT_UP[t.c]; if(!cu) return true;
@@ -513,12 +527,12 @@ const CLASS_TASKS={}, LATE={}, EARLY={}, CAUGHT_UP={};
   }
 })();
 const LAST_PHASE_DATE=PHASES[PHASES.length-1].days.slice(-1)[0].date;
-const EXTRA_DAYS=[...new Set(Object.keys(CLASS_TASKS).concat(Object.keys(LATE),Object.keys(EARLY)))].sort().filter(d=>d>LAST_PHASE_DATE&&((CLASS_TASKS[d]||[]).length||(LATE[d]||[]).length||(EARLY[d]||[]).length));
+const EXTRA_DAYS=[...new Set(Object.keys(CLASS_TASKS).concat(Object.keys(LATE),Object.keys(EARLY),Object.keys(PINNED)))].sort().filter(d=>d>LAST_PHASE_DATE&&((CLASS_TASKS[d]||[]).length||(LATE[d]||[]).length||(EARLY[d]||[]).length));
 
 function studyTasks(day){return day.tasks.map(([id,c,text])=>({id,c,text,kind:"study",date:day.date}))}
 function dayTasks(date,day){
   const cls=CLASS_TASKS[date]||[], first=cls.filter(t=>!(CAUGHT_UP[t.c]===date)), after=cls.filter(t=>CAUGHT_UP[t.c]===date);
-  return (EARLY[date]||[]).slice().sort((a,b)=>a.id<b.id?-1:1).concat(first, day?studyTasks(day):[], LATE[date]||[], after);
+  return (EARLY[date]||[]).slice().sort((a,b)=>a.id<b.id?-1:1).concat(first, day?studyTasks(day):[], PINNED[date]||[], LATE[date]||[], after);
 }
 function allDays(){
   const out=[];PHASES.forEach(p=>p.days.forEach(d=>out.push({date:d.date,label:d.label,tasks:dayTasks(d.date,d)})));
