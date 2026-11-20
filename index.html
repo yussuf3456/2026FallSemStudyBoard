@@ -270,8 +270,7 @@ const PHASES = [
  {id:"sprint", title:"Catch-up sprint", range:"Nov 10–13", note:"What you planned before Saturday. Anything unticked here is in Missed and has been moved onto a new day below.", days:[
   {date:"2026-11-10", label:"Tue Nov 10", tasks:[
    ["q1","stats","Watch L11–L15: 4.5–4.7, 5.1 (start of Midterm 2 material)"],
-   ["q2","2sh4","Watch L18–L20: OOD in C, From C to C++, C++ procedural programming"],
-   ["q3","math","Watch L16–L17: 3.6 Cauchy-Euler Equations"]]},
+   ["q2","2sh4","Watch L18–L20: OOD in C, From C to C++, C++ procedural programming"]]},
   {date:"2026-11-11", label:"Wed Nov 11", tasks:[]},
   {date:"2026-11-12", label:"Thu Nov 12", tasks:[]},
   {date:"2026-11-13", label:"Fri Nov 13", tasks:[]}
@@ -292,18 +291,18 @@ const PHASES = [
    ["r20","stats","Afternoon: redo every problem you starred, then the formula sheet. Eat, then head to TSH 120"],
    ["r21","stats","Midterm 2, 7:00 PM, TSH 120. Pencil, McMaster standard calculator, student ID"]]}
  ]},
- {id:"math", title:"Full catch-up + MATH Test 2", range:"Nov 19–29", note:"Only Thu Nov 19 off: Friday is 2SH4 Lab 4 (due that night) plus 2DI4 and STATS catch-up. 2DI4 and 2CI4 go first: 2DI4 is caught up by its Tue Nov 24 lecture, 2CI4 by its Fri Nov 27 lecture. MATH comes first until Test 2: something every day Fri–Wed, including the 4.3 lectures (L25–L26) on Monday. 2SH4 and STATS videos wait until Fri 27–Sun 29. Fri–Sun clear the 2SH4, MATH and STATS videos and tutorials, so every course is caught up by Sun Nov 29. This week is heavier than usual on purpose.", days:[
+ {id:"math", title:"Full catch-up + MATH Test 2", range:"Nov 19–29", note:"MATH Test 2 comes first. You haven't started it, so Fri–Sun is the Test 2 lectures (L16–L24) with their practice problems, Monday is 4.3 (L25–L26) plus a full practice set, Tuesday is a timed sample test, and Wednesday is redoing mistakes. Only 2SH4 Lab 4 (Fri) and the 2DI4/2CI4 catch-up share those days, so 2DI4 is caught up by its Tue Nov 24 lecture and 2CI4 by its Fri Nov 27 lecture. Sunday also has three STATS videos; the rest of STATS and 2SH4 waits until after the test (Fri 27–Mon 30). This week is heavier than usual on purpose.", days:[
   {date:"2026-11-19", label:"Thu Nov 19", off:true, tasks:[]},
   {date:"2026-11-20", label:"Fri Nov 20", tasks:[
    ["q13","2sh4","Lab 4: finish and submit on GitHub Classroom, due tonight. Do this first"],
    ["as-math-lab4","math","Matlab Lab 4 on Childsmath (was due Thu 11:29 PM; you have the 72-hour grace, so finish it today)"],
-   ["mt-a","math","Test 2 warm-up: redo the 3.6 Cauchy-Euler questions (Practice 6: 3.6.18, 3.6.21, and Tutorial 5) without notes"],
-   ["q9","2di4","Module 5 Parts 1–2 + Tutorial 5"]]},
+   ["q3","math","Test 2 starts now: watch L16–L17 (3.6 Cauchy-Euler), then the Practice 6 3.6 problems and the Tutorial 5 3.6 questions"]]},
   {date:"2026-11-21", label:"Sat Nov 21", tasks:[
-   ["q6","math","Watch L18–L20: 3.8 Linear Models (IVPs), 3.9 Linear Models (BVPs)"],
+   ["q6","math","Test 2: watch L18–L20: 3.8 Linear Models (IVPs), 3.9 Linear Models (BVPs), then the Practice 6 3.8/3.9 problems"],
+   ["q9","2di4","Module 5 Parts 1–2 + Tutorial 5"],
    ["q15","2ci4","Module 5 (Ch. 6): Capacitors, Inductors, Combinations + Tutorial 8"]]},
   {date:"2026-11-22", label:"Sun Nov 22", tasks:[
-   ["q8","math","Watch L21–L24: 4.1 Laplace Transform, 4.2 Inverse Laplace Transform, and Monday's lecture"],
+   ["q8","math","Test 2: watch L21–L24: 4.1 Laplace Transform, 4.2 Inverse Laplace Transform, and Monday's lecture, then the Practice 7 problems and Tutorial 6"],
    ["q12","2di4","Module 5 Parts 3–5 (Analysis C02 version, FSM, Applications) + Tutorial 6"]]},
   {date:"2026-11-23", label:"Mon Nov 23", tasks:[
    ["mt-b","math","Test 2: watch L25–L26 first (4.3, they're on the test), then Practice 8 4.3.39 and 4.3.75"],
@@ -311,8 +310,7 @@ const PHASES = [
    ["as-math-a5","math","Assignment 5 on Childsmath, due Thu Nov 26 11:29 PM. It's Test 2 material, so it doubles as practice"]]},
   {date:"2026-11-24", label:"Tue Nov 24", tasks:[
    ["r24","math","2026 Sample Test 2, timed, then redo every mistake"],
-   ["d6","2di4","Before the 12:30 lecture: Module 6 slides Parts 1–2 + 10 problems. Then you're caught up in 2DI4"],
-   ["as-stats-a6","stats","Assignment 6 on Childsmath, due Fri Nov 27 11:29 PM"]]},
+   ["d6","2di4","Before the 12:30 lecture: Module 6 slides Parts 1–2 + 10 problems. Then you're caught up in 2DI4"]]},
   {date:"2026-11-25", label:"Wed Nov 25", tasks:[
    ["r25","math","Redo the problems you got wrong from Practice 6–7, the tutorials and the sample test"],
    ["r26","math","Second timed pass at the sample test without notes, then the Laplace table. Sleep early"]]},
@@ -321,8 +319,9 @@ const PHASES = [
   {date:"2026-11-27", label:"Fri Nov 27", tasks:[
    ["c7","2ci4","Before the 5:30 lecture: Module 7 so far, 7.1 Review of Complex Numbers (notes + recording; no problem set posted yet). Then you're caught up in 2CI4"],
    ["q17","2ci4","Module 6: 6.1–6.3 First-Order, 6.4–6.5 Second-Order Circuits + Tutorials 9–10"],
-   ["q5","2sh4","Watch L21–L24: Class Design I, special member functions and Rule of Six, operator overloads, and Monday's lecture"]]},
+   ["as-stats-a6","stats","Assignment 6 on Childsmath, due Fri Nov 27 11:29 PM"]]},
   {date:"2026-11-28", label:"Sat Nov 28", tasks:[
+   ["q5","2sh4","Watch L21–L24: Class Design I, special member functions and Rule of Six, operator overloads, and Monday's lecture"],
    ["hw9","stats","Ch. 9 homework (hypothesis tests): 9 of the prof's suggested 9.1–9.2 exercises"],
    ["p8m","math","Practice 8: Exercises 4.4.54, 4.4.57, 4.4.69 (after watching the 4.4 lectures)"]]},
   {date:"2026-11-29", label:"Sun Nov 29", tasks:[
@@ -491,8 +490,8 @@ const CLASS_TASKS={}, LATE={}, EARLY={}, CAUGHT_UP={}, PINNED={};
   /* Full catch-up by Sun Nov 29 (planned Nov 18): every missed video and tutorial has a fixed day.
      2DI4 and 2CI4 in-person classes before their catch-up day are covered by the module blocks. */
   const P={};const pin=(ids,d)=>ids.forEach(i=>P[i]=d);
-  pin(["w-stats-L26","w-stats-L27","w-stats-L28"],"2026-11-21");pin(["w-stats-L29","w-stats-L30"],"2026-11-22");pin(["w-stats-L33"],"2026-11-27");
-  pin(["w-2sh4-L25","w-2sh4-L26","w-2sh4-L27","w-2sh4-L28"],"2026-11-28");pin(["w-2sh4-L29","w-2sh4-L30","w-2sh4-L31","w-2sh4-L32"],"2026-11-29");
+  pin(["w-stats-L26","w-stats-L27","w-stats-L28"],"2026-11-22");pin(["w-stats-L29","w-stats-L30"],"2026-11-28");pin(["w-stats-L33"],"2026-11-27");
+  pin(["w-2sh4-L25","w-2sh4-L26","w-2sh4-L27","w-2sh4-L28"],"2026-11-29");pin(["w-2sh4-L29","w-2sh4-L30","w-2sh4-L31","w-2sh4-L32"],"2026-11-30");
   pin(["w-math-L25","w-math-L26"],"2026-11-23");pin(["w-math-L27","w-math-L28"],"2026-11-28");pin(["w-math-L29","w-math-L30","w-math-L31"],"2026-11-30");pin(["w-math-L32","w-math-L33","w-math-L34"],"2026-12-02");
   pin(["a-2026-11-12-2sh4-tutorialt02"],"2026-11-28");pin(["a-2026-11-19-2sh4-tutorialt02"],"2026-11-29");pin(["a-2026-11-12-math-tutorialt01","a-2026-11-19-math-tutorialt01"],"drop");
   const COVERED={"2di4":"2026-11-24","2ci4":"2026-11-27"};
