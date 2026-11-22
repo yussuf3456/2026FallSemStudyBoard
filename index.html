@@ -148,6 +148,7 @@ table.wk .item{display:block;margin-bottom:4px}
 .whole{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
 .status{font-size:.8rem;color:var(--muted)}
 @media (prefers-reduced-motion:reduce){.bar i{transition:none}}
+details.past{margin-top:28px;border-top:1px solid var(--line,#3334);padding-top:12px;opacity:.8}details.past>summary{cursor:pointer;font-weight:600;padding:6px 0}
 </style>
 
 <div class="wrap">
@@ -291,15 +292,14 @@ const PHASES = [
    ["r20","stats","Afternoon: redo every problem you starred, then the formula sheet. Eat, then head to TSH 120"],
    ["r21","stats","Midterm 2, 7:00 PM, TSH 120. Pencil, McMaster standard calculator, student ID"]]}
  ]},
- {id:"math", title:"Full catch-up + MATH Test 2", range:"Nov 19–29", note:"MATH Test 2 comes first. You haven't started it, so Fri–Sun is the Test 2 lectures (L16–L24) with their practice problems, Monday is 4.3 (L25–L26) plus a full practice set, Tuesday is a timed sample test, and Wednesday is redoing mistakes. Only 2SH4 Lab 4 (Fri) and the 2DI4/2CI4 catch-up share those days, so 2DI4 is caught up by its Tue Nov 24 lecture and 2CI4 by its Fri Nov 27 lecture. Tuesday also has three STATS videos (before A6, due Fri); the rest of STATS and 2SH4 waits until after the test (Fri 27–Mon 30). This week is heavier than usual on purpose.", days:[
+ {id:"math", title:"Full catch-up + MATH Test 2", range:"Nov 19–29", note:"MATH Test 2 comes first. You haven't started it, so Fri–Sun is the Test 2 lectures (L16–L24) with their practice problems, Monday is 4.3 (L25–L26) plus a full practice set, Tuesday is a timed sample test, and Wednesday is redoing mistakes. Only 2SH4 Lab 4 (Fri) and the 2DI4/2CI4 catch-up share those days (2CI4 Module 5 is Wednesday afternoon), so 2DI4 is caught up by its Tue Nov 24 lecture and 2CI4 by its Fri Nov 27 lecture. Tuesday also has three STATS videos (before A6, due Fri); the rest of STATS and 2SH4 waits until after the test (Fri 27–Mon 30). This week is heavier than usual on purpose.", days:[
   {date:"2026-11-19", label:"Thu Nov 19", off:true, tasks:[]},
   {date:"2026-11-20", label:"Fri Nov 20", tasks:[
    ["q13","2sh4","Lab 4: finish and submit on GitHub Classroom, due tonight. Do this first"],
    ["as-math-lab4","math","Matlab Lab 4 on Childsmath (was due Thu 11:29 PM; you have the 72-hour grace, so finish it today)"],
    ["q3","math","Test 2 starts now: watch L16–L17 (3.6 Cauchy-Euler), then the Practice 6 3.6 problems and the Tutorial 5 3.6 questions"]]},
   {date:"2026-11-21", label:"Sat Nov 21", tasks:[
-   ["q6","math","Test 2: watch L18–L20: 3.8 Linear Models (IVPs), 3.9 Linear Models (BVPs), then the Practice 6 3.8/3.9 problems"],
-   ["q15","2ci4","Module 5 (Ch. 6): Capacitors, Inductors, Combinations + Tutorial 8"]]},
+   ["q6","math","Test 2: watch L18–L20: 3.8 Linear Models (IVPs), 3.9 Linear Models (BVPs), then the Practice 6 3.8/3.9 problems"]]},
   {date:"2026-11-22", label:"Sun Nov 22", tasks:[
    ["q8","math","Test 2: watch L21–L24: 4.1 Laplace Transform, 4.2 Inverse Laplace Transform, and Monday's lecture, then the Practice 7 problems and Tutorial 6"],
    ["q9","2di4","Module 5 Parts 1–2 + Tutorial 5"],
@@ -313,7 +313,8 @@ const PHASES = [
    ["d6","2di4","Before the 12:30 lecture: Module 6 slides Parts 1–2 + 10 problems. Then you're caught up in 2DI4"]]},
   {date:"2026-11-25", label:"Wed Nov 25", tasks:[
    ["r25","math","Redo the problems you got wrong from Practice 6–7, the tutorials and the sample test"],
-   ["r26","math","Second timed pass at the sample test without notes, then the Laplace table. Sleep early"]]},
+   ["r26","math","Second timed pass at the sample test without notes, then the Laplace table. Sleep early"],
+   ["q15","2ci4","Module 5 (Ch. 6): Capacitors, Inductors, Combinations + Tutorial 8"]]},
   {date:"2026-11-26", label:"Thu Nov 26", tasks:[
    ["r27","math","Test 2, 6:30 PM, T13 125"]]},
   {date:"2026-11-27", label:"Fri Nov 27", tasks:[
@@ -748,16 +749,26 @@ function renderPlan(){
     const ul=el("ul","tasks"); list.forEach(t=>ul.append(taskItem(t,next,false)));
     day.append(h3,ul); s.append(day);
   };
+  const pastWrap=el("details","past"); pastWrap.append(el("summary",null,"Earlier days (finished or moved). Tap to show"));
   PHASES.forEach(p=>{
-    const s=el("section","section"); s.append(el("h2",null,p.title+" ("+p.range+")"), el("p",null,p.note+" Classes and videos are listed first each day."));
-    p.days.forEach(d=>renderDay(s,d.date,d.label,dayTasks(d.date,d)));
-    sec.append(s);
+    const cur=p.days.filter(d=>d.date>=today), old=p.days.filter(d=>d.date<today);
+    if(cur.length){
+      const s=el("section","section"); s.append(el("h2",null,p.title+" ("+p.range+")"), el("p",null,p.note+" Classes and videos are listed first each day."));
+      cur.forEach(d=>renderDay(s,d.date,d.label,dayTasks(d.date,d)));
+      sec.append(s);
+    }
+    if(old.length){
+      const s=el("section","section"); s.append(el("h2",null,p.title+" ("+p.range+")"));
+      old.forEach(d=>renderDay(s,d.date,d.label,dayTasks(d.date,d)));
+      pastWrap.append(s);
+    }
   });
   if(EXTRA_DAYS.length){
     const s=el("section","section"); s.append(el("h2",null,"Classes to the end of term ("+shortDate(EXTRA_DAYS[0])+" to "+shortDate(EXTRA_DAYS[EXTRA_DAYS.length-1])+")"), el("p",null,"Keep up with every class and video so nothing piles up before finals."));
     EXTRA_DAYS.forEach(d=>renderDay(s,d,shortDate(d),dayTasks(d,null)));
     sec.append(s);
   }
+  if(pastWrap.children.length>1) sec.append(pastWrap);
 
   const tb=document.getElementById("week"); tb.replaceChildren();
   for(let wd=1;wd<=5;wd++){
