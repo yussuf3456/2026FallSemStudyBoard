@@ -156,7 +156,7 @@ details.past{margin-top:28px;border-top:1px solid var(--line,#3334);padding-top:
 <div class="wrap">
   <header>
     <h1>Fall 2026 Study Board</h1>
-    <p class="sub">Replanned Wed Nov 18: only Thu Nov 19 off, 2SH4 Lab 4 on Fri Nov 20, full catch-up by Sun Nov 29. 2DI4 and 2CI4 Module 5–6 first (Sat–Mon), 2DI4 caught up by Tue Nov 24, 2CI4 by Fri Nov 27, MATH Test 2 on Thu Nov 26, then the weekend clears the 2SH4, MATH and STATS videos and tutorials. Final review starts Mon Nov 30: a review day per module or chapter, then an overall review and two practice exams before each final. Anything you skip turns red and stays at the top until you tick it.</p>
+    <p class="sub">Replanned Fri Nov 27, after MATH Test 2. This weekend finishes the catch-up: 2DI4 by Sat Nov 28, 2CI4 by Sun Nov 29, 2SH4 videos by Sun Dec 6 alongside the project (due Wed Dec 9). STATS videos are spread one or two a day until Dec 10. 2CI4 reviews run Mon Nov 30 to Thu Dec 10 with two practice exams on Fri Dec 11, then each later final gets its own block. Anything you skip turns red and stays at the top until you tick it.</p>
     <div class="links">
       <a href="https://avenue.cllmcmaster.ca/d2l/home" target="_blank" rel="noopener">Avenue to Learn</a>
       <a href="https://claude.ai/artifact/4ouvwWyM1dZXHYdhSbyjY6" target="_blank" rel="noopener">Full catch-up plan</a>
@@ -308,108 +308,101 @@ const PHASES = [
    ["r22","math","Past-test practice PDF, Q1–Q20 (3.6 Cauchy-Euler, 3.8 springs/LRC, 3.9 BVPs). Check the answer key, mark what you got wrong"],
    ["as-math-a5","math","Assignment 5 on Childsmath, due Thu Nov 26 11:29 PM. It's Test 2 material, so it doubles as practice"]]},
   {date:"2026-11-24", label:"Tue Nov 24", tasks:[
-   ["r24","math","2026 Sample Test 2, timed, then redo every mistake"],
-   ["q9","2di4","Module 5 latches and flip-flops: videos, then problems 5.1–5.3"],
-   ["as-stats-a6","stats","Assignment 6 on Childsmath, due Fri Nov 27 11:29 PM"]]},
+   ["q9","2di4","Module 5 latches and flip-flops: videos, then problems 5.1–5.3"]]},
   {date:"2026-11-25", label:"Wed Nov 25", tasks:[
-   ["r25","math","Past-test practice PDF, Q21–Q32 (4.1–4.3 Laplace), then redo anything you got wrong in the PDF and the sample test"],
-   ["r26","math","Second timed pass at the sample test without notes, then the Laplace table. Sleep early"],
-   ["q15","2ci4","Module 5 (Ch. 6) capacitors and inductors: videos, then the problems"]]},
-  {date:"2026-11-26", label:"Thu Nov 26", tasks:[
-   ["q12","2di4","Module 5 analysis and FSMs: videos, then Set 1–2 problems"],
-   ["r27","math","Test 2, 6:30 PM, T13 125"]]},
+   ["r25","math","Past-test practice PDF, Q21–Q32 (4.1–4.3 Laplace), then redo anything you got wrong in the PDF and the sample test"]]},
+  {date:"2026-11-26", label:"Thu Nov 26", tasks:[]},
   {date:"2026-11-27", label:"Fri Nov 27", tasks:[
-   ["c7","2ci4","Before the 5:30 lecture: Module 7 so far, 7.1–7.6 AC steady state (complex numbers, phasors, impedance). Videos + notes; no problem set posted yet. Then you're caught up in 2CI4"],
-   ["q17","2ci4","Module 6 (Ch. 7) transients: videos, then the problems"],
-   ["d6","2di4","Before the 12:30 lecture: Module 6 problems (state reduction, design). Then you're caught up in 2DI4"]]},
+   ["as-stats-a6","stats","Assignment 6 on Childsmath, due TONIGHT 11:29 PM. Do this first"],
+   ["q12","2di4","Module 5 analysis and FSMs: videos, then Set 1–2 problems (before or after the 12:30 lecture)"],
+   ["q15","2ci4","Module 5 (Ch. 6) capacitors and inductors: videos, then the problems, before the 5:30 lecture"]]},
   {date:"2026-11-28", label:"Sat Nov 28", tasks:[
-   ["q2","2sh4","Watch L20 (you did L18–L19): C++ procedural programming, then run its sample code"],
-   ["q5","2sh4","Watch L21–L24: Class Design I, special member functions and Rule of Six, operator overloads, and Monday's lecture"],
-   ["hw9","stats","Ch. 9 homework (hypothesis tests): 9 of the prof's suggested 9.1–9.2 exercises"],
-   ["p8m","math","4.4: one YouTube video (derivatives of transforms, convolution), then Practice 8 4.4.54, 4.4.57, 4.4.69"]]},
+   ["q17","2ci4","Module 6 (Ch. 7) transients: videos, then the problems"],
+   ["d6","2di4","Module 6 problems (state reduction, design). Then you're caught up in 2DI4"],
+   ["q2","2sh4","Watch L20: C++ procedural programming, then run its sample code"]]},
   {date:"2026-11-29", label:"Sun Nov 29", tasks:[
-   ["pj-2sh4-1","2sh4","Course project, session 1: read the spec, plan the classes, get it compiling (due Wed Dec 9, 11:29 PM)"],
-   ["nw-1","all","First pass at the recommended problems every course posted Nov 23–29"]]}
+   ["c7","2ci4","Module 7 so far, 7.1–7.6 AC steady state (complex numbers, phasors, impedance): videos + notes. Then you're caught up in 2CI4"],
+   ["q5","2sh4","Watch L21–L24: Class Design I, special member functions and Rule of Six, operator overloads"],
+   ["pj-2sh4-1","2sh4","Course project, session 1: read the spec, plan the classes, get it compiling (due Wed Dec 9, 11:29 PM)"]]}
  ]},
- {id:"finals", title:"Finals", range:"Nov 30–Dec 21", note:"Each course gets a review day per module or chapter, then an overall review, then two practice exams right before its final. Chapter reviews are spread out while classes run; the overall review and practice exams sit just before each exam.", days:[
+ {id:"finals", title:"Finals", range:"Nov 30–Dec 21", note:"Replanned Fri Nov 27. Until classes end (Wed Dec 9) each day mixes the last catch-up videos, the 2SH4 project and the 2CI4 module reviews, because 2CI4 is your first final. 2DI4 module reviews start Sat Dec 5. STATS and MATH reviews wait until after the 2DI4 final, since those finals are last and MATH only needs about 33% for a 70.", days:[
   {date:"2026-11-30", label:"Mon Nov 30", tasks:[
    ["s2di4","2di4","Module 5 Homework Set 3: registers and counters (18 problems, starred first)"],
-   ["rv-2di4-m1","2di4","Module 1 review: slides, tutorial and the recommended problems, starred (*) ones first, by hand"]]},
+   ["rv-2ci4-m1","2ci4","Module 1 review (Ch. 1): reread the notes, redo the tutorial and the Recommended Problems you got wrong, checked with the solution manual, plus your midterm mistakes from it"]]},
   {date:"2026-12-01", label:"Tue Dec 1", tasks:[
    ["as-2di4-lab5pre","2di4","Lab 5 pre-lab, due Wed 2:30 PM at the lab"],
-   ["f2di4-4","2di4","Go back over Labs 1–4 before Wednesday's Lab 5 practical"],
-   ["rv-2ci4-m1","2ci4","Module 1 review (Ch. 1): reread the notes, redo the tutorial and the Recommended Problems you got wrong, checked with the solution manual, plus your midterm mistakes from it"]]},
-  {date:"2026-12-02", label:"Wed Dec 2", tasks:[
-   ["rv-2ci4-m2","2ci4","Module 2 review (Ch. 2): reread the notes, redo the tutorial and the Recommended Problems you got wrong, checked with the solution manual, plus your midterm mistakes from it"]]},
+   ["f2di4-4","2di4","Go back over Labs 1–4 before Wednesday's Lab 5 practical"]]},
+  {date:"2026-12-02", label:"Wed Dec 2", tasks:[]},
   {date:"2026-12-03", label:"Thu Dec 3", tasks:[
-   ["rv-2di4-m2","2di4","Module 2 review: slides, tutorial and the recommended problems, starred (*) ones first, by hand, plus your midterm mistakes from it"],
-   ["rv-2sh4-a","2sh4","C basics review: Practice Question Sets 1–2 again without the solutions"],
-   ["as-math-lab5","math","Matlab Lab 5 on Childsmath, due tonight 11:29 PM"]]},
+   ["as-math-lab5","math","Matlab Lab 5 on Childsmath, due tonight 11:29 PM"],
+   ["rv-2ci4-m2","2ci4","Module 2 review (Ch. 2): reread the notes, redo the tutorial and the Recommended Problems you got wrong, checked with the solution manual, plus your midterm mistakes from it"]]},
   {date:"2026-12-04", label:"Fri Dec 4", tasks:[
-   ["rv-2ci4-m3","2ci4","Module 3 review (Ch. 3): reread the notes, redo the tutorial and the Recommended Problems you got wrong, checked with the solution manual, plus your midterm mistakes from it"],
-   ["rv-stats-c2","stats","Ch. 2 review (probability): your Test 1 mistakes and the Sample Midterm 1 probability questions"],
-   ["as-2ci4-ad3","2ci4","AD3 Homework 3, due tonight 11:29 PM"]]},
+   ["as-2ci4-ad3","2ci4","AD3 Homework 3, due tonight 11:29 PM"],
+   ["rv-2ci4-m3","2ci4","Module 3 review (Ch. 3): reread the notes, redo the tutorial and the Recommended Problems you got wrong, checked with the solution manual, plus your midterm mistakes from it"]]},
   {date:"2026-12-05", label:"Sat Dec 5", tasks:[
-   ["rv-2ci4-m4","2ci4","Module 4 review (Ch. 5): reread the notes, redo the tutorial and the Recommended Problems you got wrong, checked with the solution manual, including max power transfer"],
-   ["rv-2di4-m3","2di4","Module 3 review: slides, tutorial and the recommended problems, starred (*) ones first, by hand, plus your midterm mistakes from it"],
-   ["rv-math-c2","math","Ch. 2 review (first-order equations): Practice 2–3 and Tutorials 2–3 again"],
-   ["rv-stats-c5","stats","Ch. 5 review (joint distributions, covariance, linear combinations): the essential problems again"],
-   ["rv-math-c1","math","Ch. 1 review: Practice 1 and Tutorial 1 again, plus the Ch. 1 questions on Sample Test 1"]]},
-  {date:"2026-12-06", label:"Sun Dec 6", tasks:[
-   ["rv-2ci4-m5","2ci4","Module 5 review (Ch. 6, capacitors and inductors): reread the notes, redo the tutorial and the Recommended Problems you got wrong, checked with the solution manual"],
-   ["rv-2di4-m4","2di4","Module 4 review: slides, tutorial and the recommended problems, starred (*) ones first, by hand, plus your midterm mistakes from it"],
-   ["nw-2","all","First pass at the recommended problems every course posted Nov 30–Dec 6"],
-   ["rv-2sh4-b","2sh4","Functions, arrays and strings review: Practice Question Sets 3–5 again"]]},
-  {date:"2026-12-07", label:"Mon Dec 7", tasks:[
    ["pj-2sh4-2","2sh4","Course project, session 2: core features working"],
-   ["rv-stats-c4","stats","Ch. 4 review (continuous, normal, exponential): the starred essential problems from 4.5–4.7"]]},
-  {date:"2026-12-08", label:"Tue Dec 8", tasks:[
-   ["rv-2ci4-m6","2ci4","Module 6 review (Ch. 7, first- and second-order transients): reread the notes, redo the tutorial and the Recommended Problems you got wrong, checked with the solution manual"],
-   ["pj-2sh4-3","2sh4","Course project, session 3: finish features, test edge cases, fix memory leaks"],
-   ["rv-stats-c3","stats","Ch. 3 review (discrete random variables): the Test 1 questions from Ch. 3 and their textbook exercises"]]},
-  {date:"2026-12-09", label:"Wed Dec 9", tasks:[
-   ["pj-2sh4-4","2sh4","Course project: final test, clean up and SUBMIT by 11:29 PM tonight"],
-   ["rv-2di4-m5","2di4","Module 5 review: slides, tutorial and the recommended problems, starred (*) ones first, by hand: latches, flip-flops, state tables, registers and counters"]]},
-  {date:"2026-12-10", label:"Thu Dec 10", tasks:[
+   ["rv-2ci4-m4","2ci4","Module 4 review (Ch. 5): reread the notes, redo the tutorial and the Recommended Problems you got wrong, checked with the solution manual, including max power transfer"],
+   ["rv-2di4-m1","2di4","Module 1 review: slides, tutorial and the recommended problems, starred (*) ones first, by hand"]]},
+  {date:"2026-12-06", label:"Sun Dec 6", tasks:[
+   ["rv-2di4-m2","2di4","Module 2 review: slides, tutorial and the recommended problems, starred (*) ones first, by hand, plus your midterm mistakes from it"],
+   ["rv-2ci4-m6","2ci4","Module 5–6 review (capacitors, inductors, transients): redo the problems you got wrong when you learned them last week, checked with the solution manual"]]},
+  {date:"2026-12-07", label:"Mon Dec 7", tasks:[
    ["rv-2ci4-m7","2ci4","Module 7–8 review (AC steady-state and power, whatever was covered): reread the notes, redo the tutorial and the Recommended Problems you got wrong, checked with the solution manual"],
+   ["rv-2di4-m3","2di4","Module 3 review: slides, tutorial and the recommended problems, starred (*) ones first, by hand, plus your midterm mistakes from it"]]},
+  {date:"2026-12-08", label:"Tue Dec 8", tasks:[
+   ["pj-2sh4-3","2sh4","Course project, session 3: finish features, test edge cases, fix memory leaks"],
+   ["rv-2di4-m4","2di4","Module 4 review: slides, tutorial and the recommended problems, starred (*) ones first, by hand, plus your midterm mistakes from it"]]},
+  {date:"2026-12-09", label:"Wed Dec 9", tasks:[
+   ["pj-2sh4-4","2sh4","Course project: final test, clean up and SUBMIT by 11:29 PM tonight"]]},
+  {date:"2026-12-10", label:"Thu Dec 10", tasks:[
    ["rv-2ci4-all","2ci4","2CI4 overall review: one page of every formula and method from Modules 1–8, then a mixed set of your worst problems"],
    ["as-math-a6","math","Assignment 6 on Childsmath, due tonight 11:29 PM (quick)"],
-   ["rv-2sh4-c","2sh4","Debugging and pointers review: Practice Question Sets 6–7 again"]]},
+   ["rv-2sh4-a","2sh4","C basics review: Practice Question Sets 1–2 again without the solutions"],
+   ["hw9","stats","Ch. 9 homework (hypothesis tests): 9 of the prof's suggested 9.1–9.2 exercises"]]},
   {date:"2026-12-11", label:"Fri Dec 11", tasks:[
    ["as-stats-a7","stats","Assignment 7 on Childsmath, due tonight 11:29 PM (quick, before the practice exams)"],
    ["pe-2ci4-1","2ci4","2CI4 practice exam #1: a past final, timed at 2.5 hours, then go over every mistake"],
    ["pe-2ci4-2","2ci4","2CI4 practice exam #2 (or the midterm again), timed, then a last pass over the formula page. Sleep early"]]},
   {date:"2026-12-12", label:"Sat Dec 12", tasks:[
    ["x2ci4","2ci4","2CI4 FINAL, 12:30 PM"],
-   ["rv-2sh4-d","2sh4","Evening, lighter: dynamic memory and OOD in C review (Practice Question Set 8, the L13–L20 sample code)"]]},
+   ["rv-2sh4-b","2sh4","Evening, after the exam: functions, arrays and strings review (Practice Question Sets 3–5 again)"],
+   ["rv-2sh4-c","2sh4","Evening: debugging and pointers review (Practice Question Sets 6–7 again)"]]},
   {date:"2026-12-13", label:"Sun Dec 13", tasks:[
+   ["rv-2sh4-d","2sh4","Dynamic memory and OOD in C review (Practice Question Set 8, the L13–L20 sample code)"],
    ["rv-2sh4-e","2sh4","C++ classes review: L21–L28, write the Rule of Six and an operator overload for a small class from scratch"],
-   ["rv-2sh4-f","2sh4","C++ review for the later lectures (L29 onward), plus the review videos in Exam Preparation"],
    ["rv-2sh4-all","2sh4","2SH4 overall review: trace through one program per topic by hand"],
    ["pe-2sh4-1","2sh4","2SH4 practice exam #1: a past final, timed at 2 hours, then every mistake"]]},
   {date:"2026-12-14", label:"Mon Dec 14", tasks:[
    ["pe-2sh4-2","2sh4","Morning: 2SH4 practice exam #2 (a different past final or past midterm), timed, then every mistake"],
+   ["rv-2sh4-f","2sh4","Afternoon: C++ review for L29 onward, plus the review videos in Exam Preparation"],
    ["x2sh4","2sh4","2SH4 FINAL, 7:30 PM"]]},
   {date:"2026-12-15", label:"Tue Dec 15", tasks:[
+   ["rv-2di4-m5","2di4","Module 5 review: slides, tutorial and the recommended problems, starred (*) ones first, by hand: latches, flip-flops, state tables, registers and counters"],
    ["rv-2di4-m6","2di4","Module 6 and later review: slides, tutorial and the recommended problems, starred (*) ones first, by hand: state reduction, FSM design, and anything after"],
    ["rv-2di4-all","2di4","2DI4 overall review: one page per module of methods, plus Labs 1–5"],
-   ["rv-stats-c67","stats","Ch. 6–7 review (descriptive stats, sampling distributions, CLT): the essential problems again"],
-   ["rv-math-c3a","math","3.1–3.5 review (higher-order linear equations): Practice 4–5 and Tutorials 4–5 again"]]},
+   ["rv-stats-c67","stats","Ch. 6–7 review (descriptive stats, sampling distributions, CLT): the essential problems again"]]},
   {date:"2026-12-16", label:"Wed Dec 16", tasks:[
    ["pe-2di4-1","2di4","2DI4 practice exam #1: a past final or the midterm sample, timed, by hand, no calculator, then every mistake"],
    ["pe-2di4-2","2di4","2DI4 practice exam #2, timed, by hand. Sleep early"],
-   ["rv-math-c3b","math","3.6–4.3 review (Test 2 material): your Test 2 mistakes and Sample Test 2 again"]]},
+   ["rv-stats-c4","stats","Ch. 4 review (continuous, normal, exponential): the starred essential problems from 4.5–4.7"]]},
   {date:"2026-12-17", label:"Thu Dec 17", tasks:[
    ["x2di4","2di4","2DI4 FINAL, 12:30 PM"],
+   ["rv-stats-c5","stats","Evening: Ch. 5 review (joint distributions, covariance, linear combinations): the essential problems again"],
    ["rv-stats-c8","stats","Evening: Ch. 8 review (confidence intervals): the essential problems again"]]},
   {date:"2026-12-18", label:"Fri Dec 18", tasks:[
+   ["rv-stats-c3","stats","Ch. 3 review (discrete random variables): the Test 1 questions from Ch. 3 and their textbook exercises"],
    ["rv-stats-c9","stats","Ch. 9 review (hypothesis tests): Ex. 24.4, 25.1 and the exercises posted after 9.2"],
    ["rv-stats-all","stats","STATS overall review: a formula sheet of every distribution, interval and test, and when to use each"],
    ["pe-stats-1","stats","STATS practice exam #1: a sample final if posted (or both sample midterms), timed at 2.5 hours, then every mistake"]]},
   {date:"2026-12-19", label:"Sat Dec 19", tasks:[
+   ["rv-stats-c2","stats","Morning, if you have energy: Ch. 2 review (probability): your Test 1 mistakes. Otherwise skip to practice exam #2"],
    ["pe-stats-2","stats","Morning: STATS practice exam #2, or redo every mistake from #1 if you're tired"],
-   ["xstats","stats","STATS FINAL, 4:00 PM"]]},
+   ["xstats","stats","STATS FINAL, 4:00 PM"],
+   ["rv-math-c1","math","Evening, light: Ch. 1 review (Practice 1, Tutorial 1)"],
+   ["rv-math-c3a","math","Evening: 3.1–3.5 review (higher-order linear equations): Practice 4–5 and Tutorials 4–5"]]},
   {date:"2026-12-20", label:"Sun Dec 20", tasks:[
+   ["p8m","math","4.4 and later (new since Test 2): one YouTube video per section, then Practice 8 4.4.54, 4.4.57, 4.4.69"],
+   ["rv-math-c2","math","Ch. 2 review (first-order equations): Practice 2–3 and Tutorials 2–3 again"],
    ["rv-math-c4","math","4.4 onward review (rest of Laplace): Practice 8 and the later tutorials"],
    ["rv-math-all","math","MATH overall review: a one-page method sheet (which technique for which equation) and the Laplace table"],
    ["pe-math-1","math","MATH practice exam: a past or sample final, timed at 2.5 hours, then every mistake"]]},
@@ -489,13 +482,22 @@ const CLASS_TASKS={}, LATE={}, EARLY={}, CAUGHT_UP={}, PINNED={};
      Videos posted on or before a course's catch-up day, and in-person classes before it,
      move to that day, after the catch-up block, in order. */
   const dateOf={};PHASES.forEach(p=>p.days.forEach(d=>d.tasks.forEach(t=>dateOf[t[0]]=d.date)));
-  Object.entries(BACKLOG).forEach(([c,b])=>{CAUGHT_UP[c]=b.items.map(i=>dateOf[i[0]]).sort().slice(-1)[0]});
+  Object.entries(BACKLOG).forEach(([c,b])=>{CAUGHT_UP[c]=b.items.map(i=>dateOf[i[0]]).sort().slice(-1)[0]});CAUGHT_UP["2ci4"]="2026-11-27";
   /* Full catch-up by Sun Nov 29 (planned Nov 18): every missed video and tutorial has a fixed day.
      2DI4 and 2CI4 in-person classes before their catch-up day are covered by the module blocks. */
   const P={};const pin=(ids,d)=>ids.forEach(i=>P[i]=d);
-  pin(["w-stats-L26","w-stats-L27"],"2026-11-23");pin(["w-stats-L28","w-stats-L29","w-stats-L30"],"2026-11-24");pin(["w-stats-L31"],"2026-11-25");pin(["w-stats-L32","w-stats-L33"],"2026-11-29");
-  pin(["w-2sh4-L25","w-2sh4-L26","w-2sh4-L27","w-2sh4-L28"],"2026-11-29");pin(["w-2sh4-L29","w-2sh4-L30","w-2sh4-L31","w-2sh4-L32"],"2026-11-30");
-  pin(["a-2026-11-12-2sh4-tutorialt02"],"2026-11-28");pin(["a-2026-11-19-2sh4-tutorialt02"],"2026-11-29");pin(["a-2026-11-12-math-tutorialt01","a-2026-11-19-math-tutorialt01"],"drop");
+  pin(["w-stats-L26", "w-stats-L27"],"2026-11-28");
+  pin(["w-stats-L28", "w-2sh4-L25", "w-2sh4-L26", "w-2sh4-L27"],"2026-11-30");
+  pin(["w-2sh4-L28"],"2026-12-01");
+  pin(["w-stats-L29", "w-2sh4-L29", "w-2sh4-L30"],"2026-12-02");
+  pin(["w-stats-L30", "w-2sh4-L31", "w-2sh4-L32"],"2026-12-03");
+  pin(["w-stats-L31"],"2026-12-04");
+  pin(["w-stats-L32", "w-stats-L33"],"2026-12-05");
+  pin(["w-stats-L34", "w-2sh4-L33", "w-2sh4-L34"],"2026-12-06");
+  pin(["w-stats-L35", "w-2sh4-L35"],"2026-12-07");
+  pin(["w-stats-L36", "w-2sh4-L36"],"2026-12-08");
+  pin(["w-stats-L37", "w-stats-L38"],"2026-12-10");
+  pin(["a-2026-11-26-2sh4-tutorialt02","a-2026-11-12-2sh4-tutorialt02","a-2026-11-19-2sh4-tutorialt02"],"2026-11-28");pin(["a-2026-11-12-math-tutorialt01","a-2026-11-19-math-tutorialt01","a-2026-11-26-math-tutorialt01"],"drop");
   const COVERED={"2di4":"2026-11-27","2ci4":"2026-11-27"};
   Object.keys(CLASS_TASKS).forEach(d=>{
     CLASS_TASKS[d]=CLASS_TASKS[d].filter(t=>{
@@ -939,6 +941,7 @@ done=lsGet(); if(!done["seed-ess-1"]){["4.5.7","4.5.13","4.6.1"].forEach(q=>done
   }catch(e){clearTimeout(timer);setStatus("Progress is kept on this device only.")}
 })();
 </script>
+
 
 </body>
 </html>
