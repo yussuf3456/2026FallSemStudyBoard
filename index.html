@@ -237,7 +237,7 @@ const NAMES = {stats:"STATS 3Y03", math:"MATH 2Z03", "2sh4":"COMPENG 2SH4", "2di
 /* day: 1=Mon … 5=Fri. mode: attend | watch. dates: only on these dates (labs). skip: weekly table only, not the daily checklist. */
 const CLASSES = [
  {day:1,t:"8:30 AM",c:"math",what:"Lecture (Echo360 recording)",loc:"TSH 120",mode:"watch",skip:true},
- {day:1,t:"10:30 AM",c:"2sh4",what:"Lecture (PLV + recording)",loc:"HH 302",mode:"watch"},
+ {day:1,t:"10:30 AM",c:"2sh4",what:"Lecture (PLV + recording)",loc:"HH 302",mode:"watch",skip:true},
  {day:1,t:"12:30 PM",c:"stats",what:"Lecture (Echo360 recording)",loc:"CNH 104",mode:"watch",skip:true},
  {day:1,t:"5:30 PM",c:"2ci4",what:"Lecture",loc:"BSB B136",mode:"attend"},
  {day:2,t:"12:30 PM",c:"2di4",what:"Lecture",loc:"BSB B135",mode:"attend"},
@@ -245,12 +245,12 @@ const CLASSES = [
  {day:2,t:"2:30 PM",c:"2ci4",what:"Lab (L03)",loc:"ITB A114",mode:"attend",dates:["2026-11-17","2026-12-01"]},
  {day:2,t:"2:30 PM",c:"2sh4",what:"Lab (L08, every other week, check Avenue)",loc:"JHE 329",mode:"attend",skip:true},
  {day:3,t:"8:30 AM",c:"math",what:"Lecture (Echo360 recording)",loc:"TSH 120",mode:"watch",skip:true},
- {day:3,t:"10:30 AM",c:"2sh4",what:"Lecture (PLV + recording)",loc:"HH 302",mode:"watch"},
+ {day:3,t:"10:30 AM",c:"2sh4",what:"Lecture (PLV + recording)",loc:"HH 302",mode:"watch",skip:true},
  {day:3,t:"12:30 PM",c:"2di4",what:"Lecture",loc:"BSB B135",mode:"attend"},
  {day:3,t:"1:30 PM",c:"2ci4",what:"Tutorial (T02)",loc:"BSB B136",mode:"attend"},
  {day:3,t:"2:30 PM",c:"2di4",what:"Lab (L05)",loc:"ITB 143",mode:"attend",dates:["2026-11-18","2026-12-02"]},
  {day:3,t:"5:30 PM",c:"2ci4",what:"Lecture",loc:"BSB B136",mode:"attend"},
- {day:4,t:"10:30 AM",c:"2sh4",what:"Lecture (PLV + recording)",loc:"HH 302",mode:"watch"},
+ {day:4,t:"10:30 AM",c:"2sh4",what:"Lecture (PLV + recording)",loc:"HH 302",mode:"watch",skip:true},
  {day:4,t:"12:30 PM",c:"stats",what:"Lecture (Echo360 recording)",loc:"CNH 104",mode:"watch",skip:true},
  {day:4,t:"1:30 PM",c:"2sh4",what:"Tutorial (T02)",loc:"TSH B128",mode:"attend"},
  {day:4,t:"5:30 PM",c:"math",what:"Tutorial (T01)",loc:"TSH 120",mode:"attend"},
@@ -319,24 +319,27 @@ const PHASES = [
   {date:"2026-11-28", label:"Sat Nov 28", tasks:[
    ["q17","2ci4","Module 6 (Ch. 7) transients: videos, then the problems"],
    ["d6","2di4","Module 6 problems (state reduction, design). Then you're caught up in 2DI4"],
-   ["q2","2sh4","Watch L20: C++ procedural programming, then run its sample code"],
+   ["q2","2sh4","C++ procedural programming (L20 topic): one short YouTube video, then write the L20 sample programs yourself without looking"],
    ["hw9","stats","Ch. 9.1–9.2 hypothesis tests, practice-first: one YouTube video on hypothesis testing, then the 9 suggested exercises (this replaces watching L26–L29)"]]},
   {date:"2026-11-29", label:"Sun Nov 29", tasks:[
    ["c7","2ci4","Module 7 so far, 7.1–7.6 AC steady state (complex numbers, phasors, impedance): videos + notes. Then you're caught up in 2CI4"],
-   ["q5","2sh4","Watch L21–L24: Class Design I, special member functions and Rule of Six, operator overloads"],
+   ["q5","2sh4","C++ classes (L21–L24 topics: class design, special members and Rule of Six, operator overloads): short YouTube videos, then write a small class with all six special members and two operator overloads from scratch"],
    ["pj-2sh4-1","2sh4","Course project, session 1: read the spec, plan the classes, get it compiling (due Wed Dec 9, 11:29 PM)"]]}
  ]},
  {id:"finals", title:"Finals", range:"Nov 30–Dec 21", note:"Replanned Fri Nov 27. Until classes end (Wed Dec 9) each day mixes the last catch-up videos, the 2SH4 project and the 2CI4 module reviews, because 2CI4 is your first final. 2DI4 module reviews start Sat Dec 5. STATS and MATH reviews wait until after the 2DI4 final, since those finals are last and MATH only needs about 33% for a 70.", days:[
   {date:"2026-11-30", label:"Mon Nov 30", tasks:[
    ["s2di4","2di4","Module 5 Homework Set 3: registers and counters (18 problems, starred first)"],
-   ["rv-2ci4-m1","2ci4","Module 1 review (Ch. 1): redo the tutorial and the Recommended Problems you got wrong, checked with the solution manual, plus your midterm mistakes from it"]]},
+   ["rv-2ci4-m1","2ci4","Module 1 review (Ch. 1): redo the tutorial and the Recommended Problems you got wrong, checked with the solution manual, plus your midterm mistakes from it"],
+   ["pr-2sh4-b","2sh4","C++ L25–L30 topics, practice-first: take the topic list from the slides, one short YouTube video per topic, then write the sample programs yourself"]]},
   {date:"2026-12-01", label:"Tue Dec 1", tasks:[
    ["as-2di4-lab5pre","2di4","Lab 5 pre-lab, due Wed 2:30 PM at the lab"],
    ["f2di4-4","2di4","Go back over Labs 1–4 before Wednesday's Lab 5 practical"]]},
-  {date:"2026-12-02", label:"Wed Dec 2", tasks:[]},
+  {date:"2026-12-02", label:"Wed Dec 2", tasks:[
+   ["pe-2sh4-m1","2sh4","Evening: a 2SH4 past midterm, timed, written by hand like the real test, then every mistake (C material, L1–L19)"]]},
   {date:"2026-12-03", label:"Thu Dec 3", tasks:[
    ["as-math-lab5","math","Matlab Lab 5 on Childsmath, due tonight 11:29 PM"],
-   ["rv-2ci4-m2","2ci4","Module 2 review (Ch. 2): redo the tutorial and the Recommended Problems you got wrong, checked with the solution manual, plus your midterm mistakes from it"]]},
+   ["rv-2ci4-m2","2ci4","Module 2 review (Ch. 2): redo the tutorial and the Recommended Problems you got wrong, checked with the solution manual, plus your midterm mistakes from it"],
+   ["pr-2sh4-c","2sh4","C++ L31 to the end, practice-first: same method. Then 2SH4 is caught up"]]},
   {date:"2026-12-04", label:"Fri Dec 4", tasks:[
    ["as-2ci4-ad3","2ci4","AD3 Homework 3, due tonight 11:29 PM"],
    ["rv-2ci4-m3","2ci4","Module 3 review (Ch. 3): redo the tutorial and the Recommended Problems you got wrong, checked with the solution manual, plus your midterm mistakes from it"],
@@ -352,7 +355,7 @@ const PHASES = [
   {date:"2026-12-07", label:"Mon Dec 7", tasks:[
    ["rv-2ci4-m7","2ci4","Module 7–8 review (AC steady-state and power, whatever was covered): redo the tutorial and the Recommended Problems you got wrong, checked with the solution manual"],
    ["rv-2di4-m3","2di4","Module 3 review: the tutorial and the recommended problems, starred (*) ones first, by hand, plus your midterm mistakes from it"],
-   ["pe-2sh4-0","2sh4","2SH4 past midterm, timed, then every mistake"]]},
+   ["pe-2sh4-0","2sh4","A second 2SH4 past midterm or practice test, timed, by hand, then every mistake"]]},
   {date:"2026-12-08", label:"Tue Dec 8", tasks:[
    ["pj-2sh4-3","2sh4","Course project, session 3: finish features, test edge cases, fix memory leaks"],
    ["rv-2di4-m4","2di4","Module 4 review: the tutorial and the recommended problems, starred (*) ones first, by hand, plus your midterm mistakes from it"],
@@ -490,13 +493,6 @@ const CLASS_TASKS={}, LATE={}, EARLY={}, CAUGHT_UP={}, PINNED={};
   /* Full catch-up by Sun Nov 29 (planned Nov 18): every missed video and tutorial has a fixed day.
      2DI4 and 2CI4 in-person classes before their catch-up day are covered by the module blocks. */
   const P={};const pin=(ids,d)=>ids.forEach(i=>P[i]=d);
-  pin(["w-2sh4-L25", "w-2sh4-L26", "w-2sh4-L27"],"2026-11-30");
-  pin(["w-2sh4-L28"],"2026-12-01");
-  pin(["w-2sh4-L29", "w-2sh4-L30"],"2026-12-02");
-  pin(["w-2sh4-L31", "w-2sh4-L32"],"2026-12-03");
-  pin(["w-2sh4-L33", "w-2sh4-L34"],"2026-12-06");
-  pin(["w-2sh4-L35"],"2026-12-07");
-  pin(["w-2sh4-L36"],"2026-12-08");
   pin(["a-2026-11-26-2sh4-tutorialt02","a-2026-11-12-2sh4-tutorialt02","a-2026-11-19-2sh4-tutorialt02"],"2026-11-28");pin(["a-2026-11-12-math-tutorialt01","a-2026-11-19-math-tutorialt01","a-2026-11-26-math-tutorialt01"],"drop");
   const COVERED={"2di4":"2026-11-27","2ci4":"2026-11-27"};
   Object.keys(CLASS_TASKS).forEach(d=>{
